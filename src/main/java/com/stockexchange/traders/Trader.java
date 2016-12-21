@@ -23,12 +23,16 @@ public class Trader implements Comparable{
 	private HashMap<UUID, Order> pendingOrders;
 	private Brokerage brokerage;
 	
-	
 	private transient State state;
 	private transient Token token;
 	
 	public Trader(Brokerage b, String n, String p){
 		brokerage = b;
+		name = n.toUpperCase();
+		pswd = p;
+	}
+	
+	public Trader(String n, String p){
 		name = n.toUpperCase();
 		pswd = p;
 	}
