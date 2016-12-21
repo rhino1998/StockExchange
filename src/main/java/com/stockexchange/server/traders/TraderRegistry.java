@@ -10,7 +10,7 @@ public class TraderRegistry {
 	
 	
 	public static void addTrader(Trader trader){
-		traders.put(trader.getUsername(), trader)
+		traders.put(trader.getUsername(), trader);
 	};
 	
 	public static Trader authenticate(Credentials cred) {
