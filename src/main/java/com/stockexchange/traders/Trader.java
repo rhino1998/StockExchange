@@ -32,7 +32,7 @@ public class Trader implements Comparable<Trader>{
 	public Trader(String brokerage, String name, String username, String pw){
 		this.brokerage = BrokerageRegistry.get(brokerage);
 		this.username = username;
-		this.name = n.toUpperCase();
+		this.name = name.toUpperCase();
 		password = new Password(pw);
 	}
 	
