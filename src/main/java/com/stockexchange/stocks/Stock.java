@@ -10,4 +10,16 @@ public class Stock {
 	private int totalQuantity;
 	private int dailyHigh;
 	private int dailyLow;
+	
+	public int getPrice(){
+		return price;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public String getSymbol(){
+		return symbol;
+	}
 }

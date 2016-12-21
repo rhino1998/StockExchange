@@ -5,8 +5,12 @@ import java.util.Comparator;
 public class StockPriceComparator<Stock> implements Comparator<Stock>{
 
 	public int compare(Stock a, Stock b) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(a.getPrice() > b.getPrice())
+			return 1;
+		if(a.getPrice() < b.getPrice())
+			return -1;
+		else
+			return 0;
 	}
 
 }
