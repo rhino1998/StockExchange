@@ -25,6 +25,7 @@ public class Trader implements Comparable{
 	
 	
 	
+	
 	private transient State state;
 	private transient Token token;
 	

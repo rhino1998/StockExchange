@@ -14,6 +14,7 @@ public class Order implements Serializable{
 	
 	private final UUID uuid;
 	
+	
 	private final Trader trader;
 	private final Account account;
 	private final String symbol;
