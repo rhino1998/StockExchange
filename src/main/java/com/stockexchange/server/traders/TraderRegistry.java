@@ -15,7 +15,7 @@ public class TraderRegistry {
 	
 	public static Trader authenticate(Credentials cred) {
 		Trader trader = traders.get(cred.getUsername());
-		if (trader != null && trader.getPassword()){
+		if (trader != null && trader.getPassword().equals(cred.getPassword())){
 			
 		}
 		return null;

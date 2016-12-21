@@ -1,6 +1,8 @@
-package com.stockexchange.server.traders;
+package com.stockexchange.traders;
 
-public class Password {
+import java.io.Serializable;
+
+public class Password implements Serializable{
 
 	private final String pwHash;
 	

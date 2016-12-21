@@ -34,4 +34,9 @@ public class Trader {
 	
 	public OrderView getPendingOrderView();
 	public void submitOrder(Order order);
+
+	public Password getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
