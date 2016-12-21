@@ -24,8 +24,6 @@ public class Trader implements Comparable{
 	private Brokerage brokerage;
 	
 	
-	
-	
 	private transient State state;
 	private transient Token token;
 	

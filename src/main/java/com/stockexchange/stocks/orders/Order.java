@@ -10,10 +10,8 @@ import com.stockexchange.traders.Trader;
 import com.stockexchange.traders.accounts.Account;
 
 public class Order implements Serializable{
-
 	
 	private final UUID uuid;
-	
 	
 	private final Trader trader;
 	private final Account account;
