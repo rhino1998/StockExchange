@@ -7,12 +7,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/jersey-client.jar"/>
-	<classpathentry kind="lib" path="libs/jersey-common.jar"/>
-	<classpathentry kind="lib" path="libs/jersey-container-servlet-core.jar"/>
-	<classpathentry kind="lib" path="libs/jersey-container-servlet.jar"/>
-	<classpathentry kind="lib" path="libs/jersey-media-jaxb.jar"/>
-	<classpathentry kind="lib" path="libs/jersey-server.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
