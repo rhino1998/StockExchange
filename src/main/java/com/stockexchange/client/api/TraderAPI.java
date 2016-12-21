@@ -16,5 +16,10 @@ public class TraderAPI {
 		//TODO write api handling
 	}
 	
-	public static OrderView getActiveOrders()
+	
+	//TODO do this;
+	public static OrderView getActiveOrders(){}
+	
+	
+	public static AccountView getAccounts()
 }

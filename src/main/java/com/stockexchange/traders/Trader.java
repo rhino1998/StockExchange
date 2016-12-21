@@ -15,7 +15,7 @@ public class Trader {
 	
 	private final String username;
 	private String name;
-	private HashMap<UUID,Account> accounts;
+	private HashMap<String,Account> accounts;
 	private HashMap<UUID, Order> pendingOrders;
 	
 	

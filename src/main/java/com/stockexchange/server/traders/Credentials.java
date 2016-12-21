@@ -2,8 +2,6 @@ package com.stockexchange.server.traders;
 
 import java.io.Serializable;
 
-import com.stockexchange.traders.Password;
-
 public class Credentials implements Serializable{
 
 	private final String username;
