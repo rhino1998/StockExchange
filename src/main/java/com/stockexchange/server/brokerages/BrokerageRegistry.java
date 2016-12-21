@@ -14,4 +14,8 @@ public class BrokerageRegistry {
 	public static void add(Brokerage brokerage){
 		brokerages.put(brokerage.getName(), brokerage);
 	};
+	
+	public static Brokerage get(String name){
+		return brokerages.get(name);
+	};
 }

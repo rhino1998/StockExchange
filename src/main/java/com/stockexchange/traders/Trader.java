@@ -10,6 +10,7 @@ import StockExchange.traders.Trader;
 
 
 import com.stockexchange.brokerages.Brokerage
+import com.stockexchange.server.brokerages.BrokerageRegistry;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.stocks.orders.OrderView;
 import com.stockexchange.traders.accounts.Account;
@@ -30,8 +31,9 @@ public class Trader implements Comparable{
 	private transient Token token;
 	
 	public Trader(String brokerage, String name, String username, String pw){
-		brokerage = ;
-		name = n.toUpperCase();
+		this.brokerage = BrokerageRegistry.get(brokerage);
+		this.username = username;
+		this.name = n.toUpperCase();
 		password = new Password(pw);
 	}
 	
