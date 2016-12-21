@@ -2,6 +2,8 @@ package com.stockexchange.traders.accounts;
 
 import java.util.UUID;
 
+import com.stockexchange.traders.Trader;
+
 public class Account {
 	
 	
