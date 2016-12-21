@@ -46,7 +46,7 @@ public class Trader implements Comparable{
 		return null;
 	}
 	public void submitOrder(Order order){
-		return null;
+		return;
 	}
 	
 	public boolean equals(Object other){
