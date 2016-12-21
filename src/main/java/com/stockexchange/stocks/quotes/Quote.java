@@ -15,4 +15,18 @@ public class Quote implements Serializable{
 	private final int lowAsk;
 	private final int volume;
 	private final int marketCap;
+	
+	public int getHighBid(){
+		return highBid;
+	}
+	
+	public int getlowAsk(){
+		return lowAsk;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public 
 }
