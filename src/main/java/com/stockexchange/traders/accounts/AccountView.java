@@ -7,4 +7,5 @@ import com.stockexchange.transport.View;
 public class AccountView extends View<Account>{
 
 	private Account[] quotes;
+	
 }
