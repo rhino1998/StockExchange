@@ -42,8 +42,12 @@ public class Trader implements Comparable{
 		return this.name;
 	}
 	
-	public OrderView getPendingOrderView();
-	public void submitOrder(Order order);
+	public OrderView getPendingOrderView(){
+		return null;
+	}
+	public void submitOrder(Order order){
+		return null;
+	}
 	
 	public boolean equals(Object other){
 		try{
@@ -71,5 +75,9 @@ public class Trader implements Comparable{
 			System.out.println("ERROR");
 			return 123456789;
 		}
+	}
+	
+	public void getQuote(String symbol){
+		
 	}
 }
