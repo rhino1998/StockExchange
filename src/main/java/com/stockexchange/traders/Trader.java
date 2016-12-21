@@ -13,7 +13,7 @@ import com.stockexchange.stocks.orders.OrderView;
 import com.stockexchange.traders.accounts.Account;
 import com.stockexchange.transport.enums.State;
 
-public class Trader implements Comparable{
+public class Trader implements Comparable<Trader>{
 
 	
 	private final String username;
@@ -70,7 +70,7 @@ public class Trader implements Comparable{
 		return null;
 	}
 
-	public int compareTo(Object arg0) {
+	/*public int compareTo(Object arg0) {
 		try{
 			int ans = this.compareTo((Trader)arg0);
 			return ans;
@@ -80,8 +80,13 @@ public class Trader implements Comparable{
 			return 123456789;
 		}
 	}
+	*/
 	
 	public void getQuote(String symbol){
 		//TODO
+	}
+
+	public int compareTo(Trader o) {
+		return this.compareTo(o);
 	}
 }
