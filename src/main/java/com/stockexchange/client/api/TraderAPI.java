@@ -12,6 +12,10 @@ public class TraderAPI {
 		TraderAPI.trader = trader;
 	}
 	
+	public static void getAccounts(){
+		
+	}
+	
 	public static void submitOrder(Order order){
 		//TODO write api handling
 	}

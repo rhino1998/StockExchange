@@ -16,4 +16,11 @@ public class AuthenticationAPI {
 		Response response = target.request().put(Entity.json(new Credentials(username, password)));
 		return response.readEntity(Trader.class);
 	}
+	
+	
+	public static Trader registerTrader(Brokerage brokerage, String username, String name, String password){
+		WebTarget target = Connection.website.path("/auth");
+		Response response = target.request().put(Entity.json(new Trader(brokerage, username, password)));
+		return response.readEntity(Trader.class);
+	}
 }
