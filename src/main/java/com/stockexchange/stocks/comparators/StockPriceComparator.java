@@ -1,5 +1,12 @@
 package com.stockexchange.stocks.comparators;
 
-public class StockPriceComparator {
+import java.util.Comparator;
+
+public class StockPriceComparator<Stock> implements Comparator<Stock>{
+
+	public int compare(Stock a, Stock b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

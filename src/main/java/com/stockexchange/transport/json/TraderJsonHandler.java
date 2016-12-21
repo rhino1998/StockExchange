@@ -1,16 +1,16 @@
 package com.stockexchange.transport.json;
 
 
-public class TraderJsonHandler<E> extends JsonHandler<E>{
+import com.stockexchange.traders.Trader;
 
-	@Override
-	public String marshall(E obj) {
+public class TraderJsonHandler extends JsonHandler<Trader>{
+
+	public String marshall(Trader trader) {
 		// TODO Person in charge of trader, write this
 		return null;
 	}
 
-	@Override
-	public E unmarshall(String json) {
+	public Trader unmarshall(String json) {
 		// TODO Person in charge of trader, write this
 		return null;
 	}

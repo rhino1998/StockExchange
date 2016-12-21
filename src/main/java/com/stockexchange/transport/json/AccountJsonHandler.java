@@ -1,16 +1,16 @@
 package com.stockexchange.transport.json;
 
 
-public class AccountJsonHandler<E> extends JsonHandler<E>{
+import com.stockexchange.traders.accounts.Account;
 
-	@Override
-	public String marshall(E obj) {
+public class AccountJsonHandler extends JsonHandler<Account>{
+
+	public String marshall(Account account) {
 		// TODO Person in charge of account, write this
 		return null;
 	}
 
-	@Override
-	public E unmarshall(String json) {
+	public Account unmarshall(String json) {
 		// TODO Person in charge of account, write this
 		return null;
 	}

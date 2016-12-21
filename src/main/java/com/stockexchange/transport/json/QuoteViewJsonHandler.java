@@ -1,16 +1,15 @@
 package com.stockexchange.transport.json;
 
+import com.stockexchange.stocks.quotes.QuoteView;
 
-public class QuoteViewJsonHandler<E> extends JsonHandler<E>{
+public class QuoteViewJsonHandler extends JsonHandler<QuoteView>{
 
-	@Override
-	public String marshall(E obj) {
+	public String marshall(QuoteView obj) {
 		// TODO Person in charge of Quotes, write this
 		return null;
 	}
 
-	@Override
-	public E unmarshall(String json) {
+	public QuoteView unmarshall(String json) {
 		// TODO Person in charge of Quotes, write this
 		return null;
 	}
