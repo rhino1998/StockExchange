@@ -73,11 +73,12 @@ public class Trader implements Comparable{
 			return ans;
 		}catch(ClassCastException e){
 			System.out.println("ERROR");
+			//TODO
 			return 123456789;
 		}
 	}
 	
 	public void getQuote(String symbol){
-		
+		//TODO
 	}
 }
