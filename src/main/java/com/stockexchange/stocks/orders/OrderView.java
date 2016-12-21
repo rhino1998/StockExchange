@@ -1,5 +1,9 @@
 package com.stockexchange.stocks.orders;
 
-public class OrderView {
+import java.io.Serializable;
+
+import com.stockexchange.transport.View;
+
+public class OrderView extends View<Order>{
 	private Order[] orders;
 }

@@ -1,6 +1,10 @@
 package com.stockexchange.stocks.quotes;
 
-public class QuoteView {
+import java.io.Serializable;
 
-	private Order[] quotes;
+import com.stockexchange.transport.View;
+
+public class QuoteView extends View<Quote>{
+
+	private Quote[] quotes;
 }

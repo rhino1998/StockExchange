@@ -5,7 +5,7 @@ import java.util.Queue;
 
 import com.stockexchange.stocks.orders.Order;
 
-public class OrderQueue {
+public class OrderQueue{
 
 	private Queue<Order> orders;
 }

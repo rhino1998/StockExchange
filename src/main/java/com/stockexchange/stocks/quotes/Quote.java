@@ -1,9 +1,11 @@
 package com.stockexchange.stocks.quotes;
 
+import java.io.Serializable;
+
 import com.stockexchange.traders.Trader;
 import com.stockexchange.traders.accounts.Account;
 
-public class Quote {
+public class Quote implements Serializable{
 
 	private final String name;
 	private final String symbol;

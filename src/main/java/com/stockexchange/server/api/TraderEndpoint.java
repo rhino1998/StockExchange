@@ -2,8 +2,13 @@ package com.stockexchange.server.api;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import com.stockexchange.stocks.orders.Order;
 
 @Path("/trader")
 public class TraderEndpoint {
@@ -11,14 +16,20 @@ public class TraderEndpoint {
 	
 	
 	
-	//TODO Login (username, pword hash -> uuid)
-	@PUT
-	@Produces(MediaType.TEXT_PLAIN)
-	public String login(){	
+	@POST
+	@Path("order")
+	@Consumes("application/json")
+	@Produces("application/json")
+	public Response submitOrder(Order order){
+		return null
 	}
 	
-	
-	@Path("{uuid}")
+	@GET
+	@Path("orders")
+	@Produces("application/json"))
+	public Response getActiveOrders(){
+		
+	}
 	
 	
 	
