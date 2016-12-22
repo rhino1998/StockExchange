@@ -1,8 +1,6 @@
-package com.stockexchange.server.traders;
+package com.stockexchange.traders;
 
 import java.io.Serializable;
-
-import com.stockexchange.traders.Password;
 
 public class Credentials implements Serializable{
 
@@ -22,4 +20,6 @@ public class Credentials implements Serializable{
 	public Password getPassword() {
 		return password;
 	}
+
+	noContent().entity(Entity.json(trader)).build()
 }

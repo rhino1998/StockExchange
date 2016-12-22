@@ -8,8 +8,6 @@ import org.glassfish.jersey.message.internal.Token;
 import StockExchange.traders.Brokerage;
 import StockExchange.traders.Trader;
 
-
-import com.stockexchange.brokerages.Brokerage
 import com.stockexchange.server.brokerages.BrokerageRegistry;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.stocks.orders.OrderView;
@@ -22,18 +20,22 @@ public class Trader implements Comparable<Trader>{
 	private final String username;
 	private String name;
 	private Password password;
-	private HashMap<String,Account> accounts;
-	private HashMap<UUID, Order> pendingOrders;
-	private Brokerage brokerage;
+	private final HashMap<String,Account> accounts = new HashMap<String, Account>();
+	private final HashMap<UUID, Order> pendingOrders = new HashMap<UUID, Order>();
 	
 	private transient State state;
 	private transient Token token;
 	
-	public Trader(String brokerage, String name, String username, String pw){
-		this.brokerage = BrokerageRegistry.get(brokerage);
+	public Trader(String name, String username, Password pw){
 		this.username = username;
 		this.name = name.toUpperCase();
-		password = new Password(pw);
+		this.password = pw;
+	}
+	
+	public Trader(Register reg){
+		this.username = reg.getUsername();
+		this.name = reg.getName();
+		this.password = reg.getPassword();
 	}
 	
 	public String getUsername(){

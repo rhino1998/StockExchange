@@ -2,6 +2,7 @@ package com.stockexchange.stocks.quotes;
 
 import java.io.Serializable;
 
+import com.stockexchange.stocks.Stock;
 import com.stockexchange.traders.Trader;
 import com.stockexchange.traders.accounts.Account;
 
@@ -16,6 +17,18 @@ public class Quote implements Serializable{
 	private final int volume;
 	private final int marketCap;
 	
+	
+	public Quote(Stock stock){
+		this.name = stock.getName();
+		this.symbol = stock.getSymbol();
+		this.dailyHigh = stock.getDailyHigh();
+		this.dailyLow = stock.getDailyLow();
+		this.highBid = stock.getHighBid();
+		this.lowAsk = stock.getLowAsk();
+		this.volume = stock.getVolume();
+		this.marketCap = stock.getMarketCap();
+	}
+	
 	public int getHighBid(){
 		return highBid;
 	}
@@ -28,5 +41,7 @@ public class Quote implements Serializable{
 		return name;
 	}
 	
-	public 
+	public String getVolume(){
+		
+	}
 }

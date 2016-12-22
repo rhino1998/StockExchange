@@ -5,7 +5,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
 import com.stockexchange.client.connection.Connection;
-import com.stockexchange.server.traders.Credentials;
+import com.stockexchange.traders.Credentials;
 import com.stockexchange.traders.Trader;
 
 public class AuthenticationAPI {
