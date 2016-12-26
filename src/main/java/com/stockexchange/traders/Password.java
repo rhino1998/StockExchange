@@ -2,24 +2,21 @@ package com.stockexchange.traders;
 
 import java.io.Serializable;
 
-public class Password implements Serializable{
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
 
-	private final String pwHash;
+public class Password implements Serializable{
+	
+	@JsonProperty private String hash;
 	
 	public Password(String pw){
-		pwHash = hash(pw);//TODO do actual hashing
+		hash = hash(pw);//TODO do actual hashing
 	}
-	
-	public String getHash(){
-		return this.pwHash;
-	}
+
+
 	
 	public boolean equals(String pw){
-		return this.pwHash.equals(hash(pw));
-	}
-	
-	public boolean equals(Password pw){
-		return this.pwHash.equals(pw.getHash());
+		return this.hash.equals(hash(pw));
 	}
 	
 	public static String hash(String pw){

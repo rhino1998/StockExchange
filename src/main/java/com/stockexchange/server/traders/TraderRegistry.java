@@ -2,8 +2,8 @@ package com.stockexchange.server.traders;
 
 import java.util.HashMap;
 
-import com.stockexchange.traders.Credentials;
 import com.stockexchange.traders.Trader;
+import com.stockexchange.transport.Credentials;
 
 public class TraderRegistry {
 

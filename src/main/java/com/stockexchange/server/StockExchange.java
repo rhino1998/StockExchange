@@ -1,35 +1,56 @@
 package com.stockexchange.server;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.stockexchange.server.brokerages.Brokerage;
+import com.stockexchange.server.data.YahooFinanceAPI;
 import com.stockexchange.stocks.Stock;
-import com.stockexchange.traders.Credentials;
+import com.stockexchange.stocks.quotes.Quote;
+import com.stockexchange.stocks.quotes.enums.QuoteSortBy;
 import com.stockexchange.traders.Trader;
+import com.stockexchange.transport.Credentials;
 
 public class StockExchange {
 
+	private final String name;
+	private final HashMap<String, Stock> stocks = new HashMap<String, Stock>();
 	
-	private static final HashMap<String, Brokerage> brokerages = new HashMap<String, Brokerage>();
-	private static final HashMap<String, Stock> stocks = new HashMap<String, Stock>();
-	
-	
-	
-	public static void addBrokerage(String name){
-		if (!brokerages.containsKey(name)){
-			//TODO Error of some sort;
-		}
-		brokerages.put(name, new Brokerage());
+	public StockExchange(String name){
+		this.name = name;
 	}
 	
-	public static Brokerage getBrokerage(String name){
-		return brokerages.get(name);
+	public String getName(){
+		return name;
 	}
 	
-	public static void listStock(String symbol, String name, double price, long quantity){
-		if (!stocks.containsKey(symbol)){
-			//TODO error of some sort
+	public void listStock(String symbol) throws IOException{
+		Stock stock = new Stock(YahooFinanceAPI.getQuote(symbol));
+		stocks.put(stock.getSymbol(), stock);
+	}
+	
+	public void listStocks(String... symbols) throws IOException{
+		for (Quote quote : YahooFinanceAPI.getQuotes(symbols)){
+			Stock stock = new Stock(quote);
+			stocks.put(stock.getSymbol(), stock);
 		}
-		stocks.put(symbol, new Stock(symbol,name,price, quantity));
+	}
+	
+	public void listStock(Stock stock){
+		stocks.put(stock.getSymbol(), stock);
+	}
+	
+	public Quote getQuote(String symbol){
+		return new Quote(stocks.get(symbol));
+	}
+	
+	public List<Quote> getQuotes(){
+		ArrayList<Quote> quotes = new ArrayList<Quote>(stocks.size());
+		for (Stock stock: this.stocks.values()){
+			quotes.add(new Quote(stock));
+		}
+		return quotes;
 	}
 }

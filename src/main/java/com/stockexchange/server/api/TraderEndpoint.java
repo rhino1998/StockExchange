@@ -3,6 +3,7 @@ package com.stockexchange.server.api;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
@@ -21,14 +22,14 @@ public class TraderEndpoint {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response submitOrder(Order order){
-		return null
+		return null;
 	}
 	
 	@GET
 	@Path("orders")
-	@Produces("application/json"))
+	@Produces("application/json")
 	public Response getActiveOrders(){
-		
+		return null;
 	}
 	
 	

@@ -2,11 +2,12 @@ package com.stockexchange.stocks.quotes.comparators;
 
 import java.util.Comparator;
 
-public class QuoteNameComparator<Quote> implements Comparator<Quote>{
+import com.stockexchange.stocks.quotes.Quote;
 
-	public int compare(Quote a, Quote b) {
-		// TODO Auto-generated method stub
-		return 0;
+public class QuoteNameComparator implements Comparator<Quote>{
+
+	public int compare(Quote o1, Quote o2) {
+		return o1.getName().compareTo(o2.getName());
 	}
-
+	
 }

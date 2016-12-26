@@ -3,34 +3,57 @@ package com.stockexchange.stocks;
 import java.util.HashMap;
 import java.util.UUID;
 
+import com.stockexchange.server.StockExchange;
+import com.stockexchange.server.StockExchangeRegistry;
 import com.stockexchange.stocks.orders.Order;
+import com.stockexchange.stocks.quotes.Quote;
 
 public class Stock {
 	
 	private final String name;
 	private final String symbol;
-	private double price;
 	private double dailyHigh;
 	private double dailyLow;
-	private double lowAsk;
-	private double highBid;
+	private double ask;
+	private double bid;
+	private double open;
+	private double previousClose;
+	private double marketCap;
 	
 	
 	private int volume;
-	private int unclaimedQuantity;
-	private final long totalQuantity;
 	
 	private final HashMap<UUID, Order> pendingOrders = new HashMap<UUID, Order>();
+	private final StockExchange exchange;
 	
-	public Stock(String symbol, String name, double price, long quantity){
-		this.name = name;
-		this.symbol = symbol;
-		this.price = price;
-		this.totalQuantity = quantity;
+	public Stock(Quote quote){
+		this.name = quote.getName();
+		this.symbol = quote.getSymbol();
+		this.ask = quote.getAsk();
+		this.bid = quote.getBid();
+		this.volume = quote.getVolume();
+		this.open = quote.getOpen();
+		this.previousClose=quote.getPreviousClose();
+		this.marketCap = quote.getMarketCap();
+		this.dailyHigh = quote.getDailyHigh();
+		this.dailyLow = quote.getDailyLow();
+		this.exchange = StockExchangeRegistry.getStockExchange(quote.getExchange());
+		
 	}
 	
-	public double getPrice(){
-		return price;
+	public void update(Quote quote){
+		if (!this.symbol.equals(quote.getSymbol())){
+			return;
+		}
+		
+		this.ask = quote.getAsk();
+		this.bid = quote.getBid();
+		this.volume = quote.getVolume();
+		this.open = quote.getOpen();
+		this.previousClose=quote.getPreviousClose();
+		this.marketCap = quote.getMarketCap();
+		this.dailyHigh = quote.getDailyHigh();
+		this.dailyLow = quote.getDailyLow();
 	}
 	
 	public String getName(){
@@ -41,22 +64,6 @@ public class Stock {
 		return symbol;
 	}
 
-	public int getUnclaimedQuantity() {
-		return unclaimedQuantity;
-	}
-
-	public void setUnclaimedQuantity(int unclaimedQuantity) {
-		this.unclaimedQuantity = unclaimedQuantity;
-	}
-
-	public int getTotalQuantity() {
-		return totalQuantity;
-	}
-
-	public void setTotalQuantity(int totalQuantity) {
-		this.totalQuantity = totalQuantity;
-	}
-
 	public int getVolume() {
 		return volume;
 	}
@@ -65,19 +72,63 @@ public class Stock {
 		this.volume = volume;
 	}
 
-	public int getDailyLow() {
-		return dailyLow;
+	public double getAsk() {
+		return ask;
 	}
 
-	public void setDailyLow(int dailyLow) {
-		this.dailyLow = dailyLow;
+	public void setAsk(double ask) {
+		this.ask = ask;
 	}
 
-	public int getDailyHigh() {
+	public double getBid() {
+		return bid;
+	}
+
+	public void setBid(double bid) {
+		this.bid = bid;
+	}
+
+	public double getOpen() {
+		return open;
+	}
+
+	public void setOpen(double open) {
+		this.open = open;
+	}
+
+	public double getPreviousClose() {
+		return previousClose;
+	}
+
+	public void setPreviousClose(double previousClose) {
+		this.previousClose = previousClose;
+	}
+
+	public double getDailyHigh() {
 		return dailyHigh;
 	}
 
-	public void setDailyHigh(int dailyHigh) {
+	public double getDailyLow() {
+		return dailyLow;
+	}
+
+	public double getMarketCap() {
+		return marketCap;
+	}
+
+	public void setMarketCap(double marketCap) {
+		this.marketCap = marketCap;
+	}
+
+	public void setDailyLow(double dailyLow) {
+		this.dailyLow = dailyLow;
+	}
+
+	public void setDailyHigh(double dailyHigh) {
 		this.dailyHigh = dailyHigh;
+	}
+	
+	public StockExchange getExchange(){
+		return exchange;
 	}
 }

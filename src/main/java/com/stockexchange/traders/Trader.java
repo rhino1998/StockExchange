@@ -1,41 +1,48 @@
 package com.stockexchange.traders;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.UUID;
 
 import org.glassfish.jersey.message.internal.Token;
 
-import StockExchange.traders.Brokerage;
-import StockExchange.traders.Trader;
-
-import com.stockexchange.server.brokerages.BrokerageRegistry;
+import com.stockexchange.server.brokerages.Brokerage;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.stockexchange.server.StockExchangeRegistry;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.stocks.orders.OrderView;
 import com.stockexchange.traders.accounts.Account;
+import com.stockexchange.transport.Register;
 import com.stockexchange.transport.enums.State;
 
-public class Trader implements Comparable<Trader>{
+public class Trader implements Comparable<Trader>, Serializable{
 
+	@JsonProperty private String username;
+	@JsonProperty private String name;
+	@JsonProperty private Password password;
+	@JsonProperty private HashMap<String,Account> accounts;
+	@JsonProperty private HashMap<UUID, Order> pendingOrders;
 	
-	private final String username;
-	private String name;
-	private Password password;
-	private final HashMap<String,Account> accounts = new HashMap<String, Account>();
-	private final HashMap<UUID, Order> pendingOrders = new HashMap<UUID, Order>();
+	private transient Brokerage brokerage;
 	
-	private transient State state;
-	private transient Token token;
+	//private transient Token token;
 	
-	public Trader(String name, String username, Password pw){
+	public Trader(String brokerage, String name, String username, Password pw){
+		this.brokerage = StockExchangeRegistry.getBrokerage(brokerage);
 		this.username = username;
 		this.name = name.toUpperCase();
 		this.password = pw;
+		this.accounts = new HashMap<String, Account>();
+		this.pendingOrders = new HashMap<UUID, Order>();
 	}
 	
-	public Trader(Register reg){
+	public Trader(String brokerage, Register reg){
+		this.brokerage = StockExchangeRegistry.getBrokerage(brokerage);
 		this.username = reg.getUsername();
 		this.name = reg.getName();
 		this.password = reg.getPassword();
+		this.accounts = new HashMap<String, Account>();
+		this.pendingOrders = new HashMap<UUID, Order>();
 	}
 	
 	public String getUsername(){
@@ -46,9 +53,6 @@ public class Trader implements Comparable<Trader>{
 		return this.name;
 	}
 	
-	public OrderView getPendingOrderView(){
-		return null;
-	}
 	public void submitOrder(Order order){
 		return;
 	}
@@ -64,11 +68,6 @@ public class Trader implements Comparable<Trader>{
 			System.out.println("ERROR");
 			return false;
 		}
-	}
-
-	public Password getPassword() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/*public int compareTo(Object arg0) {
@@ -89,5 +88,9 @@ public class Trader implements Comparable<Trader>{
 
 	public int compareTo(Trader o) {
 		return this.compareTo(o);
+	}
+
+	public boolean authenticate(Password pw) {
+		return this.password.equals(pw);
 	}
 }
