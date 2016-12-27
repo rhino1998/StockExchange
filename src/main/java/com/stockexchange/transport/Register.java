@@ -19,5 +19,6 @@ public class Register extends Credentials implements Serializable{
 	public String getName() {
 		return name;
 	}
+
 	
 }

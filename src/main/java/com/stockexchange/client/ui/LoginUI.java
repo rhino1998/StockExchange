@@ -1,6 +1,9 @@
 package com.stockexchange.client.ui;
 
 import com.stockexchange.client.Style;
+import com.stockexchange.client.api.AuthenticationAPI;
+import com.stockexchange.client.ui.components.StockExchangeBorder;
+import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Credentials;
 
 import javafx.event.ActionEvent;
@@ -12,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -24,9 +28,14 @@ public class LoginUI{
 	
 	private Stage stage;
 	
+	private BorderPane border;
+	
 	private Scene scene;
 	
 	private Text title;	
+	
+	private Label brokerageLabel;
+	private TextField brokerageField;
 	
 	private Label userLabel;
 	private TextField userField;
@@ -42,6 +51,7 @@ public class LoginUI{
 	public LoginUI(Stage stage){
 		
 		this.stage = stage;
+		this.border = new StockExchangeBorder(stage);
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -56,17 +66,23 @@ public class LoginUI{
 		
 		grid.add(title, 0, 0 ,2 ,1);
 		
+		
+		this.brokerageLabel = new Label("Brokerage: ");
+		this.brokerageField = new TextField();
 		this.userLabel = new Label("Username: ");
 		this.userField = new TextField();
 		this.pwLabel = new Label("Password: ");
 		this.pwField = new PasswordField();
 		
-		grid.add(userLabel, 0, 2);
-		grid.add(userField,1, 2);
-		grid.add(pwLabel, 0, 3);
-		grid.add(pwField,1, 3);
+		grid.add(brokerageLabel, 0, 2);
+		grid.add(brokerageField,1, 2);
+		grid.add(userLabel, 0, 3);
+		grid.add(userField,1, 3);
+		grid.add(pwLabel, 0, 4);
+		grid.add(pwField,1, 4);
 		
 		grid.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
+		
 		
 		
 		
@@ -78,9 +94,10 @@ public class LoginUI{
 		HBox btns = new HBox(10);
 		btns.setAlignment(Pos.CENTER);
 		btns.getChildren().addAll( this.login, this.cancel);
-		grid.add(btns, 1, 4);
+		grid.add(btns, 1, 5);
 
-		this.scene = new Scene(grid, Style.width, Style.height);
+		this.border.setCenter(grid);
+		this.scene = new Scene(this.border, Style.width, Style.height);
 	}
 
 
@@ -91,18 +108,37 @@ public class LoginUI{
 	
 	class LoginButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
+			double oldWidth = stage.getWidth();
+			double oldHeight= stage.getHeight();
 			
 			Credentials cred =  new Credentials(userField.getText(), pwField.getText());
+			Trader trader = AuthenticationAPI.authenticateTrader(brokerageField.getText(),cred);
+			if (trader == null){
+				pwField.setText("");
+				//TODO error alert
+				return;
+			}
+			System.out.println(trader.getBrokerageName() + trader.getName());
+			System.out.println(trader.getToken());
 			
-			System.out.println(cred.getUsername());
+			//TODO Scene change
 			stage.setScene(Scenes.login.getScene());
+			stage.sizeToScene();
+			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
+			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);
 			
 		}
 	}
 	
 	class CancelButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
+			double oldWidth = stage.getWidth();
+			double oldHeight= stage.getHeight();
+			
 			stage.setScene(Scenes.welcome.getScene());
+			stage.sizeToScene();
+			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
+			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);
 			
 		}
 	}

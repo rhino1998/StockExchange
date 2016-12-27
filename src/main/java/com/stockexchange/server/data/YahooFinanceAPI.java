@@ -29,7 +29,6 @@ public class YahooFinanceAPI {
 		}
 		syms = syms.substring(0, syms.length()-1);
 		URL stockURL = new URL(apiString+syms+"&f=snabghvopj1x");
-		System.out.println(apiString+syms+"&f=snabghvopj1x");
 		BufferedReader in = new BufferedReader(new InputStreamReader(stockURL.openStream()));
 		CSVReader reader = new CSVReader(in);
 		Quote[] quotes = new Quote[symbols.length];

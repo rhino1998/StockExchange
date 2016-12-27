@@ -1,5 +1,7 @@
 package com.stockexchange.server.api;
 
+import java.util.UUID;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -15,8 +17,8 @@ import javax.ws.rs.core.Response.Status;
 
 import com.stockexchange.server.StockExchange;
 import com.stockexchange.server.StockExchangeRegistry;
+import com.stockexchange.server.brokerages.Brokerage;
 import com.stockexchange.stocks.quotes.Quote;
-import com.stockexchange.traders.Password;
 import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Credentials;
 import com.stockexchange.transport.Register;
@@ -31,34 +33,67 @@ public class AuthenticationEndpoint {
 	@Path("/{brokerage}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response authenticateTrader(@PathParam("brokerage") String brokerage, Credentials cred){
-		Trader trader = StockExchangeRegistry.getBrokerage(brokerage).authenticate(cred);
+	public Response authenticateTrader(@PathParam("brokerage") String brokerageName, Credentials cred){
+		Brokerage brokerage = StockExchangeRegistry.getBrokerage(brokerageName);
+		if (brokerage == null){
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		Trader trader = brokerage.authenticate(cred);
+		
+		if (trader == null){
+			return Response.status(Status.FORBIDDEN).build();
+		}
+		
+		trader.genToken();
 		GenericEntity<Trader> entity = new GenericEntity<Trader>(trader, Trader.class);
 		return Response.ok().entity(entity).build();
 	}
 	
-	
-	
-	//@Consumes(MediaType.APPLICATION_JSON)
-	@GET
+	@POST
+	@Path("/{brokerage}/refresh")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response auth(){
-		Password pass = new Password("admin");
-		Trader trader = StockExchangeRegistry.getBrokerage("rhino").registerTrader(new Register("test", "admin", "admin"));
-				//StockExchangeRegistry.getBrokerage("rhino").authenticate(new Credentials("admin", "admin"));
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response refreshTrader(@PathParam("brokerage") String brokerage, String username){
+		Trader trader = StockExchangeRegistry.getBrokerage(brokerage).refresh(username);
+		if (trader == null){
+			return Response.status(Status.FORBIDDEN).build();
+		}
 		GenericEntity<Trader> entity = new GenericEntity<Trader>(trader, Trader.class);
 		return Response.ok().entity(entity).build();
+	}
+	
+	@POST
+	@Path("/{brokerage}/logout")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response logoutTrader(@PathParam("brokerage") String brokerage, String username){
+		Trader trader = StockExchangeRegistry.getBrokerage(brokerage).refresh(username);
+		if (trader == null){
+			return Response.status(Status.FORBIDDEN).build();
+		}
+		trader.logout();
+		return Response.ok().build();
 	}
 	
 	@POST
 	@Path("/register/{brokerage}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response registerTrader(@PathParam("brokerage") String brokerage, Register reg){
-		Trader trader = StockExchangeRegistry.getBrokerage(brokerage).registerTrader(reg);
-		System.out.println(trader.getName());
+	public Response registerTrader(@PathParam("brokerage") String brokerageName, Register reg){
+		Brokerage brokerage = StockExchangeRegistry.getBrokerage(brokerageName);
+		if (brokerage == null){
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		Trader trader = brokerage.registerTrader(reg);
+		
+		if (trader == null){
+			return Response.status(Status.FORBIDDEN).build();
+		}
+		
+		trader.genToken();
 		GenericEntity<Trader> entity = new GenericEntity<Trader>(trader, Trader.class);
-		return Response.ok().entity("test").build();
+		return Response.ok().entity(entity).build();
 	}
+	
+	
 }
  

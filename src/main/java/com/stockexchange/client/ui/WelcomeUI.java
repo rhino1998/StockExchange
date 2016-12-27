@@ -1,6 +1,7 @@
 package com.stockexchange.client.ui;
 
 import com.stockexchange.client.Style;
+import com.stockexchange.client.ui.components.StockExchangeBorder;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -18,7 +20,12 @@ import javafx.stage.Stage;
 
 public class WelcomeUI{
 	
+	
+	private static int width = 150;
+	private static int height = 120;
+	
 	private Stage stage;
+	private BorderPane border;
 	
 	private Scene scene;
 	
@@ -30,6 +37,7 @@ public class WelcomeUI{
 	public WelcomeUI(Stage stage){
 		
 		this.stage = stage;
+		this.border = new StockExchangeBorder(this.stage);
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -58,8 +66,10 @@ public class WelcomeUI{
 		
 		grid.add(login, 0, 2);
 		grid.add(register, 1, 2);
+		this.border.setCenter(grid);
 		
-		this.scene = new Scene(grid, Style.width, Style.height);
+		
+		this.scene = new Scene(this.border, WelcomeUI.width, WelcomeUI.height);
 	}
 
 
@@ -70,15 +80,24 @@ public class WelcomeUI{
 	
 	class LoginButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
+			double oldWidth = stage.getWidth();
+			double oldHeight= stage.getHeight();
 			stage.setScene(Scenes.login.getScene());
+			stage.sizeToScene();
+			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
+			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);
 		}
 	}
 	
 	class RegisterButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
-			System.out.println("Something");
+			double oldWidth = stage.getWidth();
+			double oldHeight= stage.getHeight();
 			
 			stage.setScene(Scenes.register.getScene());
+			stage.sizeToScene();
+			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
+			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);			
 			
 		}
 	}

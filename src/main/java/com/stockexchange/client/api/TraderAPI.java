@@ -19,11 +19,4 @@ public class TraderAPI {
 	public static void submitOrder(Order order){
 		//TODO write api handling
 	}
-	
-	
-	//TODO do this;
-	public static OrderView getActiveOrders(){}
-	
-	
-	public static AccountView getAccounts()
 }

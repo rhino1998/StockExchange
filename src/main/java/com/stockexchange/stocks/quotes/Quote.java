@@ -151,4 +151,10 @@ public class Quote implements Serializable{
 				this.marketCap
 			);
 	}
+	
+	public boolean equals(Object o){
+		
+		return o instanceof Quote && this.symbol.equals(((Quote) o).getSymbol());
+		
+	}
 }
