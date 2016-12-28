@@ -19,6 +19,12 @@
     -fx-text-fill: #EFEFEF;
 }
 
+
+.text-field{
+    -fx-background-color:  linear-gradient(to top, #232323, #232323);
+    -fx-text-fill: #EFEFEF;
+}
+
 .stock_button{
     -fx-background-color:  linear-gradient(to top, #232323, #232323);
     -fx-text-fill: #EFEFEF;
@@ -40,11 +46,18 @@
 
 }
 
+.tool-bar{
+    -fx-background-color: #232323;
+}
+
+.stack{
+    -fx-background-color: transparent;
+}
 
 .table-view{
-    -fx-table-cell-border-color: #EFEFEF;
-    -fx-table-header-border-color: #EFEFEF;
     -fx-background-color: transparent;
+    -fx-border-color: #EFEFEF;
+    -fx-padding: 0px;
 }
 
 .table-view .filler{
@@ -53,6 +66,8 @@
 
 .table-view:focused{
     -fx-background-color: transparent;
+    -fx-border-color: #EFEFEF;
+    -fx-padding: 0px;
 }
 
 
@@ -69,9 +84,11 @@
     -fx-background-color: transparent;
     -fx-table-cell-border-color: #EFEFEF;
     -fx-table-header-border-color: #EFEFEF;
+    -fx-border-color: transparent transparent #EFEFEF transparent;
 }
 
 .table-view .table-cell{
+    -fx-background-color: #454545;
     -fx-border-color: #EFEFEF;
     -fx-text-fill: #EFEFEF;
 }

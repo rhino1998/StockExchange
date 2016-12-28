@@ -12,7 +12,7 @@ import com.stockexchange.client.ui.LoginUI;
 import com.stockexchange.client.ui.RegisterUI;
 import com.stockexchange.client.ui.Scenes;
 import com.stockexchange.client.ui.WelcomeUI;
-import com.stockexchange.client.ui.components.StockExchangeBorder;
+import com.stockexchange.client.ui.components.BaseBorder;
 import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.stocks.quotes.enums.QuoteSortBy;
 import com.stockexchange.traders.Trader;

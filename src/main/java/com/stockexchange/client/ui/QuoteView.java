@@ -1,45 +1,69 @@
 package com.stockexchange.client.ui;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import com.stockexchange.client.api.StockExchangeAPI;
+import com.stockexchange.client.connection.Connection;
+import com.stockexchange.client.data.QuoteFilterChangeListener;
 import com.stockexchange.client.data.QuoteModel;
-import com.stockexchange.client.ui.components.StockExchangeManagementBorder;
-import com.stockexchange.client.ui.components.table.StockExchangeOrderColumn;
-import com.stockexchange.client.ui.components.table.StockExchangeTableColumn;
-import com.stockexchange.client.ui.components.table.StockExchangeTableView;
+import com.stockexchange.client.ui.components.table.MoneyColumn;
+import com.stockexchange.client.ui.components.table.MoneyShortColumn;
+import com.stockexchange.client.ui.components.ManagementBorder;
+import com.stockexchange.client.ui.components.table.ButtonColumn;
+import com.stockexchange.client.ui.components.table.buttons.QuoteDetailsButton;
 import com.stockexchange.client.ui.styles.Style;
 import com.stockexchange.stocks.quotes.Quote;
 
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class QuoteView {
 
+	private final String exchange;
+			
+	private Timer refresher;
+	
 	private Stage stage;
 	private Scene scene;
 	private BorderPane border;
+	private GridPane grid;
+	private ObservableList<QuoteModel> data;
 	
+	
+	private TextField filter;
 	private TableView<QuoteModel> table;
 	
 	@SuppressWarnings("unchecked")
 	public QuoteView(Stage theStage, List<Quote> quotes, String exchange){
+		this.exchange = exchange;
 		stage = theStage;
-		table = new StockExchangeTableView<QuoteModel>();
-		border = new StockExchangeManagementBorder(stage, String.format("%s Stock Quotes", exchange));
-
+		table = new TableView<QuoteModel>();
+		border = new ManagementBorder(stage, String.format("%s Stock Quotes", exchange));
+		grid = new GridPane();
+		filter = new TextField();
 		
 		
-		table.setPadding(new Insets(25,25,25,25));
+		grid.setPadding(new Insets(25,25,25,25));
 		TableColumn<QuoteModel, String> symbolColumn = 
-				new StockExchangeTableColumn<QuoteModel, String>("SYM");
+				new TableColumn<QuoteModel, String>("SYM");
 		symbolColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, String>("symbol")
 				);
@@ -48,7 +72,7 @@ public class QuoteView {
 		
 		
 		TableColumn<QuoteModel, String> nameColumn = 
-				new StockExchangeTableColumn<QuoteModel, String>("Corporation");
+				new TableColumn<QuoteModel, String>("Corporation");
 		nameColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, String>("name")
 				);
@@ -57,7 +81,7 @@ public class QuoteView {
 		
 		
 		TableColumn<QuoteModel, Double> askColumn = 
-				new StockExchangeTableColumn<QuoteModel, Double>("ASK");
+				new MoneyColumn("ASK");
 		askColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("ask")
 				);
@@ -66,7 +90,7 @@ public class QuoteView {
 		
 		
 		TableColumn<QuoteModel, Double> bidColumn = 
-				new StockExchangeTableColumn<QuoteModel, Double>("BID");
+				new MoneyColumn("BID");
 		bidColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("bid")
 				);
@@ -75,7 +99,7 @@ public class QuoteView {
 		
 
 		TableColumn<QuoteModel, Double> lowColumn = 
-				new StockExchangeTableColumn<QuoteModel, Double>("LOW");
+				new MoneyColumn("LOW");
 		lowColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("low")
 				);
@@ -84,7 +108,7 @@ public class QuoteView {
 		
 
 		TableColumn<QuoteModel, Double> highColumn = 
-				new StockExchangeTableColumn<QuoteModel, Double>("HIGH");
+				new MoneyColumn("HIGH");
 		highColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("high")
 				);
@@ -93,7 +117,7 @@ public class QuoteView {
 		
 		
 		TableColumn<QuoteModel, Double> openColumn = 
-				new StockExchangeTableColumn<QuoteModel, Double>("OPEN");
+				new MoneyColumn("OPEN");
 		openColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("open")
 				);
@@ -102,7 +126,7 @@ public class QuoteView {
 		
 
 		TableColumn<QuoteModel, Double> closeColumn = 
-				new StockExchangeTableColumn<QuoteModel, Double>("CLOSE");
+				new MoneyColumn("CLOSE");
 		closeColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("close")
 				);
@@ -111,7 +135,7 @@ public class QuoteView {
 		
 
 		TableColumn<QuoteModel, Double> volumeColumn = 
-				new StockExchangeTableColumn<QuoteModel, Double>("VOLUME");
+				new MoneyShortColumn("VOLUME");
 		volumeColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("volume")
 				);
@@ -120,7 +144,7 @@ public class QuoteView {
 		
 
 		TableColumn<QuoteModel, Double> marketCapColumn = 
-				new StockExchangeTableColumn<QuoteModel, Double>("MARKET CAP");
+				new MoneyShortColumn("CAP");
 		marketCapColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("marketCap")
 				);
@@ -129,12 +153,23 @@ public class QuoteView {
 		
 		
 		TableColumn<QuoteModel, String> orderColumn = 
-				new StockExchangeOrderColumn(stage, "ORDER");
-		orderColumn.setMinWidth(63);
-		orderColumn.setPrefWidth(63);
+				new ButtonColumn<QuoteModel, String, QuoteDetailsButton>(stage, QuoteDetailsButton.class, "ORDER");
+		orderColumn.setMinWidth(60);
+		orderColumn.setPrefWidth(60);
 		
 		table.setEditable(false);
-		table.setItems(QuoteModel.marshallQuotes(quotes));
+		data = QuoteModel.marshallQuotes(quotes);
+		FilteredList<QuoteModel> filterData = new FilteredList<QuoteModel>(data);
+		
+		
+		filter.textProperty().addListener(new QuoteFilterChangeListener(filterData));
+		
+		SortedList<QuoteModel> sorted = new SortedList<QuoteModel>(filterData);
+		
+		sorted.comparatorProperty().bind(table.comparatorProperty());
+		
+		table.setItems(sorted);
+		
 		table.getColumns().addAll(
 				symbolColumn,
 				nameColumn,
@@ -148,14 +183,46 @@ public class QuoteView {
 				marketCapColumn,
 				orderColumn
 		);
-		
-		border.setCenter(table);
-		scene = new Scene(border, 804, 400);
+		table.setPrefWidth(750);
+		grid.add(filter, 0, 0);
+		grid.add(table, 0, 1);
+		border.setCenter(grid);
+		scene = new Scene(border, 800, 400);
 		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
-		
 	}
 	
 	public Scene getScene(){
 		return this.scene;
+	}
+	
+	public void start(){
+		this.setupRefresh();
+	}
+	
+	public void stop(){
+		refresher.cancel();
+	}
+	
+	private void setupRefresh(){
+		refresher = new Timer();
+		refresher.scheduleAtFixedRate(new TimerTask(){
+
+			@Override
+			public void run() {
+				Platform.runLater(new Runnable(){
+					public void run() {
+						List<Quote> quotes = StockExchangeAPI.getQuotes(exchange);
+						update(quotes);
+					}
+				});
+			}
+			
+		}, 0, Connection.refreshRate);
+		
+	}
+	
+	public void update(List<Quote> quotes){
+		this.data.clear();
+		this.data.addAll(QuoteModel.marshallQuotes(quotes));
 	}
 }

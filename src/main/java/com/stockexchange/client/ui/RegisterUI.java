@@ -5,10 +5,7 @@ import com.stockexchange.client.api.AuthenticationAPI;
 import com.stockexchange.client.connection.Connection;
 import com.stockexchange.client.ui.LoginUI.CancelButtonEvent;
 import com.stockexchange.client.ui.LoginUI.LoginButtonEvent;
-import com.stockexchange.client.ui.components.StockExchangeBorder;
-import com.stockexchange.client.ui.components.buttons.StockExchangeButton;
-import com.stockexchange.client.ui.components.fields.StockExchangePasswordField;
-import com.stockexchange.client.ui.components.fields.StockExchangeTextField;
+import com.stockexchange.client.ui.components.BaseBorder;
 import com.stockexchange.client.ui.components.text.HeaderLabel;
 import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Credentials;
@@ -65,7 +62,7 @@ public class RegisterUI{
 	public RegisterUI(Stage stage){
 		
 		this.stage = stage;
-		this.border = new StockExchangeBorder(stage);
+		this.border = new BaseBorder(stage);
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -81,15 +78,15 @@ public class RegisterUI{
 		grid.add(title, 0, 0 ,2 ,1);
 		
 		this.brokerageLabel = new Label("Brokerage: ");
-		this.brokerageField = new StockExchangeTextField();
+		this.brokerageField = new TextField();
 		this.nameLabel = new Label("Name: ");
-		this.nameField = new StockExchangeTextField();
+		this.nameField = new TextField();
 		this.userLabel = new Label("Username: ");
-		this.userField = new StockExchangeTextField();
+		this.userField = new TextField();
 		this.pwLabel = new Label("Password: ");
-		this.pwField = new StockExchangePasswordField();
+		this.pwField = new PasswordField();
 		this.pwLabelConfirmation = new Label("Password Confirmation: ");
-		this.pwFieldConfirmation = new StockExchangePasswordField();
+		this.pwFieldConfirmation = new PasswordField();
 		
 		
 		grid.add(brokerageLabel, 0, 2);
@@ -104,9 +101,9 @@ public class RegisterUI{
 		grid.add(pwFieldConfirmation,1, 6);
 		
 		
-		this.register = new StockExchangeButton("Register");
+		this.register = new Button("Register");
 		this.register.setOnAction(new RegisterButtonEvent());
-		this.cancel = new StockExchangeButton("Cancel");
+		this.cancel = new Button("Cancel");
 		this.cancel.setOnAction(new CancelButtonEvent());
 		
 		HBox btns = new HBox(10);

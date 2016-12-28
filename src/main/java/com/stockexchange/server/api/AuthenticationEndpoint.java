@@ -15,8 +15,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.stockexchange.server.MarketSystem;
 import com.stockexchange.server.StockExchange;
-import com.stockexchange.server.StockExchangeRegistry;
 import com.stockexchange.server.brokerages.Brokerage;
 import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.traders.Trader;
@@ -34,7 +34,7 @@ public class AuthenticationEndpoint {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response authenticateTrader(@PathParam("brokerage") String brokerageName, Credentials cred){
-		Brokerage brokerage = StockExchangeRegistry.getBrokerage(brokerageName);
+		Brokerage brokerage = StockExchange.getBrokerage(brokerageName);
 		if (brokerage == null){
 			return Response.status(Status.NOT_FOUND).build();
 		}
@@ -54,7 +54,7 @@ public class AuthenticationEndpoint {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response refreshTrader(@PathParam("brokerage") String brokerage, String username){
-		Trader trader = StockExchangeRegistry.getBrokerage(brokerage).refresh(username);
+		Trader trader = StockExchange.getBrokerage(brokerage).refresh(username);
 		if (trader == null){
 			return Response.status(Status.FORBIDDEN).build();
 		}
@@ -66,7 +66,7 @@ public class AuthenticationEndpoint {
 	@Path("/{brokerage}/logout")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response logoutTrader(@PathParam("brokerage") String brokerage, String username){
-		Trader trader = StockExchangeRegistry.getBrokerage(brokerage).refresh(username);
+		Trader trader = StockExchange.getBrokerage(brokerage).refresh(username);
 		if (trader == null){
 			return Response.status(Status.FORBIDDEN).build();
 		}
@@ -79,7 +79,7 @@ public class AuthenticationEndpoint {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response registerTrader(@PathParam("brokerage") String brokerageName, Register reg){
-		Brokerage brokerage = StockExchangeRegistry.getBrokerage(brokerageName);
+		Brokerage brokerage = StockExchange.getBrokerage(brokerageName);
 		if (brokerage == null){
 			return Response.status(Status.NOT_FOUND).build();
 		}

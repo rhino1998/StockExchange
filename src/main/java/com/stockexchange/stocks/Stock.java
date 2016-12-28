@@ -3,8 +3,8 @@ package com.stockexchange.stocks;
 import java.util.HashMap;
 import java.util.UUID;
 
+import com.stockexchange.server.MarketSystem;
 import com.stockexchange.server.StockExchange;
-import com.stockexchange.server.StockExchangeRegistry;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.stocks.quotes.Quote;
 
@@ -24,7 +24,7 @@ public class Stock {
 	private int volume;
 	
 	private final HashMap<UUID, Order> pendingOrders = new HashMap<UUID, Order>();
-	private final StockExchange exchange;
+	private final MarketSystem exchange;
 	
 	public Stock(Quote quote){
 		this.name = quote.getName();
@@ -37,7 +37,7 @@ public class Stock {
 		this.marketCap = quote.getMarketCap();
 		this.dailyHigh = quote.getDailyHigh();
 		this.dailyLow = quote.getDailyLow();
-		this.exchange = StockExchangeRegistry.getStockExchange(quote.getExchange());
+		this.exchange = StockExchange.getStockExchange(quote.getExchange());
 		
 	}
 	
@@ -128,7 +128,7 @@ public class Stock {
 		this.dailyHigh = dailyHigh;
 	}
 	
-	public StockExchange getExchange(){
+	public MarketSystem getExchange(){
 		return exchange;
 	}
 }

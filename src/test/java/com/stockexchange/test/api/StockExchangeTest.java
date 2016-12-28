@@ -16,7 +16,7 @@ import org.junit.Test;
 import com.stockexchange.StockNames;
 import com.stockexchange.client.api.StockExchangeAPI;
 import com.stockexchange.client.connection.Connection;
-import com.stockexchange.server.StockExchangeRegistry;
+import com.stockexchange.server.StockExchange;
 import com.stockexchange.server.api.StockExchangeEndpoint;
 import com.stockexchange.stocks.quotes.Quote;
 
@@ -30,9 +30,9 @@ public class StockExchangeTest extends JerseyTest{
 	@Test
 	public void testGetQuote() throws IOException{
 		Connection.website = target("/");
-		StockExchangeRegistry.listStocks(StockNames.stocks);
+		StockExchange.listStocks(StockNames.stocks);
 		
-		Quote a = StockExchangeRegistry.getStockExchange("NMS").getQuote("GOOG");
+		Quote a = StockExchange.getStockExchange("NMS").getQuote("GOOG");
 		Quote b = StockExchangeAPI.getQuote("NMS", "GOOG");
 		assertEquals(a.getSymbol(), b.getSymbol());
 	}
@@ -40,9 +40,9 @@ public class StockExchangeTest extends JerseyTest{
 	@Test
 	public void testGetQuotes() throws IOException{
 		Connection.website = target("/");
-		StockExchangeRegistry.listStocks(StockNames.stocks);
+		StockExchange.listStocks(StockNames.stocks);
 		
-		List<Quote> a = StockExchangeRegistry.getStockExchange("NMS").getQuotes();
+		List<Quote> a = StockExchange.getStockExchange("NMS").getQuotes();
 		List<Quote> b = StockExchangeAPI.getQuotes("NMS");
 		
 		assertTrue(a.containsAll(b));

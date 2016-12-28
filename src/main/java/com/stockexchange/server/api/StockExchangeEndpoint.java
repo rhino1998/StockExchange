@@ -13,7 +13,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.stockexchange.server.StockExchangeRegistry;
+import com.stockexchange.server.StockExchange;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.traders.Trader;
@@ -29,7 +29,7 @@ public class StockExchangeEndpoint {
 		@Path("quote/{symbol}")
 		@Produces("application/json")
 		public Response getQuote(@PathParam("exchange") String exchange, @PathParam("symbol") String symbol){
-			Quote quote = StockExchangeRegistry.getStockExchange(exchange).getQuote(symbol);
+			Quote quote = StockExchange.getStockExchange(exchange).getQuote(symbol);
 			GenericEntity<Quote> entity = new GenericEntity<Quote>(quote, Quote.class);
 			return Response.ok().entity(entity).build();
 		}
@@ -38,7 +38,7 @@ public class StockExchangeEndpoint {
 		@Path("quotes")
 		@Produces("application/json")
 		public Response getQuotes(@PathParam("exchange") String exchange){
-			List<Quote> quotes = StockExchangeRegistry.getStockExchange(exchange).getQuotes();
+			List<Quote> quotes = StockExchange.getStockExchange(exchange).getQuotes();
 			GenericEntity<List<Quote>> entity = new GenericEntity<List<Quote>>(quotes){};
 			return Response.ok().entity(entity).build();
 		}

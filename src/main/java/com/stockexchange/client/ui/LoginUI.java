@@ -3,10 +3,7 @@ package com.stockexchange.client.ui;
 import com.stockexchange.client.ui.styles.Style;
 import com.stockexchange.client.api.AuthenticationAPI;
 import com.stockexchange.client.connection.Connection;
-import com.stockexchange.client.ui.components.StockExchangeBorder;
-import com.stockexchange.client.ui.components.buttons.StockExchangeButton;
-import com.stockexchange.client.ui.components.fields.StockExchangePasswordField;
-import com.stockexchange.client.ui.components.fields.StockExchangeTextField;
+import com.stockexchange.client.ui.components.BaseBorder;
 import com.stockexchange.client.ui.components.text.HeaderLabel;
 import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Credentials;
@@ -59,7 +56,7 @@ public class LoginUI{
 	public LoginUI(Stage stage){
 		
 		this.stage = stage;
-		this.border = new StockExchangeBorder(stage);
+		this.border = new BaseBorder(stage);
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -76,11 +73,11 @@ public class LoginUI{
 		
 		
 		this.brokerageLabel = new Label("Brokerage: ");
-		this.brokerageField = new StockExchangeTextField();
+		this.brokerageField = new TextField();
 		this.userLabel = new Label("Username: ");
-		this.userField = new StockExchangeTextField();
+		this.userField = new TextField();
 		this.pwLabel = new Label("Password: ");
-		this.pwField = new StockExchangePasswordField();
+		this.pwField = new PasswordField();
 		
 		grid.add(brokerageLabel, 0, 2);
 		grid.add(brokerageField,1, 2);
@@ -92,10 +89,10 @@ public class LoginUI{
 		
 		
 		
-		this.login = new StockExchangeButton("Login");
+		this.login = new Button("Login");
 		this.login.setOnAction(new LoginButtonEvent());
 		
-		this.cancel = new StockExchangeButton("Cancel");
+		this.cancel = new Button("Cancel");
 		this.cancel.setOnAction(new CancelButtonEvent());
 		
 		HBox btns = new HBox(10);

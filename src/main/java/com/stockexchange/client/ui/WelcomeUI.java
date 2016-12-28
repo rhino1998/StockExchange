@@ -2,8 +2,7 @@ package com.stockexchange.client.ui;
 
 import com.stockexchange.client.ui.styles.Style;
 import com.stockexchange.client.api.StockExchangeAPI;
-import com.stockexchange.client.ui.components.StockExchangeBorder;
-import com.stockexchange.client.ui.components.buttons.StockExchangeButton;
+import com.stockexchange.client.ui.components.BaseBorder;
 import com.stockexchange.client.ui.components.text.HeaderLabel;
 
 import javafx.event.ActionEvent;
@@ -39,7 +38,7 @@ public class WelcomeUI{
 	
 	public WelcomeUI(Stage stage){
 		this.stage = stage;
-		this.border = new StockExchangeBorder(this.stage);
+		this.border = new BaseBorder(this.stage);
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -57,10 +56,10 @@ public class WelcomeUI{
 		
 		
 		
-		this.login = new StockExchangeButton("Login");
+		this.login = new Button("Login");
 		this.login.setOnAction(new LoginButtonEvent());
 		
-		this.register = new StockExchangeButton("Register");
+		this.register = new Button("Register");
 		this.register.setOnAction(new RegisterButtonEvent());
 		
 		
@@ -87,8 +86,9 @@ public class WelcomeUI{
 			double oldHeight= stage.getHeight();
 			//stage.setScene(Scenes.login.getScene());
 			
-			Scene tempScene = new QuoteView(stage, StockExchangeAPI.getQuotes("NMS"), "NMS").getScene();
-			stage.setScene(tempScene);
+			QuoteView view = new QuoteView(stage, StockExchangeAPI.getQuotes("NMS"), "NMS");
+			stage.setScene(view.getScene());
+			view.start();
 			stage.sizeToScene();
 			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
 			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);

@@ -1,5 +1,7 @@
 package com.stockexchange.client.ui.components;
 
+import com.stockexchange.client.ui.components.buttongroups.WindowButtons;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,19 +16,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
-public class StockExchangeBorder extends BorderPane{
-
-	private static final String toolbarStyle = 
-			"-fx-padding: 10px;"+
-			"-fx-background-color:  linear-gradient(to top, #232323, #232323);"+
-			"-fx-background: #EFEFEF;"+
-			"-fx-color: #EFEFEF;";
+public class BaseBorder extends BorderPane{
 	
 	private Stage stage;
     private double xOffset = 0 ;
     private double yOffset = 0;
+    
+    protected HBox left, center, right;
 	
-	public StockExchangeBorder(Stage theStage){
+	public BaseBorder(Stage theStage){
 		super();
 		stage = theStage;
 		ToolBar toolBar = new ToolBar();
@@ -37,9 +35,9 @@ public class StockExchangeBorder extends BorderPane{
         toolBar.setMaxHeight(height);
         toolBar.setPadding(new Insets(0, 1, 1, 1));
 
-        HBox left = new HBox();
-        HBox center = new HBox();
-        HBox right = new WindowButtons(stage);
+        left = new HBox();
+        center = new HBox();
+        right = new WindowButtons(stage);
         
         HBox.setHgrow(left, Priority.ALWAYS);
         HBox.setHgrow(center, Priority.ALWAYS);
@@ -49,7 +47,6 @@ public class StockExchangeBorder extends BorderPane{
         right.setAlignment(Pos.CENTER_RIGHT);
         
         toolBar.getItems().addAll(left, center, right);
-        toolBar.setStyle(toolbarStyle);
 
         this.setTop(toolBar);
         

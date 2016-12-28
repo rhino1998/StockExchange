@@ -10,4 +10,6 @@ public class Connection {
 	public static WebTarget website; 
 	
 	public static Trader trader;
+
+	public static final long refreshRate = (long) 5000;
 }

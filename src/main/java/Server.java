@@ -7,7 +7,7 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import com.stockexchange.StockNames;
-import com.stockexchange.server.StockExchangeRegistry;
+import com.stockexchange.server.StockExchange;
 import com.stockexchange.server.data.YahooFinanceAPI;
 import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.stocks.quotes.enums.QuoteSortBy;
@@ -34,14 +34,14 @@ public class Server {
 
 	public static void main(String[] args) throws IOException{
 		try{
-			StockExchangeRegistry.listStocks(
+			StockExchange.listStocks(
 					StockNames.stocks
 			);
 		}catch (Exception e){
 			System.out.println(e);
 			e.printStackTrace();
 		}
-		StockExchangeRegistry.addBrokerage("rhino");
+		StockExchange.addBrokerage("rhino");
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
