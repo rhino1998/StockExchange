@@ -1,8 +1,13 @@
 package com.stockexchange.client.ui;
 
-import com.stockexchange.client.Style;
+import com.stockexchange.client.ui.styles.Style;
 import com.stockexchange.client.api.AuthenticationAPI;
+import com.stockexchange.client.connection.Connection;
 import com.stockexchange.client.ui.components.StockExchangeBorder;
+import com.stockexchange.client.ui.components.buttons.StockExchangeButton;
+import com.stockexchange.client.ui.components.fields.StockExchangePasswordField;
+import com.stockexchange.client.ui.components.fields.StockExchangeTextField;
+import com.stockexchange.client.ui.components.text.HeaderLabel;
 import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Credentials;
 
@@ -26,13 +31,16 @@ import javafx.stage.Stage;
 
 public class LoginUI{
 	
+	private static final int width = 300;
+	private static final int height = 220;
+	
 	private Stage stage;
 	
 	private BorderPane border;
 	
 	private Scene scene;
 	
-	private Text title;	
+	private Label title;	
 	
 	private Label brokerageLabel;
 	private TextField brokerageField;
@@ -61,18 +69,18 @@ public class LoginUI{
 		grid.setHgap(10);
 		grid.setPadding(new Insets(25,25,25,25));
 		
-		title = new Text("Login");
+		title = new HeaderLabel("Login");
 		title.setFont(Style.titleFont);
 		
 		grid.add(title, 0, 0 ,2 ,1);
 		
 		
 		this.brokerageLabel = new Label("Brokerage: ");
-		this.brokerageField = new TextField();
+		this.brokerageField = new StockExchangeTextField();
 		this.userLabel = new Label("Username: ");
-		this.userField = new TextField();
+		this.userField = new StockExchangeTextField();
 		this.pwLabel = new Label("Password: ");
-		this.pwField = new PasswordField();
+		this.pwField = new StockExchangePasswordField();
 		
 		grid.add(brokerageLabel, 0, 2);
 		grid.add(brokerageField,1, 2);
@@ -81,23 +89,24 @@ public class LoginUI{
 		grid.add(pwLabel, 0, 4);
 		grid.add(pwField,1, 4);
 		
-		grid.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
 		
 		
 		
-		
-		this.login = new Button("Login");
+		this.login = new StockExchangeButton("Login");
 		this.login.setOnAction(new LoginButtonEvent());
-		this.cancel = new Button("Cancel");
+		
+		this.cancel = new StockExchangeButton("Cancel");
 		this.cancel.setOnAction(new CancelButtonEvent());
 		
 		HBox btns = new HBox(10);
 		btns.setAlignment(Pos.CENTER);
 		btns.getChildren().addAll( this.login, this.cancel);
 		grid.add(btns, 1, 5);
+		grid.getStyleClass().add("grid");
 
 		this.border.setCenter(grid);
-		this.scene = new Scene(this.border, Style.width, Style.height);
+		this.scene = new Scene(this.border, width, height);
+		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
 	}
 
 
@@ -118,8 +127,11 @@ public class LoginUI{
 				//TODO error alert
 				return;
 			}
-			System.out.println(trader.getBrokerageName() + trader.getName());
-			System.out.println(trader.getToken());
+			
+			
+			//Establish trader
+			Connection.trader = trader;
+
 			
 			//TODO Scene change
 			stage.setScene(Scenes.login.getScene());

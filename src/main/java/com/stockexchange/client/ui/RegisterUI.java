@@ -1,10 +1,15 @@
 package com.stockexchange.client.ui;
 
-import com.stockexchange.client.Style;
+import com.stockexchange.client.ui.styles.Style;
 import com.stockexchange.client.api.AuthenticationAPI;
+import com.stockexchange.client.connection.Connection;
 import com.stockexchange.client.ui.LoginUI.CancelButtonEvent;
 import com.stockexchange.client.ui.LoginUI.LoginButtonEvent;
 import com.stockexchange.client.ui.components.StockExchangeBorder;
+import com.stockexchange.client.ui.components.buttons.StockExchangeButton;
+import com.stockexchange.client.ui.components.fields.StockExchangePasswordField;
+import com.stockexchange.client.ui.components.fields.StockExchangeTextField;
+import com.stockexchange.client.ui.components.text.HeaderLabel;
 import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Credentials;
 import com.stockexchange.transport.Register;
@@ -29,6 +34,9 @@ import javafx.stage.Stage;
 
 public class RegisterUI{
 	
+	private static final int width = 350;
+	private static final int height = 290;
+	
 	private Stage stage;
 	private BorderPane border;
 	
@@ -49,7 +57,7 @@ public class RegisterUI{
 	private Label pwLabelConfirmation;
 	private PasswordField pwFieldConfirmation;
 	
-	private Text title;	
+	private Label title;	
 	private Button register;
 	private Button cancel;
 	
@@ -67,21 +75,21 @@ public class RegisterUI{
 		grid.setHgap(10);
 		grid.setPadding(new Insets(25,25,25,25));
 		
-		title = new Text("Register");
+		title = new HeaderLabel("Register");
 		title.setFont(Style.titleFont);
 		
 		grid.add(title, 0, 0 ,2 ,1);
 		
 		this.brokerageLabel = new Label("Brokerage: ");
-		this.brokerageField = new TextField();
+		this.brokerageField = new StockExchangeTextField();
 		this.nameLabel = new Label("Name: ");
-		this.nameField = new TextField();
+		this.nameField = new StockExchangeTextField();
 		this.userLabel = new Label("Username: ");
-		this.userField = new TextField();
+		this.userField = new StockExchangeTextField();
 		this.pwLabel = new Label("Password: ");
-		this.pwField = new PasswordField();
+		this.pwField = new StockExchangePasswordField();
 		this.pwLabelConfirmation = new Label("Password Confirmation: ");
-		this.pwFieldConfirmation = new PasswordField();
+		this.pwFieldConfirmation = new StockExchangePasswordField();
 		
 		
 		grid.add(brokerageLabel, 0, 2);
@@ -96,21 +104,22 @@ public class RegisterUI{
 		grid.add(pwFieldConfirmation,1, 6);
 		
 		
-		this.register = new Button("Register");
+		this.register = new StockExchangeButton("Register");
 		this.register.setOnAction(new RegisterButtonEvent());
-		this.cancel = new Button("Cancel");
+		this.cancel = new StockExchangeButton("Cancel");
 		this.cancel.setOnAction(new CancelButtonEvent());
 		
 		HBox btns = new HBox(10);
 		btns.setAlignment(Pos.CENTER);
 		btns.getChildren().addAll( this.register, this.cancel);
 		grid.add(btns, 1, 7);
+		grid.getStyleClass().add("grid");
 		
 		this.border.setCenter(grid);
 		
 		
-		//grid.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
-		this.scene = new Scene(this.border, Style.width, Style.height);
+		this.scene = new Scene(this.border, width, height);
+		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
 	}
 
 
@@ -137,6 +146,9 @@ public class RegisterUI{
 				//TODO error alert
 				return;
 			}
+			
+			//Establish trader
+			Connection.trader = trader;
 			
 			System.out.println(trader.getName());
 		}

@@ -1,0 +1,92 @@
+.root{
+    -fx-background-color: #343434;
+}
+
+.toolbar {
+    -fx-padding: 10px;
+    -fx-background-color:  linear-gradient(to top, #232323, #232323);
+    -fx-background: #EFEFEF;
+    -fx-color: #EFEFEF;
+}
+
+
+.header_text {
+    -fx-stroke: #EFEFEF;
+    -fx-fill: #EFEFEF;
+}
+
+.label {
+    -fx-text-fill: #EFEFEF;
+}
+
+.stock_button{
+    -fx-background-color:  linear-gradient(to top, #232323, #232323);
+    -fx-text-fill: #EFEFEF;
+    -fx-border-radius: 1;
+    -fx-background-radius: 0px;
+    -fx-padding: 5px;
+}
+.button{
+    -fx-background-color:  linear-gradient(to top, #232323, #232323);
+    -fx-text-fill: #EFEFEF;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.grid {
+    -fx-padding: 10px;
+    -fx-background-color: #343434;
+
+}
+
+
+.table-view{
+    -fx-table-cell-border-color: #EFEFEF;
+    -fx-table-header-border-color: #EFEFEF;
+    -fx-background-color: transparent;
+}
+
+.table-view .filler{
+    -fx-background-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+
+.table-view .column-header-background{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: #EFEFEF;
+}
+
+.table-view .column-header{
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: #EFEFEF;
+    -fx-table-header-border-color: #EFEFEF;
+}
+
+.table-view .table-cell{
+    -fx-border-color: #EFEFEF;
+    -fx-text-fill: #EFEFEF;
+}
+
+.table-view .table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, #343434;
+    -fx-table-cell-border-color: #EFEFEF;
+    -fx-table-header-border-color: #EFEFEF;
+}
+
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background{
+    -fx-background-color: transparent;
+}

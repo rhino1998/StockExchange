@@ -1,7 +1,10 @@
 package com.stockexchange.client.ui;
 
-import com.stockexchange.client.Style;
+import com.stockexchange.client.ui.styles.Style;
+import com.stockexchange.client.api.StockExchangeAPI;
 import com.stockexchange.client.ui.components.StockExchangeBorder;
+import com.stockexchange.client.ui.components.buttons.StockExchangeButton;
+import com.stockexchange.client.ui.components.text.HeaderLabel;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,21 +24,20 @@ import javafx.stage.Stage;
 public class WelcomeUI{
 	
 	
-	private static int width = 150;
-	private static int height = 120;
+	private static final int width = 150;
+	private static final int height = 120;
 	
 	private Stage stage;
 	private BorderPane border;
 	
 	private Scene scene;
 	
-	private Text title;	
+	private Label title;	
 	private Button login;
 	private Button register;
 	
 	
 	public WelcomeUI(Stage stage){
-		
 		this.stage = stage;
 		this.border = new StockExchangeBorder(this.stage);
 		
@@ -47,7 +49,7 @@ public class WelcomeUI{
 		grid.setHgap(10);
 		grid.setPadding(new Insets(25,25,25,25));
 		
-		title = new Text("Welcome");
+		title = new HeaderLabel("Welcome");
 		title.setFont(Style.titleFont);
 		
 		grid.add(title, 0, 0 ,2 ,1);
@@ -55,21 +57,22 @@ public class WelcomeUI{
 		
 		
 		
-		
-		grid.setStyle("-fx-background-color: tan;-fx-padding: 10px;");
-		this.login = new Button("Login");
+		this.login = new StockExchangeButton("Login");
 		this.login.setOnAction(new LoginButtonEvent());
 		
-		this.register = new Button("Register");
+		this.register = new StockExchangeButton("Register");
 		this.register.setOnAction(new RegisterButtonEvent());
 		
 		
 		grid.add(login, 0, 2);
 		grid.add(register, 1, 2);
+		grid.getStyleClass().add("grid");
+		
 		this.border.setCenter(grid);
 		
 		
 		this.scene = new Scene(this.border, WelcomeUI.width, WelcomeUI.height);
+		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
 	}
 
 
@@ -82,7 +85,10 @@ public class WelcomeUI{
 		public void handle(ActionEvent e) {
 			double oldWidth = stage.getWidth();
 			double oldHeight= stage.getHeight();
-			stage.setScene(Scenes.login.getScene());
+			//stage.setScene(Scenes.login.getScene());
+			
+			Scene tempScene = new QuoteView(stage, StockExchangeAPI.getQuotes("NMS"), "NMS").getScene();
+			stage.setScene(tempScene);
 			stage.sizeToScene();
 			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
 			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);

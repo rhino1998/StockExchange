@@ -1,4 +1,4 @@
-package com.stockexchange.client;
+package com.stockexchange.client.ui.styles;
 
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;

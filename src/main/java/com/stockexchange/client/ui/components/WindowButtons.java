@@ -1,5 +1,7 @@
 package com.stockexchange.client.ui.components;
 
+import com.stockexchange.client.ui.components.buttons.ToolbarButton;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,8 +17,12 @@ class WindowButtons extends HBox {
     public WindowButtons(Stage theStage) {
 		stage = theStage;
     	
-        Button closeBtn = new Button("X");
+        Button closeBtn = new ToolbarButton("X");
         closeBtn.setAlignment(Pos.TOP_RIGHT);
+        closeBtn.setMaxWidth(25);
+        closeBtn.setMinWidth(25);
+        closeBtn.setPrefWidth(25);
+
 
         closeBtn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -25,8 +31,12 @@ class WindowButtons extends HBox {
             }
         });
         
-        Button minimizeBtn = new Button("_");
+        Button minimizeBtn = new ToolbarButton("_");
         minimizeBtn.setAlignment(Pos.TOP_RIGHT);
+        minimizeBtn.setMaxWidth(25);
+        minimizeBtn.setMinWidth(25);
+        minimizeBtn.setPrefWidth(25);
+
 
         minimizeBtn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
