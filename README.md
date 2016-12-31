@@ -14,6 +14,11 @@ Things to do
     - [x] Registration
     - [ ] Account view
     - [ ] Order view
+  - [ ] API
+    - [x] Authentication
+    - [x] Stock Quotes
+    - [ ] Stock Details
+    - [ ] Order submit
 - [ ] Server
   - [x] Authentication
   - [x] YahooAPI
