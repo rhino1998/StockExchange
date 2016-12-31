@@ -5,7 +5,6 @@
 
 Things to do
 
-* FixUI
 - [ ] Client
   - [ ] UI
     - [x] Stock Quotes
