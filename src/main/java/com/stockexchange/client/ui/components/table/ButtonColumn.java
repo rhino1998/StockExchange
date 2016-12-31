@@ -1,6 +1,10 @@
 package com.stockexchange.client.ui.components.table;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import com.stockexchange.client.data.QuoteModel;
+import com.stockexchange.client.ui.ViewStage;
 import com.stockexchange.client.ui.components.table.buttons.ColumnButton;
 import com.stockexchange.stocks.quotes.Quote;
 
@@ -18,7 +22,7 @@ public class ButtonColumn<S,T,B extends ColumnButton<S>> extends TableColumn<S, 
 	
 	
 	public ButtonColumn(
-			Stage stage,
+			ViewStage win,
 			final Class<B> btnType,
 			String text
 		){
@@ -30,29 +34,29 @@ public class ButtonColumn<S,T,B extends ColumnButton<S>> extends TableColumn<S, 
 			{
 				public TableCell<S, T> call(TableColumn<S, T> param){
 					TableCell<S, T> cell;
-					try {
-						cell = new TableCell<S, T>(){
-							final ColumnButton<S> btn = btnType.newInstance();
-							public void updateItem(T item, boolean empty){
-								super.updateItem(item, empty);
-								if (empty){
-									setGraphic(null);
-									setText(null);
-								}else{
-									btn.setItem(getTableView().getItems().get(getIndex()));
+					cell = new TableCell<S, T>(){
+						public void updateItem(T item, boolean empty){
+							super.updateItem(item, empty);
+							if (empty){
+								setGraphic(null);
+								setText(null);
+							}else{
+								Constructor<B> ctor;
+								try {
+									ctor = btnType.getConstructor(ViewStage.class, item.getClass());
+									B btn = ctor.newInstance(getTableView().getItems().get(getIndex()));
 									setGraphic(btn);
 									setText(null);
+								}catch (Exception e){
+									setGraphic(null);
+									setText(null);
+									return;
 								}
 							}
-						};
-						cell.setPadding(new Insets(1,0,1,5));
-						return cell;
-					} catch (InstantiationException e) {
-					} catch (IllegalAccessException e) {
-					}
-					setGraphic(null);
-					setText(null);
-					return null;
+						}
+					};
+					cell.setPadding(new Insets(1,0,1,5));
+					return cell;
 				}
 			
 			};

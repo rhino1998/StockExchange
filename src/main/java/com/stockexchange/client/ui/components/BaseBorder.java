@@ -1,5 +1,6 @@
 package com.stockexchange.client.ui.components;
 
+import com.stockexchange.client.ui.ViewStage;
 import com.stockexchange.client.ui.components.buttongroups.WindowButtons;
 
 import javafx.application.Platform;
@@ -18,15 +19,15 @@ import javafx.stage.Stage;
 
 public class BaseBorder extends BorderPane{
 	
-	private Stage stage;
+	private final ViewStage window;
     private double xOffset = 0 ;
     private double yOffset = 0;
     
     protected HBox left, center, right;
 	
-	public BaseBorder(Stage theStage){
+	public BaseBorder(ViewStage win){
 		super();
-		stage = theStage;
+		window = win;
 		ToolBar toolBar = new ToolBar();
 		
 		int height = 28;
@@ -37,7 +38,7 @@ public class BaseBorder extends BorderPane{
 
         left = new HBox();
         center = new HBox();
-        right = new WindowButtons(stage);
+        right = new WindowButtons(window);
         
         HBox.setHgrow(left, Priority.ALWAYS);
         HBox.setHgrow(center, Priority.ALWAYS);
@@ -52,29 +53,29 @@ public class BaseBorder extends BorderPane{
         
         this.setOnMousePressed(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                xOffset = stage.getX() - event.getScreenX();
-                yOffset = stage.getY() - event.getScreenY();
+                xOffset = window.getX() - event.getScreenX();
+                yOffset = window.getY() - event.getScreenY();
             }
         });
         
         this.setOnMouseDragged(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                stage.setX(event.getScreenX() + xOffset);
-                stage.setY(event.getScreenY() + yOffset);
+            	window.setX(event.getScreenX() + xOffset);
+                window.setY(event.getScreenY() + yOffset);
             }
         });
         
         toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                xOffset = stage.getX() - event.getScreenX();
-                yOffset = stage.getY() - event.getScreenY();
+                xOffset = window.getX() - event.getScreenX();
+                yOffset = window.getY() - event.getScreenY();
             }
         });
         
         toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                stage.setX(event.getScreenX() + xOffset);
-                stage.setY(event.getScreenY() + yOffset);
+            	window.setX(event.getScreenX() + xOffset);
+            	window.setY(event.getScreenY() + yOffset);
             }
         });
 	}

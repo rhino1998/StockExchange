@@ -3,8 +3,8 @@ package com.stockexchange.client.ui;
 import com.stockexchange.client.ui.styles.Style;
 import com.stockexchange.client.api.AuthenticationAPI;
 import com.stockexchange.client.connection.Connection;
-import com.stockexchange.client.ui.LoginUI.CancelButtonEvent;
-import com.stockexchange.client.ui.LoginUI.LoginButtonEvent;
+import com.stockexchange.client.ui.LoginView.CancelButtonEvent;
+import com.stockexchange.client.ui.LoginView.LoginButtonEvent;
 import com.stockexchange.client.ui.components.BaseBorder;
 import com.stockexchange.client.ui.components.text.HeaderLabel;
 import com.stockexchange.traders.Trader;
@@ -29,17 +29,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class RegisterUI{
+public class RegisterView extends View{
 	
 	private static final int width = 350;
-	private static final int height = 290;
-	
-	private Stage stage;
-	private BorderPane border;
-	
-	
-	private Scene scene;
-	
+	private static final int height = 310;
+
 	private Label brokerageLabel;
 	private TextField brokerageField;
 	
@@ -59,10 +53,10 @@ public class RegisterUI{
 	private Button cancel;
 	
 	
-	public RegisterUI(Stage stage){
+	public RegisterView(ViewStage window){
+		super(window);
 		
-		this.stage = stage;
-		this.border = new BaseBorder(stage);
+		this.border = new BaseBorder(window);
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -70,7 +64,7 @@ public class RegisterUI{
 		
 		grid.setVgap(10);
 		grid.setHgap(10);
-		grid.setPadding(new Insets(25,25,25,25));
+		grid.setPadding(new Insets(10,25,25,25));
 		
 		title = new HeaderLabel("Register");
 		title.setFont(Style.titleFont);
@@ -110,7 +104,6 @@ public class RegisterUI{
 		btns.setAlignment(Pos.CENTER);
 		btns.getChildren().addAll( this.register, this.cancel);
 		grid.add(btns, 1, 7);
-		grid.getStyleClass().add("grid");
 		
 		this.border.setCenter(grid);
 		
@@ -120,14 +113,12 @@ public class RegisterUI{
 	}
 
 
-	public Scene getScene() {
-		return this.scene;
-	}
 
 	
 	class RegisterButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
 			
+			//Ensure password is consistent
 			if (!pwField.getText().equals(pwFieldConfirmation.getText())){
 				//TODO invalid password alert
 				pwField.setText("");
@@ -135,31 +126,32 @@ public class RegisterUI{
 				return;
 			}
 			
+			//Create transport object
 			Register reg =  new Register(nameField.getText(), userField.getText(), pwField.getText());
 			Trader trader = AuthenticationAPI.registerTrader(brokerageField.getText(),reg);
 			
+			//Ensure registration was successful.
 			if (trader == null){
 				pwField.setText("");
-				//TODO error alert
+				pwFieldConfirmation.setText("");
+				
+				//TODO Error alert of some sort.
 				return;
 			}
 			
 			//Establish trader
 			Connection.trader = trader;
 			
-			System.out.println(trader.getName());
+			//Create and change View
+			Scenes.profile = new ProfileView(window,trader);
+			window.setView(Scenes.profile);	
 		}
 	}
 	
 	class CancelButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
-			double oldWidth = stage.getWidth();
-			double oldHeight= stage.getHeight();
-			stage.setScene(Scenes.welcome.getScene());
-			stage.sizeToScene();
-			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
-			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);
-			
+			//Change view
+			window.setView(Scenes.welcome);
 		}
 	}
 

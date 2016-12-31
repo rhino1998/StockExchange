@@ -26,16 +26,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class LoginUI{
+public class LoginView extends View{
 	
 	private static final int width = 300;
-	private static final int height = 220;
-	
-	private Stage stage;
-	
-	private BorderPane border;
-	
-	private Scene scene;
+	private static final int height = 230;
 	
 	private Label title;	
 	
@@ -53,10 +47,15 @@ public class LoginUI{
 	private Button cancel;
 	
 	
-	public LoginUI(Stage stage){
+	/**
+	 * A Login page view
+	 * @param stage The window stage in which to render this view
+	 */
+	public LoginView(ViewStage win){
+		super(win);
 		
-		this.stage = stage;
-		this.border = new BaseBorder(stage);
+		
+		this.border = new BaseBorder(win);
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -64,7 +63,7 @@ public class LoginUI{
 		
 		grid.setVgap(10);
 		grid.setHgap(10);
-		grid.setPadding(new Insets(25,25,25,25));
+		grid.setPadding(new Insets(10,25,25,25));
 		
 		title = new HeaderLabel("Login");
 		title.setFont(Style.titleFont);
@@ -99,23 +98,15 @@ public class LoginUI{
 		btns.setAlignment(Pos.CENTER);
 		btns.getChildren().addAll( this.login, this.cancel);
 		grid.add(btns, 1, 5);
-		grid.getStyleClass().add("grid");
 
 		this.border.setCenter(grid);
 		this.scene = new Scene(this.border, width, height);
 		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
 	}
 
-
-	public Scene getScene() {
-		return this.scene;
-	}
-
 	
 	class LoginButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
-			double oldWidth = stage.getWidth();
-			double oldHeight= stage.getHeight();
 			
 			Credentials cred =  new Credentials(userField.getText(), pwField.getText());
 			Trader trader = AuthenticationAPI.authenticateTrader(brokerageField.getText(),cred);
@@ -128,27 +119,18 @@ public class LoginUI{
 			
 			//Establish trader
 			Connection.trader = trader;
-
 			
-			//TODO Scene change
-			stage.setScene(Scenes.login.getScene());
-			stage.sizeToScene();
-			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
-			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);
+			//Create and change scene
+			Scenes.profile = new ProfileView(window,trader);
+			window.setView(Scenes.profile);
 			
 		}
 	}
 	
 	class CancelButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
-			double oldWidth = stage.getWidth();
-			double oldHeight= stage.getHeight();
-			
-			stage.setScene(Scenes.welcome.getScene());
-			stage.sizeToScene();
-			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
-			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);
-			
+			//Change view
+			window.setView(Scenes.welcome);
 		}
 	}
 

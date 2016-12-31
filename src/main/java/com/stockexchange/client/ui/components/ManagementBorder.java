@@ -1,5 +1,6 @@
 package com.stockexchange.client.ui.components;
 
+import com.stockexchange.client.ui.ViewStage;
 import com.stockexchange.client.ui.components.buttongroups.ManagementButtons;
 import com.stockexchange.client.ui.components.buttongroups.WindowButtons;
 import com.stockexchange.client.ui.components.text.HeaderLabel;
@@ -21,9 +22,9 @@ import javafx.stage.Stage;
 
 public class ManagementBorder extends BaseBorder{
 	
-	public ManagementBorder(Stage theStage, String header) {
-		super(theStage);
-		this.left.getChildren().add(new ManagementButtons(theStage));
+	public ManagementBorder(ViewStage win, String header) {
+		super(win);
+		this.left.getChildren().add(new ManagementButtons(win));
 	}
 	
 }

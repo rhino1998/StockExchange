@@ -1,5 +1,7 @@
 package com.stockexchange.client.ui.components.buttongroups;
 
+import com.stockexchange.client.ui.ViewStage;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,10 +12,10 @@ import javafx.stage.Stage;
 
 public class WindowButtons extends HBox {
 
-	private Stage stage;
+	private final ViewStage window;
 	
-    public WindowButtons(Stage theStage) {
-		stage = theStage;
+    public WindowButtons(ViewStage win) {
+    	this.window = win;
     	
         Button closeBtn = new Button("X");
         closeBtn.setAlignment(Pos.TOP_RIGHT);
@@ -38,7 +40,7 @@ public class WindowButtons extends HBox {
 
         minimizeBtn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
-                stage.setIconified(true);
+            	window.getStage().setIconified(true);
             }
         });
         this.getChildren().addAll(minimizeBtn, closeBtn);

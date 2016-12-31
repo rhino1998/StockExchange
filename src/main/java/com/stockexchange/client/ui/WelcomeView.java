@@ -20,25 +20,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class WelcomeUI{
+public class WelcomeView extends View{
 	
 	
-	private static final int width = 150;
-	private static final int height = 120;
-	
-	private Stage stage;
-	private BorderPane border;
-	
-	private Scene scene;
+	private static final int width = 180;
+	private static final int height = 150;
 	
 	private Label title;	
 	private Button login;
 	private Button register;
 	
 	
-	public WelcomeUI(Stage stage){
-		this.stage = stage;
-		this.border = new BaseBorder(this.stage);
+	public WelcomeView(ViewStage window){
+		super(window);
+		this.border = new BaseBorder(this.window);
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -70,41 +65,22 @@ public class WelcomeUI{
 		this.border.setCenter(grid);
 		
 		
-		this.scene = new Scene(this.border, WelcomeUI.width, WelcomeUI.height);
+		this.scene = new Scene(this.border, WelcomeView.width, WelcomeView.height);
 		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
-	}
-
-
-	public Scene getScene() {
-		return this.scene;
 	}
 
 	
 	class LoginButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
-			double oldWidth = stage.getWidth();
-			double oldHeight= stage.getHeight();
-			//stage.setScene(Scenes.login.getScene());
-			
-			QuoteView view = new QuoteView(stage, StockExchangeAPI.getQuotes("NMS"), "NMS");
-			stage.setScene(view.getScene());
-			view.start();
-			stage.sizeToScene();
-			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
-			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);
+			//Change View
+			window.setView(Scenes.login);
 		}
 	}
 	
 	class RegisterButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
-			double oldWidth = stage.getWidth();
-			double oldHeight= stage.getHeight();
-			
-			stage.setScene(Scenes.register.getScene());
-			stage.sizeToScene();
-			stage.setX(stage.getX()-(stage.getWidth()-oldWidth)/2);
-			stage.setY(stage.getY()-(stage.getHeight()-oldHeight)/2);			
-			
+			//Change View
+			window.setView(Scenes.register);
 		}
 	}
 

@@ -1,5 +1,8 @@
 package com.stockexchange.client.ui.components.buttongroups;
 
+import com.stockexchange.client.ui.Scenes;
+import com.stockexchange.client.ui.ViewStage;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,37 +13,24 @@ import javafx.stage.Stage;
 
 public class ManagementButtons extends HBox {
 
-	private Stage stage;
+	private ViewStage window;
 	
-    public ManagementButtons(Stage theStage) {
-		stage = theStage;
+    public ManagementButtons(ViewStage win) {
+    	window = win;
     	
-        Button closeBtn = new Button("X");
-        closeBtn.setAlignment(Pos.TOP_RIGHT);
-        closeBtn.setMaxWidth(25);
-        closeBtn.setMinWidth(25);
-        closeBtn.setPrefWidth(25);
+        Button profileBtn = new Button("P");
+        profileBtn.setAlignment(Pos.TOP_LEFT);
+        profileBtn.setMaxWidth(25);
+        profileBtn.setMinWidth(25);
+        profileBtn.setPrefWidth(25);
 
 
-        closeBtn.setOnAction(new EventHandler<ActionEvent>() {
+        profileBtn.setOnAction(new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent actionEvent) {
-                Platform.exit();
+                window.setView(Scenes.profile);
             }
         });
-        
-        Button minimizeBtn = new Button("_");
-        minimizeBtn.setAlignment(Pos.TOP_RIGHT);
-        minimizeBtn.setMaxWidth(25);
-        minimizeBtn.setMinWidth(25);
-        minimizeBtn.setPrefWidth(25);
-
-
-        minimizeBtn.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent actionEvent) {
-                stage.setIconified(true);
-            }
-        });
-        this.getChildren().addAll(minimizeBtn, closeBtn);
+        this.getChildren().addAll(profileBtn);
     }
 }

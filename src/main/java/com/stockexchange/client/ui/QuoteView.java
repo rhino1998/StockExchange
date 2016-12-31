@@ -20,12 +20,9 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -35,33 +32,49 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class QuoteView {
+public class QuoteView extends View{
 
+	private final long refreshRate;
 	private final String exchange;
 			
 	private Timer refresher;
 	
-	private Stage stage;
-	private Scene scene;
-	private BorderPane border;
 	private GridPane grid;
 	private ObservableList<QuoteModel> data;
+	
 	
 	
 	private TextField filter;
 	private TableView<QuoteModel> table;
 	
 	@SuppressWarnings("unchecked")
-	public QuoteView(Stage theStage, List<Quote> quotes, String exchange){
+	/**
+	 * A view containing a searchable, filterable table of stock quotes
+	 * @param stage The window stage in which to render this view
+	 * @param exchange The exchange the quotes belong to.
+	 * @param refreshRate How often to autorefresh the table.
+	 */
+	public QuoteView(ViewStage win, String exchange, long refreshRate){
+		super(win);
+		
+		this.refreshRate = refreshRate;
 		this.exchange = exchange;
-		stage = theStage;
+		
+		
+		//Retrieve quotes from the stock server.
+		List<Quote> quotes = StockExchangeAPI.getQuotes(exchange);
+		
+		
+		//Create table and formatting containers.
 		table = new TableView<QuoteModel>();
-		border = new ManagementBorder(stage, String.format("%s Stock Quotes", exchange));
+		border = new ManagementBorder(window, String.format("%s Stock Quotes", exchange));
 		grid = new GridPane();
 		filter = new TextField();
 		
 		
 		grid.setPadding(new Insets(25,25,25,25));
+		
+		//Create table format
 		TableColumn<QuoteModel, String> symbolColumn = 
 				new TableColumn<QuoteModel, String>("SYM");
 		symbolColumn.setCellValueFactory(
@@ -153,23 +166,26 @@ public class QuoteView {
 		
 		
 		TableColumn<QuoteModel, String> orderColumn = 
-				new ButtonColumn<QuoteModel, String, QuoteDetailsButton>(stage, QuoteDetailsButton.class, "ORDER");
+				new ButtonColumn<QuoteModel, String, QuoteDetailsButton>(window, QuoteDetailsButton.class, "ORDER");
 		orderColumn.setMinWidth(60);
 		orderColumn.setPrefWidth(60);
 		
 		table.setEditable(false);
+		
+		//Wrap quotes as queryable objects in a list
 		data = QuoteModel.marshallQuotes(quotes);
 		FilteredList<QuoteModel> filterData = new FilteredList<QuoteModel>(data);
 		
-		
+		//Enable searching
 		filter.textProperty().addListener(new QuoteFilterChangeListener(filterData));
-		
+		//Enable sorting
 		SortedList<QuoteModel> sorted = new SortedList<QuoteModel>(filterData);
-		
 		sorted.comparatorProperty().bind(table.comparatorProperty());
 		
+		//Populate table
 		table.setItems(sorted);
 		
+		//Format table
 		table.getColumns().addAll(
 				symbolColumn,
 				nameColumn,
@@ -183,26 +199,31 @@ public class QuoteView {
 				marketCapColumn,
 				orderColumn
 		);
+		
+		//Size table
 		table.setPrefWidth(750);
 		grid.add(filter, 0, 0);
 		grid.add(table, 0, 1);
 		border.setCenter(grid);
+		
+		
 		scene = new Scene(border, 800, 400);
 		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
 	}
-	
-	public Scene getScene(){
-		return this.scene;
-	}
-	
 	public void start(){
+		super.start();
 		this.setupRefresh();
 	}
 	
 	public void stop(){
+		super.stop();
 		refresher.cancel();
 	}
 	
+	
+	/**
+	 * Automatically refreshes the Quote Display every Connection.refreshRate seconds.
+	 */
 	private void setupRefresh(){
 		refresher = new Timer();
 		refresher.scheduleAtFixedRate(new TimerTask(){
@@ -211,13 +232,14 @@ public class QuoteView {
 			public void run() {
 				Platform.runLater(new Runnable(){
 					public void run() {
+						//Grab new stock quotes
 						List<Quote> quotes = StockExchangeAPI.getQuotes(exchange);
 						update(quotes);
 					}
 				});
 			}
 			
-		}, 0, Connection.refreshRate);
+		}, 0, refreshRate);
 		
 	}
 	

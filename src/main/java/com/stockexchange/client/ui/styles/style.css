@@ -19,6 +19,11 @@
     -fx-text-fill: #EFEFEF;
 }
 
+.text-label {
+    -fx-font-size: 16;
+}
+
+
 
 .text-field{
     -fx-background-color:  linear-gradient(to top, #232323, #232323);
@@ -40,10 +45,8 @@
     -fx-padding: 5px;
 }
 
-.grid {
-    -fx-padding: 10px;
+.grid-pane {
     -fx-background-color: #343434;
-
 }
 
 .tool-bar{
