@@ -5,31 +5,36 @@ import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stockexchange.stocks.Stock;
 import com.stockexchange.traders.Trader;
 import com.stockexchange.traders.accounts.Account;
-import com.stockexchange.transport.dummies.QuoteDummy;
 
 public class Quote implements Serializable{
 
 	private static final long serialVersionUID = -5983976623649918132L;
 	
-	private final String name;
-	private final String symbol;
-	private final String exchange;
-	private final double dailyHigh;
-	private final double dailyLow;
-	private final double bid;
-	private final double ask;
-	private final double open;
-	private final double previousClose;
-	private final double marketCap;
-	private final int volume;
+	@JsonProperty private String name;
+	@JsonProperty private String symbol;
+	@JsonProperty private String exchange;
+	@JsonProperty private double dailyHigh;
+	@JsonProperty private double dailyLow;
+	@JsonProperty private double bid;
+	@JsonProperty private double ask;
+	@JsonProperty private double open;
+	@JsonProperty private double previousClose;
+	@JsonProperty private double marketCap;
+	@JsonProperty private int volume;
 	
+	public Quote(){}
 	
+	/**
+	 * A snapshot of a stock's state
+	 * @param stock The stock of which to make a snapshot
+	 */
 	public Quote(Stock stock){
 		this.name = stock.getName();
 		this.symbol = stock.getSymbol();
@@ -44,6 +49,10 @@ public class Quote implements Serializable{
 		this.exchange = stock.getExchange().getName();
 	}
 	
+	/**
+	 * 
+	 * @param args the traits of the Quote in a string array.
+	 */
 	public Quote(String[] args){
 		
 		this.symbol = args[0];
@@ -76,21 +85,6 @@ public class Quote implements Serializable{
 		
 	}
 	
-	
-	public Quote(QuoteDummy q){
-		this.symbol = q.getSymbol();
-		this.name = q.getName();
-		this.exchange = q.getExchange();
-		this.ask = q.getAsk();
-		this.bid = q.getBid();
-		this.marketCap = q.getMarketCap();
-		this.open = q.getOpen();
-		this.previousClose = q.getPreviousClose();
-		this.volume = q.getVolume();
-		this.dailyLow = q.getDailyLow();
-		this.dailyHigh = q.getDailyHigh();
-		
-	}
 	
 	public String getName(){
 		return name;

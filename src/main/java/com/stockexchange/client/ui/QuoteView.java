@@ -13,6 +13,7 @@ import com.stockexchange.client.ui.components.table.MoneyShortColumn;
 import com.stockexchange.client.ui.components.ManagementBorder;
 import com.stockexchange.client.ui.components.table.ButtonColumn;
 import com.stockexchange.client.ui.components.table.buttons.QuoteDetailsButton;
+import com.stockexchange.client.ui.components.table.buttons.factory.ColumnButtonFactory;
 import com.stockexchange.client.ui.styles.Style;
 import com.stockexchange.stocks.quotes.Quote;
 
@@ -166,7 +167,11 @@ public class QuoteView extends View{
 		
 		
 		TableColumn<QuoteModel, String> orderColumn = 
-				new ButtonColumn<QuoteModel, String, QuoteDetailsButton>(window, QuoteDetailsButton.class, "ORDER");
+			new ButtonColumn<QuoteModel, String>(
+				window,
+				new ColumnButtonFactory<QuoteModel>(QuoteDetailsButton.class),
+				"ORDER"
+		);
 		orderColumn.setMinWidth(60);
 		orderColumn.setPrefWidth(60);
 		

@@ -26,6 +26,11 @@ public class Stock {
 	private final HashMap<UUID, Order> pendingOrders = new HashMap<UUID, Order>();
 	private final MarketSystem exchange;
 	
+	
+	/**
+	 * Create a stock from a snapshot of it, typically retrieved elsewhere.
+	 * @param quote a quote to initialize stock state
+	 */
 	public Stock(Quote quote){
 		this.name = quote.getName();
 		this.symbol = quote.getSymbol();
@@ -41,6 +46,11 @@ public class Stock {
 		
 	}
 	
+	
+	/**
+	 * Update the stock from new data
+	 * @param quote A snapshot of a stock's state
+	 */
 	public void update(Quote quote){
 		if (!this.symbol.equals(quote.getSymbol())){
 			return;

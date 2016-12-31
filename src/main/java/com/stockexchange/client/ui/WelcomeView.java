@@ -73,7 +73,8 @@ public class WelcomeView extends View{
 	class LoginButtonEvent implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
 			//Change View
-			window.setView(Scenes.login);
+			View view = new QuoteView(window, "NMS", 500);
+			window.setView(view);
 		}
 	}
 	

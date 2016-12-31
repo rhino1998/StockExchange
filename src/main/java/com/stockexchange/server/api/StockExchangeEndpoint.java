@@ -17,7 +17,6 @@ import com.stockexchange.server.StockExchange;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.traders.Trader;
-import com.stockexchange.transport.dummies.QuoteDummy;
 
 
 @Path("/exchange/{exchange}")
