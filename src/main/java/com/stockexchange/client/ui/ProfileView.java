@@ -13,6 +13,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class ProfileView extends View{
+	
+	private static final int width = 300;
+	private static final int height = 300;
 
 	private GridPane grid;
 	
@@ -56,7 +59,7 @@ public class ProfileView extends View{
 		
 		
 		//Size and theme
-		this.scene = new Scene(border, 300, 300);
+		this.scene = new Scene(border, width, height);
 		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
 	}
 

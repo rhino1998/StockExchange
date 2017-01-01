@@ -30,7 +30,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class RegisterView extends View{
-	
 	private static final int width = 350;
 	private static final int height = 310;
 

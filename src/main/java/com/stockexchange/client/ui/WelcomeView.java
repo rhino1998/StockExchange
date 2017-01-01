@@ -21,8 +21,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class WelcomeView extends View{
-	
-	
 	private static final int width = 180;
 	private static final int height = 150;
 	
@@ -65,7 +63,7 @@ public class WelcomeView extends View{
 		this.border.setCenter(grid);
 		
 		
-		this.scene = new Scene(this.border, WelcomeView.width, WelcomeView.height);
+		this.scene = new Scene(this.border, width, height);
 		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
 	}
 

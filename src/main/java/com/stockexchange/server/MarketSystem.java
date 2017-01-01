@@ -53,4 +53,8 @@ public class MarketSystem {
 		}
 		return quotes;
 	}
+
+	public Stock getStock(String symbol) {
+		return stocks.get(symbol);
+	}
 }

@@ -25,4 +25,14 @@ public class StockExchangeAPI {
 		WebTarget target = Connection.website.path(String.format("/exchange/%s/quote/%s", exchange,symbol));
 		return target.request().get().readEntity(Quote.class);
 	}
+	
+	public static String getQuoteDescription(String exchange, String symbol){
+		WebTarget target = Connection.website.path(String.format("/exchange/%s/quote/%s/description", exchange,symbol));
+		return target.request().get().readEntity(String.class);
+	}
+	
+	public static String getQuoteChartURL(String exchange, String symbol){
+		WebTarget target = Connection.website.path(String.format("/exchange/%s/quote/%s/chart", exchange,symbol));
+		return target.request().get().readEntity(String.class);
+	}
 }

@@ -27,7 +27,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LoginView extends View{
-	
 	private static final int width = 300;
 	private static final int height = 230;
 	

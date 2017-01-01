@@ -7,8 +7,8 @@ public class StockNames {
 	
 	public static final String[] stocks = new String[]{
 		"ABT", "ABBV", "ACN", "ACE",
-		"ADBE", "ADT", "AAP", "AES", "AET", "AFL", "AMG", "A", "GAS",
-		"APD", "ARG", "AKAM", "AA", "AGN", "ALXN", "ALLE", "ADS", "ALL", "ALTR",
+		"ADBE", "ADT", "AAP", "AES", "AET", "AFL", "AMG", "GAS",
+		"APD", "ARG", "AKAM", "AGN", "ALXN", "ALLE", "ADS", "ALL",
 		"MO", "AMZN", "AEE", "AAL", "AEP", "AXP", "AIG", "AMT", "AMP", "ABC",
 		"AME", "AMGN", "APH", "APC", "ADI", "AON", "APA", "AIV", "AMAT", "ADM",
 		"AIZ", "T", "ADSK", "ADP", "AN", "AZO", "AVGO", "AVB", "AVY",

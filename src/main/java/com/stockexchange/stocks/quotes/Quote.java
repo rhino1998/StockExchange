@@ -29,7 +29,7 @@ public class Quote implements Serializable{
 	@JsonProperty private double marketCap;
 	@JsonProperty private int volume;
 	
-	public Quote(){}
+	public Quote(){};
 	
 	/**
 	 * A snapshot of a stock's state

@@ -40,4 +40,8 @@ public class Brokerage {
 		traders.put(reg.getUsername(), trader);
 		return trader;
 	}
+
+	public Trader getTrader(String traderUsername) {
+		return traders.get(traderUsername);
+	}
 }

@@ -34,7 +34,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class QuoteView extends View{
-
+	private static final int width = 800;
+	private static final int height = 500;
+	
+	
 	private final long refreshRate;
 	private final String exchange;
 			
@@ -95,7 +98,7 @@ public class QuoteView extends View{
 		
 		
 		TableColumn<QuoteModel, Double> askColumn = 
-				new MoneyColumn("ASK");
+				new MoneyShortColumn("ASK");
 		askColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("ask")
 				);
@@ -104,7 +107,7 @@ public class QuoteView extends View{
 		
 		
 		TableColumn<QuoteModel, Double> bidColumn = 
-				new MoneyColumn("BID");
+				new MoneyShortColumn("BID");
 		bidColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("bid")
 				);
@@ -113,7 +116,7 @@ public class QuoteView extends View{
 		
 
 		TableColumn<QuoteModel, Double> lowColumn = 
-				new MoneyColumn("LOW");
+				new MoneyShortColumn("LOW");
 		lowColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("low")
 				);
@@ -122,7 +125,7 @@ public class QuoteView extends View{
 		
 
 		TableColumn<QuoteModel, Double> highColumn = 
-				new MoneyColumn("HIGH");
+				new MoneyShortColumn("HIGH");
 		highColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("high")
 				);
@@ -131,7 +134,7 @@ public class QuoteView extends View{
 		
 		
 		TableColumn<QuoteModel, Double> openColumn = 
-				new MoneyColumn("OPEN");
+				new MoneyShortColumn("OPEN");
 		openColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("open")
 				);
@@ -140,7 +143,7 @@ public class QuoteView extends View{
 		
 
 		TableColumn<QuoteModel, Double> closeColumn = 
-				new MoneyColumn("CLOSE");
+				new MoneyShortColumn("CLOSE");
 		closeColumn.setCellValueFactory(
 				new PropertyValueFactory<QuoteModel, Double>("close")
 				);
@@ -212,7 +215,7 @@ public class QuoteView extends View{
 		border.setCenter(grid);
 		
 		
-		scene = new Scene(border, 800, 400);
+		scene = new Scene(border, width, height);
 		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
 	}
 	public void start(){

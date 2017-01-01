@@ -2,6 +2,7 @@ package com.stockexchange.client.ui.components.table;
 
 import com.stockexchange.client.data.QuoteModel;
 import com.stockexchange.stocks.quotes.Quote;
+import com.stockexchange.util.MoneyFormat;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,15 +32,7 @@ public class MoneyShortColumn extends TableColumn<QuoteModel, Double>{
 								setText(null);
 							}else{
 								setGraphic(null);
-								if (item > 1e9){
-									setText(String.format("$%.2fB", item/1e9));
-								}else if (item > 1e6){
-									setText(String.format("$%.2fM", item/1e6));
-								}else if (item > 1e3){
-									setText(String.format("$%.2fK", item/1e3));
-								}else{
-									setText(String.format("$%.2f", item));
-								}
+								setText(MoneyFormat.shortened(item));
 								
 							}
 						}

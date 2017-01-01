@@ -3,6 +3,7 @@ package com.stockexchange.client.ui.components;
 import com.stockexchange.client.ui.ViewStage;
 import com.stockexchange.client.ui.components.buttongroups.ManagementButtons;
 import com.stockexchange.client.ui.components.buttongroups.WindowButtons;
+import com.stockexchange.client.ui.components.labels.TextLabel;
 import com.stockexchange.client.ui.components.text.HeaderLabel;
 
 import javafx.application.Platform;
@@ -25,6 +26,7 @@ public class ManagementBorder extends BaseBorder{
 	public ManagementBorder(ViewStage win, String header) {
 		super(win);
 		this.left.getChildren().add(new ManagementButtons(win));
+		this.center.getChildren().add(new TextLabel(header));
 	}
 	
 }
