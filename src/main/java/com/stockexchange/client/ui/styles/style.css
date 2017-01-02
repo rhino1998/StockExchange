@@ -39,6 +39,42 @@
 }
 
 
+.chart{
+    -fx-padding: 5px;
+    -fx-text-fill: #EFEFEF;
+    -fx-font-size: 12;
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: transparent;
+}
+
+.axis-tick-mark {
+    -fx-stroke: #EFEFEF;
+    -fx-stroke-width: 2; 
+}
+.axis-minor-tick-mark {
+    -fx-stroke: #EFEFEF;
+}
+ 
+.axis-label {
+  -fx-font-size: 10;
+  -fx-text-fill: #EFEFEF;
+}
+
+.axis {
+    -fx-font-size: 12;    
+    -fx-tick-label-fill: #EFEFEF;
+    -fx-font-family: Tahoma;
+    -fx-tick-length: 10;
+    -fx-minor-tick-length: 5;
+}
+
 .text-area{
     -fx-text-fill: #EFEFEF;
     -fx-font-size: 16;

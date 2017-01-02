@@ -18,6 +18,9 @@ import com.stockexchange.client.api.StockExchangeAPI;
 import com.stockexchange.client.connection.Connection;
 import com.stockexchange.server.StockExchange;
 import com.stockexchange.server.api.StockExchangeEndpoint;
+import com.stockexchange.server.data.ReutersAPI;
+import com.stockexchange.stocks.Stock;
+import com.stockexchange.stocks.StockDataPoint;
 import com.stockexchange.stocks.quotes.Quote;
 
 public class StockExchangeTest extends JerseyTest{
@@ -44,6 +47,50 @@ public class StockExchangeTest extends JerseyTest{
 		
 		List<Quote> a = StockExchange.getStockExchange("NMS").getQuotes();
 		List<Quote> b = StockExchangeAPI.getQuotes("NMS");
+		
+		assertTrue(a.containsAll(b));
+	}
+	
+	@Test
+	public void testGetDescription() throws IOException{
+		Connection.website = target("/");
+		Stock stock = StockExchange
+				.getStockExchange("NMS")
+				.getStock("GOOG");
+		
+		String c = ReutersAPI.getDescription("GOOG");
+		String b = StockExchangeAPI.getStockDescription("NMS", "GOOG");
+		String a = stock.getDescription();
+		
+		assertEquals(c,b);
+		assertEquals(a,b);
+	}
+	
+	@Test
+	public void testGetHistory() throws IOException{
+		Connection.website = target("/");
+		StockExchange.listStocks(StockNames.stocks);
+		
+		
+		Stock stock = StockExchange
+				.getStockExchange("NMS")
+				.getStock("GOOG");
+		
+		for (int i = 0; i<1440; i++){
+			stock
+			.getHistory()
+			.add(new StockDataPoint(
+				stock.getAsk(),
+				stock.getBid()
+			));
+		}
+		
+		List<StockDataPoint> a = StockExchange
+				.getStockExchange("NMS")
+				.getStock("GOOG")
+				.getHistory()
+				.getAll();
+		List<StockDataPoint> b = StockExchangeAPI.getStockHistory("NMS", "GOOG", 0);
 		
 		assertTrue(a.containsAll(b));
 	}

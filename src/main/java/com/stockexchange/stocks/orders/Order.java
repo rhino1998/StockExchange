@@ -17,7 +17,10 @@ public class Order {
 	}
 
 	public boolean isMarket() {
-		// TODO Auto-generated method stub
 		return orderType == OrderType.MARKET;
+	}
+
+	public boolean isBuy() {
+		return transactionType == TransactionType.BUY;
 	}
 }

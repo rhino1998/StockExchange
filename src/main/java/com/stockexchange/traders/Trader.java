@@ -11,7 +11,6 @@ import com.stockexchange.server.brokerages.Brokerage;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.stockexchange.server.StockExchange;
 import com.stockexchange.stocks.orders.Order;
-import com.stockexchange.stocks.orders.OrderView;
 import com.stockexchange.traders.accounts.Account;
 import com.stockexchange.transport.Register;
 import com.stockexchange.transport.enums.State;

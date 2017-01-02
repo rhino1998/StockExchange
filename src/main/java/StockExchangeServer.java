@@ -13,7 +13,7 @@ import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.stocks.quotes.enums.QuoteSortBy;
 
 
-public class Server {
+public class StockExchangeServer {
 
 	
 	public static final String BASE_URI = "http://localhost:8080/";

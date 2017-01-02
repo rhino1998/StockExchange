@@ -1,14 +1,16 @@
 package com.stockexchange.stocks;
 
-import java.util.HashMap;
 import java.util.PriorityQueue;
-import java.util.UUID;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.stockexchange.server.MarketSystem;
 import com.stockexchange.server.StockExchange;
-import com.stockexchange.server.data.ReutersAPI;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.stocks.quotes.Quote;
+import com.stockexchange.util.History;
+
+import javafx.application.Platform;
 
 public class Stock {
 	
@@ -24,7 +26,10 @@ public class Stock {
 	
 	
 	private int volume;
-	
+	private String description;
+	private final Timer historian;
+	private final History<StockDataPoint> history = 
+			new History<StockDataPoint>(720);
 	private final PriorityQueue<Order> sellOrders = new PriorityQueue<Order>();
 	private final PriorityQueue<Order> buyOrders = new PriorityQueue<Order>();
 	private final MarketSystem exchange;
@@ -47,6 +52,20 @@ public class Stock {
 		this.dailyLow = quote.getDailyLow();
 		this.exchange = StockExchange.getStockExchange(quote.getExchange());
 		
+		
+		
+		final Stock stock = this;
+		historian = new Timer();
+		historian.scheduleAtFixedRate(new TimerTask(){
+
+			@Override
+			public void run() {
+				stock.bid += Math.random()*100-45;
+				stock.ask += Math.random()*100-45;
+				history.add(new StockDataPoint(stock));
+			}
+			
+		}, 0, 10000);
 	}
 	
 	
@@ -138,7 +157,26 @@ public class Stock {
 		return marketCap;
 	}
 	
+	public History<StockDataPoint> getHistory(){
+		return this.history;
+	}
+	
 	public MarketSystem getExchange(){
 		return exchange;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public boolean hasDescription() {
+		return this.description!=null;
 	}
 }

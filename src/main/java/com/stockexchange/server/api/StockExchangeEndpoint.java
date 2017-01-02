@@ -18,6 +18,8 @@ import javax.ws.rs.core.Response.Status;
 import com.stockexchange.server.StockExchange;
 import com.stockexchange.server.data.GoogleFinanceAPI;
 import com.stockexchange.server.data.ReutersAPI;
+import com.stockexchange.stocks.Stock;
+import com.stockexchange.stocks.StockDataPoint;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.traders.Trader;
@@ -25,12 +27,10 @@ import com.stockexchange.traders.Trader;
 
 @Path("/exchange/{exchange}")
 public class StockExchangeEndpoint {
-
-		private static final HashMap<String, String> descriptionCache = new HashMap<String, String>();
 		
 		
 		@GET
-		@Path("quote/{symbol}")
+		@Path("{symbol}")
 		@Produces(MediaType.APPLICATION_JSON)
 		public Response getQuote(@PathParam("exchange") String exchange, @PathParam("symbol") String symbol){
 			Quote quote = StockExchange.getStockExchange(exchange).getQuote(symbol);
@@ -48,26 +48,30 @@ public class StockExchangeEndpoint {
 		}
 		
 		@GET
-		@Path("quote/{symbol}/description")
+		@Path("{symbol}/description")
 		@Produces(MediaType.APPLICATION_JSON)
 		public Response getQuoteDescription(
 			@PathParam("exchange") String exchange,
 			@PathParam("symbol") String symbol
 		){
-			String desc = "No description available";
-			if (descriptionCache.containsKey(exchange+symbol)){
-				desc = descriptionCache.get(exchange+symbol);
-			}else{
-				desc = ReutersAPI.getDescription(symbol);
-				descriptionCache.put(exchange+symbol, desc);
+			Stock stock = 
+					StockExchange
+					.getStockExchange(exchange)
+					.getStock(symbol);
+			if (!stock.hasDescription()){
+				String desc = ReutersAPI.getDescription(symbol);
+				stock.setDescription(desc);
 			}
-
-			GenericEntity<String> entity = new GenericEntity<String>(desc, String.class);
+			
+			GenericEntity<String> entity = new GenericEntity<String>(
+				stock.getDescription(),
+				String.class
+			);
 			return Response.ok().entity(entity).build();
 		}
 		
 		@GET
-		@Path("quote/{symbol}/chart")
+		@Path("{symbol}/chart")
 		@Produces(MediaType.APPLICATION_JSON)
 		public Response getQuoteChart(
 			@PathParam("exchange") String exchange,
@@ -77,6 +81,33 @@ public class StockExchangeEndpoint {
 					GoogleFinanceAPI.getChartURL(symbol),
 					String.class
 			);
+			return Response.ok().entity(entity).build(); //MAYBE ADD CACHING
+		}
+		
+		
+		@GET
+		@Path("{symbol}/history/{offset}")
+		@Produces(MediaType.APPLICATION_JSON)
+		public Response getQuoteHistory(
+			@PathParam("exchange") String exchange,
+			@PathParam("symbol") String symbol,
+			@PathParam("offset") long offset
+		){
+			
+			List<StockDataPoint> history = StockExchange
+					.getStockExchange(exchange)
+					.getStock(symbol)
+					.getHistory()
+					.getAll();
+			int i = 0;
+			for (i = 0; i < history.size(); i++){
+				if (history.get(i).getTime()>offset){
+					break;
+				}
+			}
+			GenericEntity<List<StockDataPoint>> entity = new GenericEntity<List<StockDataPoint>>(
+					history.subList(i, history.size())
+			){};
 			return Response.ok().entity(entity).build(); //MAYBE ADD CACHING
 		}
 		

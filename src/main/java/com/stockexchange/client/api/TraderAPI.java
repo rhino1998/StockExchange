@@ -1,7 +1,6 @@
 package com.stockexchange.client.api;
 
 import com.stockexchange.stocks.orders.Order;
-import com.stockexchange.stocks.orders.OrderView;
 import com.stockexchange.traders.Trader;
 
 public class TraderAPI {

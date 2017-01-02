@@ -28,6 +28,7 @@ public class WindowButtons extends HBox {
 
             public void handle(ActionEvent actionEvent) {
                 Platform.exit();
+                System.exit(0);
             }
         });
         

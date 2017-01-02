@@ -1,4 +1,4 @@
-package com.stockexchange.test.info;
+package com.stockexchange.test.data;
 
 import static org.junit.Assert.assertNotEquals;
 
@@ -19,10 +19,15 @@ public class StockDescriptionTest {
 	
 	@Test
 	public void getDescriptionTest() throws IOException{
+		int i = 0;
 		for (String symbol : StockNames.stocks){
 			String desc = ReutersAPI.getDescription(symbol);
 			System.out.println(desc);
 			assertNotEquals(desc, "");
+			i++;
+			if (i>10){
+				break;
+			}
 		}
 		
 	}
