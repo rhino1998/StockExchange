@@ -30,7 +30,7 @@
 		      <id>build-second</id>
 		      <phase>package</phase>
 		      <goals>
-		         <goal>shade</goal>
+		        <goal>shade</goal>
 		      </goals>   
 		      <configuration>
 		        <transformers>
@@ -44,56 +44,57 @@
 		  </executions>
 		</plugin>
 		<plugin>
-            <groupId>com.akathist.maven.plugins.launch4j</groupId>
-            <artifactId>launch4j-maven-plugin</artifactId>
-            <version>1.5.1</version>
-            <executions>
-                <execution>
-                    <id>l4j-clui</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>launch4j</goal>
-                    </goals>
-                    <configuration>
-                        <headerType>gui</headerType>
-                        <jar>target/client--${project.version}.jar</jar>
-                        <outfile>target/client--${project.version}.exe</outfile>
-                        <downloadUrl>http://java.com/download</downloadUrl>
-                        <classPath>
-                            <mainClass>StockExchangeClient</mainClass>
-                            <preCp>anything</preCp>
-                        </classPath>
-                        <icon>src/main/resources/icon/app.ico</icon>
-                        <jre>
-                            <minVersion>1.6.0</minVersion>
-                            <jdkPreference>preferJre</jdkPreference>
-                        </jre>
-                        <versionInfo>
-                            <fileVersion>1.0.0.0</fileVersion>
-                            <txtFileVersion>${project.version}</txtFileVersion>
-                            <fileDescription>${project.name}</fileDescription>
-                            <copyright>2012 hasCode.com</copyright>
-                            <productVersion>1.0.0.0</productVersion>
-                            <txtProductVersion>1.0.0.0</txtProductVersion>
-                            <productName>${project.name}</productName>
-                            <companyName>hasCode.com</companyName>
-                            <internalName>hasCode</internalName>
-                            <originalFilename>hasCode.exe</originalFilename>
-                        </versionInfo>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+      <groupId>com.akathist.maven.plugins.launch4j</groupId>
+      <artifactId>launch4j-maven-plugin</artifactId>
+      <version>1.5.1</version>
+      <executions>
+        <execution>
+          <id>l4j-clui</id>
+            <phase>package</phase>
+            <goals>
+              <goal>launch4j</goal>
+            </goals>
+            <configuration>
+              <headerType>gui</headerType>
+              <jar>target/client--${project.version}.jar</jar>
+              <outfile>target/client--${project.version}.exe</outfile>
+              <downloadUrl>http://java.com/download</downloadUrl>
+              <classPath>
+                <mainClass>StockExchangeClient</mainClass>
+                <preCp>anything</preCp>
+              </classPath>
+              <icon>src/main/resources/icon/app.ico</icon>
+              <jre>
+                <minVersion>1.6.0</minVersion>
+                <jdkPreference>preferJre</jdkPreference>
+              </jre>
+              <versionInfo>
+                <fileVersion>1.0.0.0</fileVersion>
+                <txtFileVersion>${project.version}</txtFileVersion>
+                <fileDescription>${project.name}</fileDescription>
+                <copyright>2012 hasCode.com</copyright>
+                <productVersion>1.0.0.0</productVersion>
+                <txtProductVersion>1.0.0.0</txtProductVersion>
+                <productName>${project.name}</productName>
+                <companyName>hasCode.com</companyName>
+                <internalName>hasCode</internalName>
+                <originalFilename>hasCode.exe</originalFilename>
+              </versionInfo>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19.1</version>
         <configuration>
           <testFailureIgnore>true</testFailureIgnore>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>3.6.0</version>
         <configuration>
           <source/>
           <target/>
@@ -104,11 +105,11 @@
   <groupId>com.stockexchange</groupId>
   <artifactId>stockexchange</artifactId>
   <dependencies>
-  <dependency>
-  <groupId>org.glassfish.jersey.media</groupId>
-  <artifactId>jersey-media-json-jackson</artifactId>
-  <version>2.25</version>
-</dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-json-jackson</artifactId>
+      <version>2.25</version>
+    </dependency>
   	<dependency>
   		<groupId>org.glassfish.jersey.core</groupId>
   		<artifactId>jersey-server</artifactId>
@@ -122,10 +123,10 @@
   		<systemPath>${project.basedir}/lib/jfxrt.jar</systemPath>
   	</dependency>
   	<dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-grizzly2-http</artifactId>
-            <version>2.25</version>
-        </dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-grizzly2-http</artifactId>
+      <version>2.25</version>
+      </dependency>
   	<dependency>
   		<groupId>org.glassfish.jersey.core</groupId>
   		<artifactId>jersey-client</artifactId>
@@ -137,9 +138,9 @@
   <version>2.8.5</version>
 </dependency>
   <dependency>
-     <groupId>com.opencsv</groupId>
-     <artifactId>opencsv</artifactId>
-     <version>3.7</version>
+    <groupId>com.opencsv</groupId>
+    <artifactId>opencsv</artifactId>
+    <version>3.7</version>
   </dependency>
   <dependency>
   	<groupId>org.glassfish.grizzly</groupId>
