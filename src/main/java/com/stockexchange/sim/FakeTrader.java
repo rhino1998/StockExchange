@@ -23,7 +23,7 @@ public class FakeTrader{
     }
 
     public void trade(){
-
+        //TODO: figure out how to pretend to trade approximately reasonably
     }
 
     public void kill(){

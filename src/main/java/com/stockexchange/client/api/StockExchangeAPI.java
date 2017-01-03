@@ -14,7 +14,13 @@ public class StockExchangeAPI {
 
 	public static List<Quote> getQuotes(String exchange){
 		WebTarget target = Connection.website.path(String.format("/exchange/%s/quotes", exchange));
-		List<Quote> quotes = target.request().get().readEntity(new GenericType<List<Quote>>(){});
+		Response response = target.request().get();
+
+		if (response.getStatus() != 200){
+			return null;
+		}
+
+		List<Quote> quotes = response.readEntity(new GenericType<List<Quote>>(){});
 		return quotes;	
 	}
 	
@@ -22,7 +28,13 @@ public class StockExchangeAPI {
 		WebTarget target = Connection.website.path(
 				String.format("/exchange/%s/%s", exchange,symbol)
 		);
-		return target.request().get().readEntity(Quote.class);
+		Response response = target.request().get();
+
+		if (response.getStatus() != 200){
+			return null;
+		}
+
+		return response.readEntity(Quote.class);
 	}
 	
 	public static String getStockDescription(String exchange, String symbol){
@@ -30,9 +42,11 @@ public class StockExchangeAPI {
 				String.format("/exchange/%s/%s/description", exchange,symbol)
 		);
 		Response response = target.request().get();
+
 		if (response.getStatus() != 200){
 			return "Description not available";
 		}
+
 		return response.readEntity(String.class);
 	}
 	
@@ -40,6 +54,8 @@ public class StockExchangeAPI {
 		WebTarget target = Connection.website.path(
 				String.format("/exchange/%s/%s/chart", exchange,symbol)
 		);
+
+		
 		return target.request().get().readEntity(String.class);
 	}
 	
@@ -47,7 +63,14 @@ public class StockExchangeAPI {
 		WebTarget target = Connection.website.path(
 				String.format("/exchange/%s/%s/history/%s", exchange,symbol,offset)
 		);
-		return target.request().get().readEntity(new GenericType<List<StockDataPoint>>(){});
+		Response response = target.request().get();
+
+		if (response.getStatus() != 200){
+			return null;
+		}
+
+
+		return response.readEntity(new GenericType<List<StockDataPoint>>(){});
 	}
 	
 }
