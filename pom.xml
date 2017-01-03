@@ -23,7 +23,7 @@
 		            <mainClass>StockExchangeClient</mainClass>
 		          </transformer>
 		        </transformers>
-		        <finalName>client--${version}</finalName>
+		        <finalName>client--${project.version}</finalName>
 		      </configuration>        
 		    </execution>
 		    <execution>
@@ -38,7 +38,7 @@
 		            <mainClass>StockExchangeServer</mainClass>
 		          </transformer>
 		        </transformers>
-		        <finalName>server--${version}</finalName>
+		        <finalName>server--${project.version}</finalName>
 		      </configuration>  
 		    </execution>
 		  </executions>
@@ -56,8 +56,8 @@
                     </goals>
                     <configuration>
                         <headerType>gui</headerType>
-                        <jar>target/client--${version}.jar</jar>
-                        <outfile>target/client--${version}.exe</outfile>
+                        <jar>target/client--${project.version}.jar</jar>
+                        <outfile>target/client--${project.version}.exe</outfile>
                         <downloadUrl>http://java.com/download</downloadUrl>
                         <classPath>
                             <mainClass>StockExchangeClient</mainClass>
