@@ -177,6 +177,6 @@ public class Stock {
 
 
 	public boolean hasDescription() {
-		return this.description!=null;
+		return this.description!=null && !this.description.equals("Description not available");
 	}
 }

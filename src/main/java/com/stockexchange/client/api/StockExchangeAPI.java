@@ -33,7 +33,11 @@ public class StockExchangeAPI {
 		WebTarget target = Connection.website.path(
 				String.format("/exchange/%s/%s/description", exchange,symbol)
 		);
-		return target.request().get().readEntity(String.class);
+		Response response = target.request().get();
+		if (response.getStatus() != 200){
+			return "Description not available";
+		}
+		return response.readEntity(String.class);
 	}
 	
 	public static String getQuoteChartURL(String exchange, String symbol){
