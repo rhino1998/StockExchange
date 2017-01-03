@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <version>0.0.8--INDEV</version>
+  <version>0.0.9--INDEV</version>
   <name>Analysis of Algorithms Stock Exchange</name>
   <packaging>jar</packaging>
   <properties>
@@ -10,80 +10,95 @@
     <sourceDirectory>src/main/java</sourceDirectory>
     <testSourceDirectory>src/test/java</testSourceDirectory>
     <plugins>
-		<plugin>
-		  <groupId>org.apache.maven.plugins</groupId>
-		  <artifactId>maven-shade-plugin</artifactId>
-		  <version>2.4.1</version>
-		  <executions>
-		    <execution>
-		      <id>build-first</id>
-		      <phase>package</phase>
-		      <goals>
-		         <goal>shade</goal>
-		      </goals>   
-		      <configuration>
-		        <transformers>
-		          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
-		            <mainClass>StockExchangeClient</mainClass>
-		          </transformer>
-		        </transformers>
-		        <finalName>client--${project.version}</finalName>
-		      </configuration>        
-		    </execution>
-		    <execution>
-		      <id>build-second</id>
-		      <phase>package</phase>
-		      <goals>
-		        <goal>shade</goal>
-		      </goals>   
-		      <configuration>
-		        <transformers>
-		          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
-		            <mainClass>StockExchangeServer</mainClass>
-		          </transformer>
-		        </transformers>
-		        <finalName>server--${project.version}</finalName>
-		      </configuration>  
-		    </execution>
-		  </executions>
-		</plugin>
-		<plugin>
-      <groupId>com.akathist.maven.plugins.launch4j</groupId>
-      <artifactId>launch4j-maven-plugin</artifactId>
-      <version>1.5.1</version>
-      <executions>
-        <execution>
-          <id>l4j-clui</id>
-            <phase>package</phase>
-            <goals>
-              <goal>launch4j</goal>
-            </goals>
-            <configuration>
-              <headerType>gui</headerType>
-              <jar>target/client--${project.version}.jar</jar>
-              <outfile>target/client--${project.version}.exe</outfile>
-              <downloadUrl>http://java.com/download</downloadUrl>
-              <classPath>
-                <mainClass>StockExchangeClient</mainClass>
-                <preCp>anything</preCp>
-              </classPath>
-              <icon>src/main/resources/icon/app.ico</icon>
-              <jre>
-                <minVersion>1.6.0</minVersion>
-                <jdkPreference>preferJre</jdkPreference>
-              </jre>
-              <versionInfo>
-                <fileVersion>1.0.0.0</fileVersion>
-                <txtFileVersion>${project.version}</txtFileVersion>
-                <fileDescription>${project.name}</fileDescription>
-                <copyright>2012 hasCode.com</copyright>
-                <productVersion>1.0.0.0</productVersion>
-                <txtProductVersion>1.0.0.0</txtProductVersion>
-                <productName>${project.name}</productName>
-                <companyName>hasCode.com</companyName>
-                <internalName>hasCode</internalName>
-                <originalFilename>hasCode.exe</originalFilename>
-              </versionInfo>
+      <plugin>
+        <groupId>net.revelc.code.formatter</groupId>
+        <artifactId>formatter-maven-plugin</artifactId>
+        <version>2.0.0</version>
+        <configuration>
+          <configFile>${main.basedir}/src/config/eclipse/formatter/java.xml</configFile>
+          <configJsFile>${main.basedir}/src/config/eclipse/formatter/javascript.xml</configJsFile>
+          <sourceDirectory>${project.basedir}</sourceDirectory>
+          <excludes>
+            <exclude>**/src/test/resources/**</exclude>
+            <exclude>**/target/**</exclude>
+          </excludes>
+          <lineEnding>AUTO</lineEnding>
+        </configuration>
+      </plugin> 
+		  <plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-shade-plugin</artifactId>
+		    <version>2.4.1</version>
+		    <executions>
+		      <execution>
+		        <id>build-first</id>
+		        <phase>package</phase>
+		        <goals>
+		          <goal>shade</goal>
+		        </goals>   
+		        <configuration>
+		          <transformers>
+		            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
+		              <mainClass>StockExchangeClient</mainClass>
+		            </transformer>
+		          </transformers>
+		          <finalName>client--${project.version}</finalName>
+		        </configuration>        
+		      </execution>
+		      <execution>
+		        <id>build-second</id>
+		        <phase>package</phase>
+		        <goals>
+		          <goal>shade</goal>
+		        </goals>   
+		        <configuration>
+		          <transformers>
+		            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
+		              <mainClass>StockExchangeServer</mainClass>
+		            </transformer>
+		          </transformers>
+		          <finalName>server--${project.version}</finalName>
+		        </configuration>  
+		      </execution>
+		    </executions>
+		  </plugin>
+		  <plugin>
+        <groupId>com.akathist.maven.plugins.launch4j</groupId>
+        <artifactId>launch4j-maven-plugin</artifactId>
+        <version>1.5.1</version>
+        <executions>
+          <execution>
+            <id>l4j-clui</id>
+              <phase>package</phase>
+                <goals>
+                  <goal>launch4j</goal>
+                </goals>
+              <configuration>
+                <headerType>gui</headerType>
+                <jar>target/client--${project.version}.jar</jar>
+                <outfile>target/client--${project.version}.exe</outfile>
+                <downloadUrl>http://java.com/download</downloadUrl>
+                <classPath>
+                  <mainClass>StockExchangeClient</mainClass>
+                  <preCp>anything</preCp>
+                </classPath>
+                <icon>src/main/resources/icon/app.ico</icon>
+                <jre>
+                  <minVersion>1.6.0</minVersion>
+                  <jdkPreference>preferJre</jdkPreference>
+                </jre>
+                <versionInfo>
+                  <fileVersion>1.0.0.0</fileVersion>
+                  <txtFileVersion>${project.version}</txtFileVersion>
+                  <fileDescription>${project.name}</fileDescription>
+                  <copyright>2012 hasCode.com</copyright>
+                  <productVersion>1.0.0.0</productVersion>
+                  <txtProductVersion>1.0.0.0</txtProductVersion>
+                  <productName>${project.name}</productName>
+                  <companyName>hasCode.com</companyName>
+                  <internalName>hasCode</internalName>
+                  <originalFilename>hasCode.exe</originalFilename>
+                </versionInfo>
             </configuration>
           </execution>
         </executions>

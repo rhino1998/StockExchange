@@ -5,13 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.stockexchange.server.brokerages.Brokerage;
 import com.stockexchange.server.data.YahooFinanceAPI;
 import com.stockexchange.stocks.Stock;
 import com.stockexchange.stocks.quotes.Quote;
-import com.stockexchange.stocks.quotes.enums.QuoteSortBy;
-import com.stockexchange.traders.Trader;
-import com.stockexchange.transport.Credentials;
 
 public class MarketSystem {
 

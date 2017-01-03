@@ -1,9 +1,7 @@
 package com.stockexchange.client.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
@@ -11,8 +9,6 @@ import javax.ws.rs.core.Response;
 import com.stockexchange.client.connection.Connection;
 import com.stockexchange.stocks.StockDataPoint;
 import com.stockexchange.stocks.quotes.Quote;
-import com.stockexchange.traders.Trader;
-import com.stockexchange.transport.Credentials;
 
 public class StockExchangeAPI {
 

@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.logging.ConsoleHandler;
@@ -10,6 +11,7 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import com.stockexchange.StockNames;
+import com.stockexchange.sim.FakeTrader;
 import com.stockexchange.server.StockMarket;
 import com.stockexchange.server.data.YahooFinanceAPI;
 import com.stockexchange.stocks.quotes.Quote;
@@ -19,6 +21,8 @@ import com.stockexchange.stocks.quotes.enums.QuoteSortBy;
 public class StockExchangeServer {
 
 	
+
+    public static final long frequency = 5000;
 	public static final String BASE_URI = "http://localhost:8080/";
 
     /**
@@ -57,7 +61,15 @@ public class StockExchangeServer {
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
+
+        List<FakeTrader> sims = new ArrayList<FakeTrader>(500);
+        for (int i = 0; i<sims.size(); i++){
+            sims.set(i,new FakeTrader("SIMUTRADER", String.format("FakeTrader:%s", i), 15000));
+        }
         System.in.read();
+        for (FakeTrader sim: sims){
+            sim.kill();
+        }
         server.shutdownNow();
         System.exit(0);
 		
