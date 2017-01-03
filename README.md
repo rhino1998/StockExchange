@@ -1,12 +1,14 @@
 # StockExchange
 
+A basic stock exchange program for Mr. Estep's Analysis of Algorithms class 2016-2017
 
 
 
-Things to do
+#TODO
 
 - [ ] Client
   - [ ] UI
+    - [x] Stock History Graphs
     - [x] Stock Quotes
     - [ ] Stock Details
     - [ ] Profile
@@ -20,6 +22,7 @@ Things to do
     - [ ] Stock Details
     - [ ] Order submit
 - [ ] Server
+  - [x] Stock History
   - [x] Authentication
   - [x] YahooAPI
   - [ ] Stock Detail serving
