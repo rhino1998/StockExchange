@@ -5,7 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.stockexchange.server.MarketSystem;
-import com.stockexchange.server.StockExchange;
+import com.stockexchange.server.StockMarket;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.util.History;
@@ -50,7 +50,7 @@ public class Stock {
 		this.marketCap = quote.getMarketCap();
 		this.dailyHigh = quote.getDailyHigh();
 		this.dailyLow = quote.getDailyLow();
-		this.exchange = StockExchange.getStockExchange(quote.getExchange());
+		this.exchange = StockMarket.getStockExchange(quote.getExchange());
 		
 		
 		

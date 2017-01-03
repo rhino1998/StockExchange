@@ -216,7 +216,12 @@ public class QuoteView extends View{
 		
 		
 		scene = new Scene(border, width, height);
-		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
+		scene.getStylesheets().add(
+			getClass()
+			.getClassLoader()
+			.getResource("styles/style.css")
+			.toExternalForm()
+		);
 	}
 	public void start(){
 		super.start();

@@ -1,13 +1,16 @@
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.ConsoleHandler;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import com.stockexchange.StockNames;
-import com.stockexchange.server.StockExchange;
+import com.stockexchange.server.StockMarket;
 import com.stockexchange.server.data.YahooFinanceAPI;
 import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.stocks.quotes.enums.QuoteSortBy;
@@ -33,20 +36,30 @@ public class StockExchangeServer {
     }
 
 	public static void main(String[] args) throws IOException{
+        Logger l = Logger.getLogger("org.glassfish.grizzly.http.server.HttpHandler");
+        l.setLevel(Level.FINE);
+        l.setUseParentHandlers(false);
+        ConsoleHandler ch = new ConsoleHandler();
+        ch.setLevel(Level.ALL);
+        l.addHandler(ch);
 		try{
-			StockExchange.listStocks(
+			StockMarket.listStocks(
 					StockNames.stocks
 			);
 		}catch (Exception e){
+            System.out.println("MAJOR FAILURE");
 			System.out.println(e);
 			e.printStackTrace();
+            System.exit(2);
 		}
-		StockExchange.addBrokerage("rhino");
+        System.out.println(StockMarket.getStockExchange("NMS"));
+		StockMarket.addBrokerage("rhino");
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
         System.in.read();
         server.shutdownNow();
+        System.exit(0);
 		
 	}
 }

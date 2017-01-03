@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.stockexchange.server.brokerages.Brokerage;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.stockexchange.server.StockExchange;
+import com.stockexchange.server.StockMarket;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.traders.accounts.Account;
 import com.stockexchange.transport.Register;
@@ -37,7 +37,7 @@ public class Trader implements Comparable<Trader>, Serializable{
 	
 	public Trader(String brokerage, Register reg){
 		this.brokerageName = brokerage;
-		this.brokerage = StockExchange.getBrokerage(brokerage);
+		this.brokerage = StockMarket.getBrokerage(brokerage);
 		this.username = reg.getUsername();
 		this.name = reg.getName();
 		this.accounts = new HashMap<String, Account>();

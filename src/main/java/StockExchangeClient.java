@@ -47,7 +47,11 @@ public class StockExchangeClient extends Application{
 
 	
 	public static void main(String[] args){
-		launch(args);
+		try{
+			launch(args);
+		}catch (Throwable e){
+			e.printStackTrace();
+		}
 	}
 	
 	public void start(Stage theStage) throws Exception {

@@ -17,7 +17,7 @@ public class ReutersAPI {
 	public static String getDescription(String symbol){
 		try{
 			File input = File.createTempFile("tmp", symbol);
-			System.out.println(symbol);
+			//System.out.println(symbol);
 			Document doc = Jsoup.connect(
 				String.format(
 					"http://www.reuters.com/finance/stocks/lookup?search=%s&searchType=any&sortBy=&dateRange=&comSortBy=marketcap",

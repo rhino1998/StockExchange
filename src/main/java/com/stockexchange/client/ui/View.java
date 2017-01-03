@@ -23,8 +23,6 @@ public abstract class View {
 	}
 	
 	public Scene getScene(){
-		scene.getStylesheets().clear();
-		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
 		return this.scene;
 	}
 	

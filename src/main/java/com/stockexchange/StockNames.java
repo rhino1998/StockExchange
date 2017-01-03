@@ -1,6 +1,6 @@
 package com.stockexchange;
 
-import com.stockexchange.server.StockExchange;
+import com.stockexchange.server.StockMarket;
 
 public class StockNames {
 

@@ -108,7 +108,12 @@ public class RegisterView extends View{
 		
 		
 		this.scene = new Scene(this.border, width, height);
-		scene.getStylesheets().add(Style.class.getResource("style.css").toExternalForm());
+		scene.getStylesheets().add(
+			getClass()
+			.getClassLoader()
+			.getResource("styles/style.css")
+			.toExternalForm()
+		);
 	}
 
 

@@ -17,6 +17,7 @@ public class YahooFinanceAPI {
 	
 	public static Quote getQuote(String symbol) throws IOException{
 		URL stockURL = new URL(apiString+symbol+"&f=snabghvopj1x");
+		
 		BufferedReader in = new BufferedReader(new InputStreamReader(stockURL.openStream()));
 		CSVReader reader = new CSVReader(in);
 		return new Quote(reader.readNext());
@@ -35,6 +36,12 @@ public class YahooFinanceAPI {
 		int total = 0;
 		for (int i = 0; i<quotes.length; i++){
 			String[] strs = reader.readNext();
+			for (int j = 0; j<strs.length;j++){
+				if (strs[j].equals("N/A")){
+					strs[j]="0";
+				}
+			}
+			//System.out.println(strs[0]);
 			if (!Arrays.asList(strs).contains("N/A")){
 				quotes[total] = new Quote(strs);
 				total++;

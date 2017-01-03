@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.stockexchange.client.api.AuthenticationAPI;
 import com.stockexchange.client.connection.Connection;
-import com.stockexchange.server.StockExchange;
+import com.stockexchange.server.StockMarket;
 import com.stockexchange.server.api.AuthenticationEndpoint;
 import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Credentials;
@@ -27,7 +27,7 @@ public class AuthenticationTest extends JerseyTest{
 	@Test
 	public void testRegister(){
 		Connection.website = target("/");
-		StockExchange.addBrokerage("rhino");
+		StockMarket.addBrokerage("rhino");
 		Register reg = new Register("Test", "admin", "admin");
 		Trader trader = AuthenticationAPI.registerTrader("rhino", reg);
 		assertEquals(reg.getUsername(), trader.getUsername());
@@ -36,7 +36,7 @@ public class AuthenticationTest extends JerseyTest{
 	@Test
 	public void testAuthenticate(){
 		Connection.website = target("/");
-		StockExchange.addBrokerage("rhino");
+		StockMarket.addBrokerage("rhino");
 		Register reg = new Register("Test", "admin", "admin");
 		Credentials cred = new Credentials("admin", "admin");
 		Trader a = AuthenticationAPI.registerTrader("rhino", reg);
@@ -47,7 +47,7 @@ public class AuthenticationTest extends JerseyTest{
 	@Test
 	public void testRefresh(){
 		Connection.website = target("/");
-		StockExchange.addBrokerage("rhino");
+		StockMarket.addBrokerage("rhino");
 		Register reg = new Register("Test", "admin", "admin");
 		Credentials cred = new Credentials("admin", "admin");
 		Trader a = AuthenticationAPI.registerTrader("rhino", reg);
@@ -62,7 +62,7 @@ public class AuthenticationTest extends JerseyTest{
 	@Test
 	public void testLogout(){
 		Connection.website = target("/");
-		StockExchange.addBrokerage("rhino");
+		StockMarket.addBrokerage("rhino");
 		Register reg = new Register("Test", "admin", "admin");
 		Credentials cred = new Credentials("admin", "admin");
 		Trader a = AuthenticationAPI.registerTrader("rhino", reg);
@@ -80,7 +80,7 @@ public class AuthenticationTest extends JerseyTest{
 	@Test
 	public void testLogInOutInOut(){
 		Connection.website = target("/");
-		StockExchange.addBrokerage("rhino");
+		StockMarket.addBrokerage("rhino");
 		Register reg = new Register("Test", "admin", "admin");
 		Credentials cred = new Credentials("admin", "admin");
 		Trader a = AuthenticationAPI.registerTrader("rhino", reg);

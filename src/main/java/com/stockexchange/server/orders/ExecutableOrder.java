@@ -1,7 +1,7 @@
 package com.stockexchange.server.orders;
 
 import com.stockexchange.client.orders.RemoteOrder;
-import com.stockexchange.server.StockExchange;
+import com.stockexchange.server.StockMarket;
 import com.stockexchange.stocks.Stock;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.traders.Trader;
@@ -12,9 +12,9 @@ public class ExecutableOrder extends Order{
 	private Stock stock;
 	
 	public ExecutableOrder(RemoteOrder order){
-		this.trader = StockExchange.getBrokerage(order.getBrokerageName())
+		this.trader = StockMarket.getBrokerage(order.getBrokerageName())
 				.getTrader(order.getTraderUsername());
-		this.stock = StockExchange.getStockExchange(order.getExchangeName())
+		this.stock = StockMarket.getStockExchange(order.getExchangeName())
 				.getStock(order.getSymbol());
 		this.shares = order.getShares();
 	}

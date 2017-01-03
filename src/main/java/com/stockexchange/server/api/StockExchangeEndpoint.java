@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.stockexchange.server.StockExchange;
+import com.stockexchange.server.StockMarket;
 import com.stockexchange.server.data.GoogleFinanceAPI;
 import com.stockexchange.server.data.ReutersAPI;
 import com.stockexchange.stocks.Stock;
@@ -33,7 +33,7 @@ public class StockExchangeEndpoint {
 		@Path("{symbol}")
 		@Produces(MediaType.APPLICATION_JSON)
 		public Response getQuote(@PathParam("exchange") String exchange, @PathParam("symbol") String symbol){
-			Quote quote = StockExchange.getStockExchange(exchange).getQuote(symbol);
+			Quote quote = StockMarket.getStockExchange(exchange).getQuote(symbol);
 			GenericEntity<Quote> entity = new GenericEntity<Quote>(quote, Quote.class);
 			return Response.ok().entity(entity).build();
 		}
@@ -42,7 +42,7 @@ public class StockExchangeEndpoint {
 		@Path("quotes")
 		@Produces(MediaType.APPLICATION_JSON)
 		public Response getQuotes(@PathParam("exchange") String exchange){
-			List<Quote> quotes = StockExchange.getStockExchange(exchange).getQuotes();
+			List<Quote> quotes = StockMarket.getStockExchange(exchange).getQuotes();
 			GenericEntity<List<Quote>> entity = new GenericEntity<List<Quote>>(quotes){};
 			return Response.ok().entity(entity).build();
 		}
@@ -55,7 +55,7 @@ public class StockExchangeEndpoint {
 			@PathParam("symbol") String symbol
 		){
 			Stock stock = 
-					StockExchange
+					StockMarket
 					.getStockExchange(exchange)
 					.getStock(symbol);
 			if (!stock.hasDescription()){
@@ -94,7 +94,7 @@ public class StockExchangeEndpoint {
 			@PathParam("offset") long offset
 		){
 			
-			List<StockDataPoint> history = StockExchange
+			List<StockDataPoint> history = StockMarket
 					.getStockExchange(exchange)
 					.getStock(symbol)
 					.getHistory()

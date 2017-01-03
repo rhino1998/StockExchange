@@ -16,7 +16,7 @@ import org.junit.Test;
 import com.stockexchange.StockNames;
 import com.stockexchange.client.api.StockExchangeAPI;
 import com.stockexchange.client.connection.Connection;
-import com.stockexchange.server.StockExchange;
+import com.stockexchange.server.StockMarket;
 import com.stockexchange.server.api.StockExchangeEndpoint;
 import com.stockexchange.server.data.ReutersAPI;
 import com.stockexchange.stocks.Stock;
@@ -33,9 +33,9 @@ public class StockExchangeTest extends JerseyTest{
 	@Test
 	public void testGetQuote() throws IOException{
 		Connection.website = target("/");
-		StockExchange.listStocks(StockNames.stocks);
+		StockMarket.listStocks(StockNames.stocks);
 		
-		Quote a = StockExchange.getStockExchange("NMS").getQuote("GOOG");
+		Quote a = StockMarket.getStockExchange("NMS").getQuote("GOOG");
 		Quote b = StockExchangeAPI.getQuote("NMS", "GOOG");
 		assertEquals(a.getSymbol(), b.getSymbol());
 	}
@@ -43,9 +43,9 @@ public class StockExchangeTest extends JerseyTest{
 	@Test
 	public void testGetQuotes() throws IOException{
 		Connection.website = target("/");
-		StockExchange.listStocks(StockNames.stocks);
+		StockMarket.listStocks(StockNames.stocks);
 		
-		List<Quote> a = StockExchange.getStockExchange("NMS").getQuotes();
+		List<Quote> a = StockMarket.getStockExchange("NMS").getQuotes();
 		List<Quote> b = StockExchangeAPI.getQuotes("NMS");
 		
 		assertTrue(a.containsAll(b));
@@ -54,7 +54,7 @@ public class StockExchangeTest extends JerseyTest{
 	@Test
 	public void testGetDescription() throws IOException{
 		Connection.website = target("/");
-		Stock stock = StockExchange
+		Stock stock = StockMarket
 				.getStockExchange("NMS")
 				.getStock("GOOG");
 		
@@ -69,10 +69,10 @@ public class StockExchangeTest extends JerseyTest{
 	@Test
 	public void testGetHistory() throws IOException{
 		Connection.website = target("/");
-		StockExchange.listStocks(StockNames.stocks);
+		StockMarket.listStocks(StockNames.stocks);
 		
 		
-		Stock stock = StockExchange
+		Stock stock = StockMarket
 				.getStockExchange("NMS")
 				.getStock("GOOG");
 		
@@ -85,7 +85,7 @@ public class StockExchangeTest extends JerseyTest{
 			));
 		}
 		
-		List<StockDataPoint> a = StockExchange
+		List<StockDataPoint> a = StockMarket
 				.getStockExchange("NMS")
 				.getStock("GOOG")
 				.getHistory()

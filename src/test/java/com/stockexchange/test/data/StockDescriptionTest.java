@@ -22,7 +22,7 @@ public class StockDescriptionTest {
 		int i = 0;
 		for (String symbol : StockNames.stocks){
 			String desc = ReutersAPI.getDescription(symbol);
-			System.out.println(desc);
+			//System.out.println(desc);
 			assertNotEquals(desc, "");
 			i++;
 			if (i>10){
