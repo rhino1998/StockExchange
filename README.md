@@ -8,9 +8,12 @@ A basic stock exchange program for Mr. Estep's Analysis of Algorithms class 2016
 
 - [ ] Client
   - [ ] UI
-    - [x] Stock History Graphs
     - [x] Stock Quotes
     - [ ] Stock Details
+      - [x] Stock History Graphs
+      - [x] Stock Descriptions
+      - [x] Stock Table
+      - [ ] Stock actions buttons 
     - [ ] Profile
     - [x] Login
     - [x] Registration
