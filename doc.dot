@@ -1,0 +1,169 @@
+digraph {
+size="1024.0,1280.0";
+layout=dot;
+rankdir="BT";
+overlap=false;
+splines=true;
+pack=true;
+
+node[shape=box,style=filled,fillcolor="#fff2b6"];
+  "com.stockexchange.util.\nMoneyFormat"
+  "com.stockexchange.\nStockNames"
+  "com.stockexchange.client.ui.\nLoginView"
+  "com.stockexchange.client.data.\nQuoteModel"
+  "com.stockexchange.client.ui.components.table.\nButtonColumn$1"
+  "com.stockexchange.client.ui.\nWelcomeView$LoginButtonEvent"
+  "com.stockexchange.util.\nHistory"
+  "com.stockexchange.server.orders.\nExecutableOrder"
+  "com.stockexchange.traders.\nTrader"
+  "com.stockexchange.client.ui.styles.\nStyle"
+  "com.stockexchange.client.ui.components.buttongroups.\nWindowButtons$2"
+  "com.stockexchange.client.ui.components.buttongroups.\nWindowButtons$1"
+  "com.stockexchange.stocks.\nStockDataPoint"
+  "com.stockexchange.client.ui.components.table.\nMoneyColumn"
+  "com.stockexchange.client.ui.components.table.buttons.\nQuoteDetailsButton"
+  "com.stockexchange.client.ui.components.table.\nMoneyShortColumn"
+  "com.stockexchange.client.ui.\nQuoteView$1"
+  "com.stockexchange.client.ui.\nStockDetailsView$1"
+  "com.stockexchange.client.ui.\nStockDetailsView"
+  "com.stockexchange.transport.\nCredentials"
+  "com.stockexchange.client.ui.components.table.buttons.factory.\nColumnButtonFactory"
+  "javafx.scene.layout.\nBorderPane"
+  "com.stockexchange.sim.\nFakeTrader"
+  "com.stockexchange.server.\nMarketSystem"
+  "com.stockexchange.sim.\nFakeTrader$1"
+  "com.stockexchange.client.ui.\nProfileView"
+  "com.stockexchange.server.api.\nStockExchangeEndpoint$1"
+  "com.stockexchange.server.api.\nStockExchangeEndpoint$2"
+  "com.stockexchange.client.ui.components.\nBaseBorder"
+  "com.stockexchange.stocks.quotes.comparators.\nQuoteNameComparator"
+  "com.stockexchange.transport.\nRegister"
+  "com.stockexchange.client.ui.components.text.\nHeaderLabel"
+  "com.stockexchange.client.ui.components.buttongroups.\nManagementButtons"
+  "com.stockexchange.stocks.quotes.comparators.\nQuoteVolumeComparator"
+  "javafx.util.\nStringConverter"
+  "com.stockexchange.stocks.orders.enums.\nTransactionType"
+  "com.stockexchange.transport.enums.\nState"
+  "com.stockexchange.client.ui.components.buttongroups.\nWindowButtons"
+  "com.stockexchange.stocks.\nStock$1"
+  "com.stockexchange.client.data.\nQuoteFilterChangeListener$1"
+  "com.stockexchange.server.\nStockMarket"
+  "com.stockexchange.client.ui.\nLoginView$LoginButtonEvent"
+  "com.stockexchange.client.ui.\nRegisterView$RegisterButtonEvent"
+  "javafx.scene.control.\nButton"
+  "com.stockexchange.client.ui.\nQuoteView$1$1"
+  "com.stockexchange.client.ui.\nQuoteView"
+  "com.stockexchange.client.ui.components.table.\nButtonColumn"
+  "com.stockexchange.client.ui.components.table.\nMoneyColumn$1$1"
+  "com.stockexchange.server.brokerages.\nBrokerage"
+  "com.stockexchange.client.ui.components.labels.\nTextLabel"
+  "com.stockexchange.transport.\nView"
+  "com.stockexchange.stocks.quotes.comparators.\nQuoteSymbolComparator"
+  "com.stockexchange.stocks.\nStock"
+  "com.stockexchange.client.ui.components.table.\nMoneyColumn$1"
+  "com.stockexchange.client.api.\nStockExchangeAPI"
+  "com.stockexchange.client.ui.components.table.buttons.\nQuoteDetailsButton$1"
+  "com.stockexchange.server.api.\nTraderEndpoint"
+  "com.stockexchange.client.ui.components.chart.\nStockPriceChart$1"
+  "com.stockexchange.client.ui.components.table.\nMoneyShortColumn$1"
+  "com.stockexchange.client.ui.\nManagementView"
+  "javafx.scene.layout.\nHBox"
+  "com.stockexchange.client.ui.components.chart.\nStockPriceChart"
+  "com.stockexchange.client.ui.\nScenes"
+  "com.stockexchange.client.api.\nAuthenticationAPI"
+  "com.stockexchange.client.ui.components.table.\nButtonColumn$1$1"
+  "com.stockexchange.client.ui.components.buttongroups.\nManagementButtons$1"
+  "com.stockexchange.client.ui.\nRegisterView$CancelButtonEvent"
+  "com.stockexchange.client.orders.\nRemoteOrder"
+  "com.stockexchange.stocks.orders.enums.\nOrderType"
+  "com.stockexchange.client.api.\nStockExchangeAPI$1"
+  "com.stockexchange.server.api.\nAuthenticationEndpoint"
+  "com.stockexchange.traders.accounts.\nAccount"
+  "com.stockexchange.client.api.\nStockExchangeAPI$2"
+  "com.stockexchange.stocks.quotes.\nQuote"
+  "com.stockexchange.client.data.\nQuoteFilterChangeListener"
+  "com.stockexchange.client.ui.components.\nBaseBorder$4"
+  "com.stockexchange.client.ui.components.\nBaseBorder$3"
+  "com.stockexchange.client.ui.components.\nBaseBorder$2"
+  "com.stockexchange.server.api.\nStockExchangeEndpoint"
+  "com.stockexchange.client.ui.components.\nBaseBorder$1"
+  "com.stockexchange.server.data.\nReutersAPI"
+  "com.stockexchange.server.data.\nGoogleFinanceAPI"
+  "com.stockexchange.client.ui.\nWelcomeView"
+  "com.stockexchange.stocks.quotes.comparators.\nQuoteDailyHighComparator"
+  "com.stockexchange.client.ui.\nLoginView$CancelButtonEvent"
+  "javafx.scene.control.\nTableColumn"
+  "javafx.scene.chart.\nLineChart"
+  "javafx.scene.control.\nTableCell"
+  "com.stockexchange.client.ui.\nWelcomeView$RegisterButtonEvent"
+  "com.stockexchange.client.ui.components.table.buttons.\nColumnButton"
+  "com.stockexchange.client.ui.\nRegisterView"
+  "com.stockexchange.stocks.quotes.comparators.\nQuoteBidComparator"
+  "javafx.scene.control.\nLabel"
+  "com.stockexchange.client.ui.\nViewStage"
+  "com.stockexchange.client.ui.components.table.\nMoneyShortColumn$1$1"
+  "com.stockexchange.client.ui.\nStockDetailsView$1$1"
+  "com.stockexchange.client.ui.components.\nManagementBorder"
+  "com.stockexchange.stocks.orders.\nOrder"
+  "com.stockexchange.stocks.quotes.comparators.\nQuoteDailyLowComparator"
+  "com.stockexchange.stocks.quotes.enums.\nQuoteSortBy"
+  "com.stockexchange.client.ui.components.table.events.\nColumnButtonEvent"
+  "com.stockexchange.client.connection.\nConnection"
+  "com.stockexchange.stocks.quotes.comparators.\nQuoteAskComparator"
+  "com.stockexchange.server.data.\nYahooFinanceAPI"
+  "com.stockexchange.client.api.\nTraderAPI"
+  "com.stockexchange.client.ui.\nView"
+
+node[shape=diamond,style=filled,fillcolor="#b6e7ff"];
+  "javafx.event.\nEventHandler"
+  "javafx.util.\nCallback"
+  "javafx.beans.value.\nChangeListener"
+
+node[shape=oval,style=filled,fillcolor="#f3c9ff"];
+
+  "com.stockexchange.client.ui.\nLoginView" -> "com.stockexchange.client.ui.\nView"
+  "com.stockexchange.client.ui.components.table.\nButtonColumn$1" -> "javafx.util.\nCallback" [arrowhead=diamond]
+  "com.stockexchange.client.ui.\nWelcomeView$LoginButtonEvent" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.server.orders.\nExecutableOrder" -> "com.stockexchange.stocks.orders.\nOrder"
+  "com.stockexchange.client.ui.components.buttongroups.\nWindowButtons$2" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.components.buttongroups.\nWindowButtons$1" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.components.table.\nMoneyColumn" -> "javafx.scene.control.\nTableColumn"
+  "com.stockexchange.client.ui.components.table.buttons.\nQuoteDetailsButton" -> "com.stockexchange.client.ui.components.table.buttons.\nColumnButton"
+  "com.stockexchange.client.ui.components.table.\nMoneyShortColumn" -> "javafx.scene.control.\nTableColumn"
+  "com.stockexchange.client.ui.\nStockDetailsView" -> "com.stockexchange.client.ui.\nView"
+  "com.stockexchange.client.ui.\nProfileView" -> "com.stockexchange.client.ui.\nView"
+  "com.stockexchange.client.ui.components.\nBaseBorder" -> "javafx.scene.layout.\nBorderPane"
+  "com.stockexchange.transport.\nRegister" -> "com.stockexchange.transport.\nCredentials"
+  "com.stockexchange.client.ui.components.text.\nHeaderLabel" -> "javafx.scene.control.\nLabel"
+  "com.stockexchange.client.ui.components.buttongroups.\nManagementButtons" -> "javafx.scene.layout.\nHBox"
+  "com.stockexchange.client.ui.components.buttongroups.\nWindowButtons" -> "javafx.scene.layout.\nHBox"
+  "com.stockexchange.client.ui.\nLoginView$LoginButtonEvent" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.\nRegisterView$RegisterButtonEvent" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.\nQuoteView" -> "com.stockexchange.client.ui.\nView"
+  "com.stockexchange.client.ui.components.table.\nButtonColumn" -> "javafx.scene.control.\nTableColumn"
+  "com.stockexchange.client.ui.components.table.\nMoneyColumn$1$1" -> "javafx.scene.control.\nTableCell"
+  "com.stockexchange.client.ui.components.labels.\nTextLabel" -> "javafx.scene.control.\nLabel"
+  "com.stockexchange.client.ui.components.table.\nMoneyColumn$1" -> "javafx.util.\nCallback" [arrowhead=diamond]
+  "com.stockexchange.client.ui.components.table.buttons.\nQuoteDetailsButton$1" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.components.chart.\nStockPriceChart$1" -> "javafx.util.\nStringConverter"
+  "com.stockexchange.client.ui.components.table.\nMoneyShortColumn$1" -> "javafx.util.\nCallback" [arrowhead=diamond]
+  "com.stockexchange.client.ui.\nManagementView" -> "com.stockexchange.client.ui.\nView"
+  "com.stockexchange.client.ui.components.chart.\nStockPriceChart" -> "javafx.scene.chart.\nLineChart"
+  "com.stockexchange.client.ui.components.table.\nButtonColumn$1$1" -> "javafx.scene.control.\nTableCell"
+  "com.stockexchange.client.ui.components.buttongroups.\nManagementButtons$1" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.\nRegisterView$CancelButtonEvent" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.orders.\nRemoteOrder" -> "com.stockexchange.stocks.orders.\nOrder"
+  "com.stockexchange.client.data.\nQuoteFilterChangeListener" -> "javafx.beans.value.\nChangeListener" [arrowhead=diamond]
+  "com.stockexchange.client.ui.components.\nBaseBorder$4" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.components.\nBaseBorder$3" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.components.\nBaseBorder$2" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.components.\nBaseBorder$1" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.\nWelcomeView" -> "com.stockexchange.client.ui.\nView"
+  "com.stockexchange.client.ui.\nLoginView$CancelButtonEvent" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.\nWelcomeView$RegisterButtonEvent" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+  "com.stockexchange.client.ui.components.table.buttons.\nColumnButton" -> "javafx.scene.control.\nButton"
+  "com.stockexchange.client.ui.\nRegisterView" -> "com.stockexchange.client.ui.\nView"
+  "com.stockexchange.client.ui.components.table.\nMoneyShortColumn$1$1" -> "javafx.scene.control.\nTableCell"
+  "com.stockexchange.client.ui.components.\nManagementBorder" -> "com.stockexchange.client.ui.components.\nBaseBorder"
+  "com.stockexchange.client.ui.components.table.events.\nColumnButtonEvent" -> "javafx.event.\nEventHandler" [arrowhead=diamond]
+}

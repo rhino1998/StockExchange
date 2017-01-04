@@ -15,7 +15,6 @@ import com.stockexchange.sim.FakeTrader;
 import com.stockexchange.server.StockMarket;
 import com.stockexchange.server.data.YahooFinanceAPI;
 import com.stockexchange.stocks.quotes.Quote;
-import com.stockexchange.stocks.quotes.enums.QuoteSortBy;
 
 
 public class StockExchangeServer {

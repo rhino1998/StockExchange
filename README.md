@@ -3,8 +3,12 @@
 A basic stock exchange program for Mr. Estep's Analysis of Algorithms class 2016-2017
 
 
+## Structure
 
-#TODO
+![alt text](docs/class_diagram.png "Logo Title Text 1")
+
+
+## TODO
 
 - [ ] Client
   - [ ] UI

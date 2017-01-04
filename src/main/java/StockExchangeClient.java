@@ -15,7 +15,6 @@ import com.stockexchange.client.ui.ViewStage;
 import com.stockexchange.client.ui.WelcomeView;
 import com.stockexchange.client.ui.components.BaseBorder;
 import com.stockexchange.stocks.quotes.Quote;
-import com.stockexchange.stocks.quotes.enums.QuoteSortBy;
 import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Register;
 
