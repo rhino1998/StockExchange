@@ -15,21 +15,20 @@ import com.stockexchange.StockNames;
 import com.stockexchange.server.data.ReutersAPI;
 
 public class StockDescriptionTest {
-	
-	
-	@Test
-	public void getDescriptionTest() throws IOException{
-		int i = 0;
-		for (String symbol : StockNames.stocks){
-			String desc = ReutersAPI.getDescription(symbol);
-			//System.out.println(desc);
-			assertNotEquals(desc, "");
-			i++;
-			if (i>10){
-				break;
-			}
-		}
-		
-	}
+
+    @Test
+    public void getDescriptionTest() throws IOException {
+        int i = 0;
+        for (String symbol : StockNames.stocks) {
+            String desc = ReutersAPI.getDescription(symbol);
+            // System.out.println(desc);
+            assertNotEquals(desc, "");
+            i++;
+            if (i > 10) {
+                break;
+            }
+        }
+
+    }
 
 }

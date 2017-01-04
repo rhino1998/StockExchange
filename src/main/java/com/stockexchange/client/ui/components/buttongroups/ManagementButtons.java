@@ -13,19 +13,18 @@ import javafx.stage.Stage;
 
 public class ManagementButtons extends HBox {
 
-	private ViewStage window;
-	
+    private ViewStage window;
+
     public ManagementButtons(ViewStage win) {
-    	window = win;
-    	
+        window = win;
+
         Button profileBtn = new Button("P");
         profileBtn.setAlignment(Pos.TOP_LEFT);
         profileBtn.setMaxWidth(25);
         profileBtn.setMinWidth(25);
         profileBtn.setPrefWidth(25);
 
-
-        profileBtn.setOnAction(new EventHandler<ActionEvent>() {
+        profileBtn.setOnAction(new EventHandler< ActionEvent>() {
 
             public void handle(ActionEvent actionEvent) {
                 window.setView(Scenes.profile);

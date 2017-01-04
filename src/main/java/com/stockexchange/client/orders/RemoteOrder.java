@@ -6,41 +6,46 @@ import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.stocks.orders.enums.OrderType;
 import com.stockexchange.stocks.orders.enums.TransactionType;
 
-public class RemoteOrder extends Order{
+public class RemoteOrder extends Order {
 
-	@JsonProperty private TransactionType transactionType;
-	@JsonProperty private OrderType orderType;
-	
-	
-	@JsonProperty private String symbol;
-	@JsonProperty private String traderUsername;
-	@JsonProperty private String brokerageName;
-	@JsonProperty private String exchangeName;
-	
-	
-	@JsonProperty private int limitPrice;
-	@JsonProperty private int volume;
-	
-	public RemoteOrder(){}
-	
-	public RemoteOrder(ExecutableOrder order){
-	}
-	
-	
-	public String getSymbol(){
-		return symbol;
-	}
+    @JsonProperty
+    private TransactionType transactionType;
+    @JsonProperty
+    private OrderType orderType;
 
+    @JsonProperty
+    private String symbol;
+    @JsonProperty
+    private String traderUsername;
+    @JsonProperty
+    private String brokerageName;
+    @JsonProperty
+    private String exchangeName;
 
-	public String getBrokerageName() {
-		return brokerageName;
-	}
+    @JsonProperty
+    private int limitPrice;
+    @JsonProperty
+    private int volume;
 
-	public String getExchangeName() {
-		return exchangeName;
-	}
+    public RemoteOrder() {
+    }
 
-	public String getTraderUsername() {
-		return traderUsername;
-	}
+    public RemoteOrder(ExecutableOrder order) {
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public String getBrokerageName() {
+        return brokerageName;
+    }
+
+    public String getExchangeName() {
+        return exchangeName;
+    }
+
+    public String getTraderUsername() {
+        return traderUsername;
+    }
 }

@@ -36,55 +36,43 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class StockExchangeClient extends Application{
+public class StockExchangeClient extends Application {
 
-	
-	ViewStage window;
-	
-	private static final double CENTER_ON_SCREEN_X_FRACTION = 1.0f / 2;
-	private static final double CENTER_ON_SCREEN_Y_FRACTION = 1.0f / 2.5;
+    ViewStage window;
 
-	
-	public static void main(String[] args){
-		try{
-			launch(args);
-		}catch (Throwable e){
-			e.printStackTrace();
-		}
-	}
-	
-	public void start(Stage theStage) throws Exception {
-		
-		theStage.getIcons().add(
-				new Image(
-						getClass()
-						.getClassLoader()
-						.getResource("icon/app.ico")
-						.toExternalForm()
-				)
-		);
-		window = new ViewStage(theStage);
-		window.getStage().initStyle(StageStyle.UNDECORATED);
+    private static final double CENTER_ON_SCREEN_X_FRACTION = 1.0f / 2;
+    private static final double CENTER_ON_SCREEN_Y_FRACTION = 1.0f / 2.5;
 
-        
-		
-		
-		Client client = ClientBuilder.newClient();
-		
-		Connection.website = client.target("http://localhost:8080/");
-		Scenes.welcome = new WelcomeView(window);
-		Scenes.login = new LoginView(window);
-		Scenes.register = new RegisterView(window);
-		
-		window.setView(Scenes.welcome);
-		window.setTitle("Stock Trader 5000");
-		window.show();
+    public static void main(String[] args) {
+        try {
+            launch(args);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void start(Stage theStage) throws Exception {
+
+        theStage.getIcons().add(new Image(getClass().getClassLoader().getResource("icon/app.ico").toExternalForm()));
+        window = new ViewStage(theStage);
+        window.getStage().initStyle(StageStyle.UNDECORATED);
+
+        Client client = ClientBuilder.newClient();
+
+        Connection.website = client.target("http://localhost:8080/");
+        Scenes.welcome = new WelcomeView(window);
+        Scenes.login = new LoginView(window);
+        Scenes.register = new RegisterView(window);
+
+        window.setView(Scenes.welcome);
+        window.setTitle("Stock Trader 5000");
+        window.show();
         Rectangle2D primScreenBounds = Screen.getPrimary().getBounds();
-        window.setX((primScreenBounds.getWidth()-window.getWidth()) * CENTER_ON_SCREEN_X_FRACTION);
-        window.setY((primScreenBounds.getHeight()-window.getHeight()) * CENTER_ON_SCREEN_Y_FRACTION);		
-		
-		// TODO Auto-generated method stub
-		
-	}
+        window.setX((primScreenBounds.getWidth() - window.getWidth()) * CENTER_ON_SCREEN_X_FRACTION);
+        window.setY((primScreenBounds.getHeight() - window.getHeight()) * CENTER_ON_SCREEN_Y_FRACTION);
+
+        // TODO Auto-generated method stub
+
+    }
 
 }

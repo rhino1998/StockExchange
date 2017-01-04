@@ -20,53 +20,45 @@ import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class ButtonColumn<S,T> extends TableColumn<S, T>{
-	
-	private ViewStage window;
-	
-	public ButtonColumn(
-			ViewStage win,
-			final ColumnButtonFactory<S> factory,
-			String text
-		){
-		super(text);
-		window = win;
-		
-		Callback<TableColumn<S, T>, TableCell<S, T>> cellFactory =
-			new Callback<TableColumn<S, T>, TableCell<S, T>>()
-			{
-				public TableCell<S, T> call(TableColumn<S, T> param){
-					TableCell<S, T> cell;
-					cell = new TableCell<S, T>(){
-						public void updateItem(T item, boolean empty){
-							super.updateItem(item, empty);
-							if (empty){
-								setGraphic(null);
-								setText(null);
-							}else{
-								try {
-									ColumnButton<S> btn = factory.create(
-										window,
-										getTableView().getItems().get(getIndex())
-									);
-									setGraphic(btn);
-									setText(null);
-								}catch (Exception e){
-									setGraphic(null);
-									setText(null);
-									System.out.println("FAIL");
-									e.printStackTrace();
-									System.exit(1);
-									return;
-								}
-							}
-						}
-					};
-					cell.setPadding(new Insets(1,0,1,5));
-					return cell;
-				}
-			
-			};
-		this.setCellFactory(cellFactory);
-	}
+public class ButtonColumn<S, T> extends TableColumn< S, T> {
+
+    private ViewStage window;
+
+    public ButtonColumn(ViewStage win, final ColumnButtonFactory< S> factory, String text) {
+        super(text);
+        window = win;
+
+        Callback< TableColumn< S, T>, TableCell< S, T>> cellFactory = new Callback< TableColumn< S, T>, TableCell< S, T>>() {
+            public TableCell< S, T> call(TableColumn< S, T> param) {
+                TableCell< S, T> cell;
+                cell = new TableCell< S, T>() {
+                    public void updateItem(T item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            try {
+                                ColumnButton< S> btn = factory
+                                        .create(window, getTableView().getItems().get(getIndex()));
+                                setGraphic(btn);
+                                setText(null);
+                            } catch (Exception e) {
+                                setGraphic(null);
+                                setText(null);
+                                System.out.println("FAIL");
+                                e.printStackTrace();
+                                System.exit(1);
+                                return;
+                            }
+                        }
+                    }
+                };
+                cell.setPadding(new Insets(1, 0, 1, 5));
+                return cell;
+            }
+
+        };
+        this.setCellFactory(cellFactory);
+    }
 }

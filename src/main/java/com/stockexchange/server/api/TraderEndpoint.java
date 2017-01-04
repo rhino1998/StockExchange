@@ -14,25 +14,19 @@ import com.stockexchange.stocks.orders.Order;
 @Path("/trader")
 public class TraderEndpoint {
 
-	
-	
-	
-	@POST
-	@Path("order")
-	@Consumes("application/json")
-	@Produces("application/json")
-	public Response submitOrder(Order order){
-		return null;
-	}
-	
-	@GET
-	@Path("orders")
-	@Produces("application/json")
-	public Response getActiveOrders(){
-		return null;
-	}
-	
-	
-	
-	
+    @POST
+    @Path("order")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response submitOrder(Order order) {
+        return null;
+    }
+
+    @GET
+    @Path("orders")
+    @Produces("application/json")
+    public Response getActiveOrders() {
+        return null;
+    }
+
 }

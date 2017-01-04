@@ -17,20 +17,20 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
-public class BaseBorder extends BorderPane{
-	
-	private final ViewStage window;
-    private double xOffset = 0 ;
+public class BaseBorder extends BorderPane {
+
+    private final ViewStage window;
+    private double xOffset = 0;
     private double yOffset = 0;
-    
+
     protected HBox left, center, right;
-	
-	public BaseBorder(ViewStage win){
-		super();
-		window = win;
-		ToolBar toolBar = new ToolBar();
-		
-		int height = 28;
+
+    public BaseBorder(ViewStage win) {
+        super();
+        window = win;
+        ToolBar toolBar = new ToolBar();
+
+        int height = 28;
         toolBar.setPrefHeight(height);
         toolBar.setMinHeight(height);
         toolBar.setMaxHeight(height);
@@ -39,45 +39,45 @@ public class BaseBorder extends BorderPane{
         left = new HBox();
         center = new HBox();
         right = new WindowButtons(window);
-        
+
         HBox.setHgrow(left, Priority.ALWAYS);
         HBox.setHgrow(center, Priority.ALWAYS);
         HBox.setHgrow(right, Priority.ALWAYS);
         left.setAlignment(Pos.CENTER_LEFT);
         center.setAlignment(Pos.CENTER);
         right.setAlignment(Pos.CENTER_RIGHT);
-        
+
         toolBar.getItems().addAll(left, center, right);
 
         this.setTop(toolBar);
-        
-        this.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+        this.setOnMousePressed(new EventHandler< MouseEvent>() {
             public void handle(MouseEvent event) {
                 xOffset = window.getX() - event.getScreenX();
                 yOffset = window.getY() - event.getScreenY();
             }
         });
-        
-        this.setOnMouseDragged(new EventHandler<MouseEvent>() {
+
+        this.setOnMouseDragged(new EventHandler< MouseEvent>() {
             public void handle(MouseEvent event) {
-            	window.setX(event.getScreenX() + xOffset);
+                window.setX(event.getScreenX() + xOffset);
                 window.setY(event.getScreenY() + yOffset);
             }
         });
-        
-        toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+        toolBar.setOnMousePressed(new EventHandler< MouseEvent>() {
             public void handle(MouseEvent event) {
                 xOffset = window.getX() - event.getScreenX();
                 yOffset = window.getY() - event.getScreenY();
             }
         });
-        
-        toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+
+        toolBar.setOnMouseDragged(new EventHandler< MouseEvent>() {
             public void handle(MouseEvent event) {
-            	window.setX(event.getScreenX() + xOffset);
-            	window.setY(event.getScreenY() + yOffset);
+                window.setX(event.getScreenX() + xOffset);
+                window.setY(event.getScreenY() + yOffset);
             }
         });
-	}
-	
+    }
+
 }

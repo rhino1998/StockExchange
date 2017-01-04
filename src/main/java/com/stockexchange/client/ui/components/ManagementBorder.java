@@ -21,12 +21,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
-public class ManagementBorder extends BaseBorder{
-	
-	public ManagementBorder(ViewStage win, String header) {
-		super(win);
-		this.left.getChildren().add(new ManagementButtons(win));
-		this.center.getChildren().add(new TextLabel(header));
-	}
-	
+public class ManagementBorder extends BaseBorder {
+
+    public ManagementBorder(ViewStage win, String header) {
+        super(win);
+        this.left.getChildren().add(new ManagementButtons(win));
+        this.center.getChildren().add(new TextLabel(header));
+    }
+
 }

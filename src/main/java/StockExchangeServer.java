@@ -16,16 +16,14 @@ import com.stockexchange.server.StockMarket;
 import com.stockexchange.server.data.YahooFinanceAPI;
 import com.stockexchange.stocks.quotes.Quote;
 
-
 public class StockExchangeServer {
 
-	
-
     public static final long frequency = 5000;
-	public static final String BASE_URI = "http://localhost:8080/";
+    public static final String BASE_URI = "http://localhost:8080/";
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
+     * 
      * @return Grizzly HTTP server.
      */
     public static HttpServer startServer() {
@@ -38,39 +36,37 @@ public class StockExchangeServer {
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 
-	public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         Logger l = Logger.getLogger("org.glassfish.grizzly.http.server.HttpHandler");
         l.setLevel(Level.FINE);
         l.setUseParentHandlers(false);
         ConsoleHandler ch = new ConsoleHandler();
         ch.setLevel(Level.ALL);
         l.addHandler(ch);
-		try{
-			StockMarket.listStocks(
-					StockNames.stocks
-			);
-		}catch (Exception e){
+        try {
+            StockMarket.listStocks(StockNames.stocks);
+        } catch (Exception e) {
             System.out.println("MAJOR FAILURE");
-			System.out.println(e);
-			e.printStackTrace();
+            System.out.println(e);
+            e.printStackTrace();
             System.exit(2);
-		}
+        }
         System.out.println(StockMarket.getStockExchange("NMS"));
-		StockMarket.addBrokerage("rhino");
+        StockMarket.addBrokerage("rhino");
         final HttpServer server = startServer();
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
 
-        List<FakeTrader> sims = new ArrayList<FakeTrader>(500);
-        for (int i = 0; i<sims.size(); i++){
-            sims.set(i,new FakeTrader("SIMUTRADER", String.format("FakeTrader:%s", i), 15000));
+        List< FakeTrader> sims = new ArrayList< FakeTrader>(500);
+        for (int i = 0; i < sims.size(); i++) {
+            sims.set(i, new FakeTrader("SIMUTRADER", String.format("FakeTrader:%s", i), 15000));
         }
         System.in.read();
-        for (FakeTrader sim: sims){
+        for (FakeTrader sim : sims) {
             sim.kill();
         }
         server.shutdownNow();
         System.exit(0);
-		
-	}
+
+    }
 }

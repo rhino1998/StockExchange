@@ -12,36 +12,34 @@ import javafx.stage.Stage;
 
 public class WindowButtons extends HBox {
 
-	private final ViewStage window;
-	
+    private final ViewStage window;
+
     public WindowButtons(ViewStage win) {
-    	this.window = win;
-    	
+        this.window = win;
+
         Button closeBtn = new Button("X");
         closeBtn.setAlignment(Pos.TOP_RIGHT);
         closeBtn.setMaxWidth(25);
         closeBtn.setMinWidth(25);
         closeBtn.setPrefWidth(25);
 
-
-        closeBtn.setOnAction(new EventHandler<ActionEvent>() {
+        closeBtn.setOnAction(new EventHandler< ActionEvent>() {
 
             public void handle(ActionEvent actionEvent) {
                 Platform.exit();
                 System.exit(0);
             }
         });
-        
+
         Button minimizeBtn = new Button("_");
         minimizeBtn.setAlignment(Pos.TOP_RIGHT);
         minimizeBtn.setMaxWidth(25);
         minimizeBtn.setMinWidth(25);
         minimizeBtn.setPrefWidth(25);
 
-
-        minimizeBtn.setOnAction(new EventHandler<ActionEvent>() {
+        minimizeBtn.setOnAction(new EventHandler< ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
-            	window.getStage().setIconified(true);
+                window.getStage().setIconified(true);
             }
         });
         this.getChildren().addAll(minimizeBtn, closeBtn);

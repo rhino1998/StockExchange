@@ -10,11 +10,10 @@ import org.junit.Test;
 
 import com.stockexchange.server.data.GoogleFinanceAPI;
 
-
 public class StockChartTest {
 
-	@Test
-	public void getStockChart() throws IOException{
-		assertTrue(GoogleFinanceAPI.getChartURL("GOOG")!=null);
-	}
+    @Test
+    public void getStockChart() throws IOException {
+        assertTrue(GoogleFinanceAPI.getChartURL("GOOG") != null);
+    }
 }

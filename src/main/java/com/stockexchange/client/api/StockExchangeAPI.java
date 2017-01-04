@@ -12,65 +12,58 @@ import com.stockexchange.stocks.quotes.Quote;
 
 public class StockExchangeAPI {
 
-	public static List<Quote> getQuotes(String exchange){
-		WebTarget target = Connection.website.path(String.format("/exchange/%s/quotes", exchange));
-		Response response = target.request().get();
+    public static List< Quote> getQuotes(String exchange) {
+        WebTarget target = Connection.website.path(String.format("/exchange/%s/quotes", exchange));
+        Response response = target.request().get();
 
-		if (response.getStatus() != 200){
-			return null;
-		}
+        if (response.getStatus() != 200) {
+            return null;
+        }
 
-		List<Quote> quotes = response.readEntity(new GenericType<List<Quote>>(){});
-		return quotes;	
-	}
-	
-	public static Quote getQuote(String exchange, String symbol){
-		WebTarget target = Connection.website.path(
-				String.format("/exchange/%s/%s", exchange,symbol)
-		);
-		Response response = target.request().get();
+        List< Quote> quotes = response.readEntity(new GenericType< List< Quote>>() {
+        });
+        return quotes;
+    }
 
-		if (response.getStatus() != 200){
-			return null;
-		}
+    public static Quote getQuote(String exchange, String symbol) {
+        WebTarget target = Connection.website.path(String.format("/exchange/%s/%s", exchange, symbol));
+        Response response = target.request().get();
 
-		return response.readEntity(Quote.class);
-	}
-	
-	public static String getStockDescription(String exchange, String symbol){
-		WebTarget target = Connection.website.path(
-				String.format("/exchange/%s/%s/description", exchange,symbol)
-		);
-		Response response = target.request().get();
+        if (response.getStatus() != 200) {
+            return null;
+        }
 
-		if (response.getStatus() != 200){
-			return "Description not available";
-		}
+        return response.readEntity(Quote.class);
+    }
 
-		return response.readEntity(String.class);
-	}
-	
-	public static String getQuoteChartURL(String exchange, String symbol){
-		WebTarget target = Connection.website.path(
-				String.format("/exchange/%s/%s/chart", exchange,symbol)
-		);
+    public static String getStockDescription(String exchange, String symbol) {
+        WebTarget target = Connection.website.path(String.format("/exchange/%s/%s/description", exchange, symbol));
+        Response response = target.request().get();
 
-		
-		return target.request().get().readEntity(String.class);
-	}
-	
-	public static List<StockDataPoint> getStockHistory(String exchange, String symbol, long offset){
-		WebTarget target = Connection.website.path(
-				String.format("/exchange/%s/%s/history/%s", exchange,symbol,offset)
-		);
-		Response response = target.request().get();
+        if (response.getStatus() != 200) {
+            return "Description not available";
+        }
 
-		if (response.getStatus() != 200){
-			return null;
-		}
+        return response.readEntity(String.class);
+    }
 
+    public static String getQuoteChartURL(String exchange, String symbol) {
+        WebTarget target = Connection.website.path(String.format("/exchange/%s/%s/chart", exchange, symbol));
 
-		return response.readEntity(new GenericType<List<StockDataPoint>>(){});
-	}
-	
+        return target.request().get().readEntity(String.class);
+    }
+
+    public static List< StockDataPoint> getStockHistory(String exchange, String symbol, long offset) {
+        WebTarget target = Connection.website.path(String
+                .format("/exchange/%s/%s/history/%s", exchange, symbol, offset));
+        Response response = target.request().get();
+
+        if (response.getStatus() != 200) {
+            return null;
+        }
+
+        return response.readEntity(new GenericType< List< StockDataPoint>>() {
+        });
+    }
+
 }
