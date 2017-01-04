@@ -11,4 +11,4 @@ for %%a in (%*) do (
 )
 
 java -jar %1/target/docs--%2.jar !str! > %1/build/doc.dot
-%1/build/graphvis/bin/dot -Tpng -Kosage < %1/build/doc.dot > %1/docs/class_diagram.png
+%1/build/graphvis/bin/dot -Tpng -K < %1/build/doc.dot > %1/docs/class_diagram.png
