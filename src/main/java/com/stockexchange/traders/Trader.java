@@ -13,7 +13,6 @@ import com.stockexchange.server.StockMarket;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.traders.accounts.Account;
 import com.stockexchange.transport.Register;
-import com.stockexchange.transport.enums.State;
 
 public class Trader implements Comparable<Trader>, Serializable{
 

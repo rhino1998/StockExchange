@@ -186,6 +186,8 @@
                 <argument>com.stockexchange.stocks</argument>
                 <argument>com.stockexchange.traders</argument>
                 <argument>com.stockexchange.sim</argument>
+                <argument>com.stockexchange.transport</argument>
+                <argument>com.stockexchange.client.orders</argument>
               </arguments>
             </configuration>
           </execution>
