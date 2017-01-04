@@ -5,3 +5,4 @@
 
 - [ ] Order Buttons
 - [ ] Navigation Buttons
+- [x] Window Buttons
