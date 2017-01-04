@@ -7,6 +7,18 @@ A basic stock exchange program for Mr. Estep's Analysis of Algorithms class 2016
 
 ![alt text](docs/class_diagram.png "Logo Title Text 1")
 
+Learn JavaFX
+* Stage
+* Scene
+* Components
+
+Learn Jersey
+* Server url @Path
+* Client target
+
+Learn Jackson annotations
+* @JsonProperty -- allows a private field to be dejsonified
+* @JsonCreator -- allows a private constructor to be accessed to dejsonify a json object
 
 ## TODO
 
