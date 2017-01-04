@@ -4,14 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.Application;
 
 import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.JerseyTest;
-import org.junit.Test;
+import org.glassfish.jersey.test.JerseyTestNg;
+import org.testng.annotations.Test;
 
 import com.stockexchange.StockNames;
 import com.stockexchange.client.api.StockExchangeAPI;
@@ -23,14 +22,14 @@ import com.stockexchange.stocks.Stock;
 import com.stockexchange.stocks.StockDataPoint;
 import com.stockexchange.stocks.quotes.Quote;
 
-public class StockExchangeTest extends JerseyTest{
+public class StockExchangeTest extends JerseyTestNg.ContainerPerClassTest{
 	@Override
 	protected Application configure(){
 		return new ResourceConfig(StockExchangeEndpoint.class);
 	}
 	
 	
-	@Test
+	@Test(priority=1)
 	public void testGetQuote() throws IOException{
 		Connection.website = target("/");
 		StockMarket.listStocks(StockNames.stocks);
@@ -40,7 +39,7 @@ public class StockExchangeTest extends JerseyTest{
 		assertEquals(a.getSymbol(), b.getSymbol());
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void testGetQuotes() throws IOException{
 		Connection.website = target("/");
 		StockMarket.listStocks(StockNames.stocks);
@@ -51,7 +50,7 @@ public class StockExchangeTest extends JerseyTest{
 		assertTrue(a.containsAll(b));
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void testGetDescription() throws IOException{
 		Connection.website = target("/");
 		Stock stock = StockMarket
@@ -66,7 +65,7 @@ public class StockExchangeTest extends JerseyTest{
 		assertEquals(a,b);
 	}
 	
-	@Test
+	@Test(priority=2)
 	public void testGetHistory() throws IOException{
 		Connection.website = target("/");
 		StockMarket.listStocks(StockNames.stocks);

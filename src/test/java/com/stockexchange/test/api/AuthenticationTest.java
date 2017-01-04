@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import javax.ws.rs.core.Application;
 
 import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.JerseyTest;
-import org.junit.Test;
+import org.glassfish.jersey.test.JerseyTestNg;
+import org.testng.annotations.Test;
 
 import com.stockexchange.client.api.AuthenticationAPI;
 import com.stockexchange.client.connection.Connection;
@@ -16,7 +16,7 @@ import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Credentials;
 import com.stockexchange.transport.Register;
 
-public class AuthenticationTest extends JerseyTest{
+public class AuthenticationTest extends JerseyTestNg.ContainerPerClassTest{
 
 	
 	@Override
@@ -24,7 +24,7 @@ public class AuthenticationTest extends JerseyTest{
 		return new ResourceConfig(AuthenticationEndpoint.class);
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void testRegister(){
 		Connection.website = target("/");
 		StockMarket.addBrokerage("rhino");
@@ -33,7 +33,7 @@ public class AuthenticationTest extends JerseyTest{
 		assertEquals(reg.getUsername(), trader.getUsername());
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void testAuthenticate(){
 		Connection.website = target("/");
 		StockMarket.addBrokerage("rhino");
@@ -44,7 +44,7 @@ public class AuthenticationTest extends JerseyTest{
 		assertEquals(a.getToken(), b.getToken());
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void testRefresh(){
 		Connection.website = target("/");
 		StockMarket.addBrokerage("rhino");
@@ -59,7 +59,7 @@ public class AuthenticationTest extends JerseyTest{
 		assertEquals(a.getToken(), c.getToken());
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void testLogout(){
 		Connection.website = target("/");
 		StockMarket.addBrokerage("rhino");
@@ -77,7 +77,7 @@ public class AuthenticationTest extends JerseyTest{
 		assertEquals(null, d);
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void testLogInOutInOut(){
 		Connection.website = target("/");
 		StockMarket.addBrokerage("rhino");

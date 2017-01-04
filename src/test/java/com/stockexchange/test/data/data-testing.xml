@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="DataSource Tests">
+
+  <test name="History Test">
+    <classes>
+       <class name="com.stockexchange.test.data.HistoryTest" />
+    </classes>
+  </test>
+  
+  <test name="Stock Data Tests">
+    <classes>
+       <class name="com.stockexchange.test.data.StockChartTest" />
+       <class name="com.stockexchange.test.data.StockDescriptionTest" />
+    </classes>
+  </test>
+</suite>  
