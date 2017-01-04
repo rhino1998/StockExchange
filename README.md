@@ -29,7 +29,7 @@ Learn Jackson annotations
       - [x] Stock History Graphs
       - [x] Stock Descriptions
       - [x] Stock Table
-      - [ ] Stock actions buttons 
+      - [ ] [Stock actions buttons](todo/stock_buttons.md) 
     - [ ] Profile
     - [x] Login
     - [x] Registration
