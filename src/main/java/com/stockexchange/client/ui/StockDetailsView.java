@@ -51,7 +51,8 @@ public class StockDetailsView extends View {
 
         Quote quote = StockExchangeAPI.getQuote(exchange, symbol);
 
-        this.border = new ManagementBorder(window, String.format("[%s] %s", quote.getSymbol(), quote.getName()));
+        this.border = new ManagementBorder(window, String.format("[%s] %s",
+                quote.getSymbol(), quote.getName()));
         grid = new GridPane();
         // border.setCenter(grid);
 
@@ -76,12 +77,18 @@ public class StockDetailsView extends View {
         // Second column, with user-specific data
         vbox2.getChildren().add(new TextLabel(quote.getName()));
         vbox2.getChildren().add(new TextLabel(quote.getSymbol()));
-        vbox2.getChildren().add(new TextLabel(MoneyFormat.shortened(quote.getBid())));
-        vbox2.getChildren().add(new TextLabel(MoneyFormat.shortened(quote.getAsk())));
-        vbox2.getChildren().add(new TextLabel(MoneyFormat.shortened(quote.getOpen())));
-        vbox2.getChildren().add(new TextLabel(MoneyFormat.shortened(quote.getPreviousClose())));
-        vbox2.getChildren().add(new TextLabel(MoneyFormat.shortened(quote.getVolume())));
-        vbox2.getChildren().add(new TextLabel(MoneyFormat.shortened(quote.getMarketCap())));
+        vbox2.getChildren().add(
+                new TextLabel(MoneyFormat.shortened(quote.getBid())));
+        vbox2.getChildren().add(
+                new TextLabel(MoneyFormat.shortened(quote.getAsk())));
+        vbox2.getChildren().add(
+                new TextLabel(MoneyFormat.shortened(quote.getOpen())));
+        vbox2.getChildren().add(
+                new TextLabel(MoneyFormat.shortened(quote.getPreviousClose())));
+        vbox2.getChildren().add(
+                new TextLabel(MoneyFormat.shortened(quote.getVolume())));
+        vbox2.getChildren().add(
+                new TextLabel(MoneyFormat.shortened(quote.getMarketCap())));
 
         vbox1.setPrefSize(130, 270);
         vbox2.setPrefSize(200, 270);
@@ -91,7 +98,8 @@ public class StockDetailsView extends View {
         vbox2.setPadding(new Insets(15, 5, 0, 15));
 
         Label description = new Label("\t"
-                + StockExchangeAPI.getStockDescription(exchange, symbol).replaceAll("  ", "\n\t"));
+                + StockExchangeAPI.getStockDescription(exchange, symbol)
+                        .replaceAll("  ", "\n\t"));
         description.setWrapText(true);
         ScrollPane descScroll = new ScrollPane(description);
         descScroll.setPadding(new Insets(15, 15, 15, 15));
@@ -99,7 +107,8 @@ public class StockDetailsView extends View {
         descScroll.setPrefSize(900, 400);
         descScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        chart = new StockPriceChart(exchange, symbol, StockExchangeAPI.getStockHistory(exchange, symbol, 0));
+        chart = new StockPriceChart(exchange, symbol,
+                StockExchangeAPI.getStockHistory(exchange, symbol, 0));
         chart.setPrefSize(300, 260);
         chart.setMaxSize(300, 260);
 
@@ -130,7 +139,9 @@ public class StockDetailsView extends View {
 
         // Size and theme
         this.scene = new Scene(border, width, height);
-        scene.getStylesheets().add(getClass().getClassLoader().getResource("styles/style.css").toExternalForm());
+        scene.getStylesheets().add(
+                getClass().getClassLoader().getResource("styles/style.css")
+                        .toExternalForm());
     }
 
     public void start() {
@@ -154,7 +165,8 @@ public class StockDetailsView extends View {
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
-                        update(StockExchangeAPI.getStockHistory(exchange, symbol, chart.getEnd()));
+                        update(StockExchangeAPI.getStockHistory(exchange,
+                                symbol, chart.getEnd()));
                     }
                 });
             }
@@ -163,7 +175,7 @@ public class StockDetailsView extends View {
 
     }
 
-    public void update(List< StockDataPoint> data) {
+    public void update(List<StockDataPoint> data) {
         this.chart.update(data);
     }
 }

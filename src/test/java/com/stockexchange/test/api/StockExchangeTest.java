@@ -1,7 +1,6 @@
 package com.stockexchange.test.api;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,7 +27,7 @@ public class StockExchangeTest extends JerseyTestNg.ContainerPerClassTest {
         return new ResourceConfig(StockExchangeEndpoint.class);
     }
 
-    @Test(priority = 1)
+    @Test( priority = 1)
     public void testGetQuote() throws IOException {
         Connection.website = target("/");
         StockMarket.listStocks(StockNames.stocks);
@@ -38,18 +37,18 @@ public class StockExchangeTest extends JerseyTestNg.ContainerPerClassTest {
         assertEquals(a.getSymbol(), b.getSymbol());
     }
 
-    @Test(priority = 1)
+    @Test( priority = 1)
     public void testGetQuotes() throws IOException {
         Connection.website = target("/");
         StockMarket.listStocks(StockNames.stocks);
 
-        List< Quote> a = StockMarket.getStockExchange("NMS").getQuotes();
-        List< Quote> b = StockExchangeAPI.getQuotes("NMS");
+        List<Quote> a = StockMarket.getStockExchange("NMS").getQuotes();
+        List<Quote> b = StockExchangeAPI.getQuotes("NMS");
 
         assertTrue(a.containsAll(b));
     }
 
-    @Test(priority = 2)
+    @Test( priority = 2)
     public void testGetDescription() throws IOException {
         Connection.website = target("/");
         Stock stock = StockMarket.getStockExchange("NMS").getStock("GOOG");
@@ -62,7 +61,7 @@ public class StockExchangeTest extends JerseyTestNg.ContainerPerClassTest {
         assertEquals(a, b);
     }
 
-    @Test(priority = 2)
+    @Test( priority = 2)
     public void testGetHistory() throws IOException {
         Connection.website = target("/");
         StockMarket.listStocks(StockNames.stocks);
@@ -70,11 +69,14 @@ public class StockExchangeTest extends JerseyTestNg.ContainerPerClassTest {
         Stock stock = StockMarket.getStockExchange("NMS").getStock("GOOG");
 
         for (int i = 0; i < 1440; i++) {
-            stock.getHistory().add(new StockDataPoint(stock.getAsk(), stock.getBid()));
+            stock.getHistory().add(
+                    new StockDataPoint(stock.getAsk(), stock.getBid()));
         }
 
-        List< StockDataPoint> a = StockMarket.getStockExchange("NMS").getStock("GOOG").getHistory().getAll();
-        List< StockDataPoint> b = StockExchangeAPI.getStockHistory("NMS", "GOOG", 0);
+        List<StockDataPoint> a = StockMarket.getStockExchange("NMS")
+                .getStock("GOOG").getHistory().getAll();
+        List<StockDataPoint> b = StockExchangeAPI.getStockHistory("NMS",
+                "GOOG", 0);
 
         assertTrue(a.containsAll(b));
     }

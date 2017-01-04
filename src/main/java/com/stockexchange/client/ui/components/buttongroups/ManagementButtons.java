@@ -24,7 +24,7 @@ public class ManagementButtons extends HBox {
         profileBtn.setMinWidth(25);
         profileBtn.setPrefWidth(25);
 
-        profileBtn.setOnAction(new EventHandler< ActionEvent>() {
+        profileBtn.setOnAction(new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent actionEvent) {
                 window.setView(Scenes.profile);

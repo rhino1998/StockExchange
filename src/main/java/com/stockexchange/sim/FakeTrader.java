@@ -13,7 +13,8 @@ public class FakeTrader {
     private Trader trader;
 
     public FakeTrader(String name, String username, long freq) {
-        trader = StockMarket.getBrokerage("FakeTraders").registerTrader(new Register(name, username, "1234"));
+        trader = StockMarket.getBrokerage("FakeTraders").registerTrader(
+                new Register(name, username, "1234"));
         loop = new Timer();
         loop.schedule(new TimerTask() {
             public void run() {

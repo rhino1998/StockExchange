@@ -6,16 +6,17 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.FilteredList;
 
-public class QuoteFilterChangeListener implements ChangeListener< String> {
+public class QuoteFilterChangeListener implements ChangeListener<String> {
 
-    private FilteredList< QuoteModel> data;
+    private FilteredList<QuoteModel> data;
 
-    public QuoteFilterChangeListener(FilteredList< QuoteModel> data) {
+    public QuoteFilterChangeListener(FilteredList<QuoteModel> data) {
         this.data = data;
     }
 
-    public void changed(ObservableValue< ? extends String> observable, final String oldValue, final String newValue) {
-        data.setPredicate(new Predicate< QuoteModel>() {
+    public void changed(ObservableValue<? extends String> observable,
+            final String oldValue, final String newValue) {
+        data.setPredicate(new Predicate<QuoteModel>() {
 
             public boolean test(QuoteModel quote) {
                 if (newValue == null || newValue.isEmpty()) {

@@ -23,7 +23,7 @@ public class WindowButtons extends HBox {
         closeBtn.setMinWidth(25);
         closeBtn.setPrefWidth(25);
 
-        closeBtn.setOnAction(new EventHandler< ActionEvent>() {
+        closeBtn.setOnAction(new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent actionEvent) {
                 Platform.exit();
@@ -37,7 +37,7 @@ public class WindowButtons extends HBox {
         minimizeBtn.setMinWidth(25);
         minimizeBtn.setPrefWidth(25);
 
-        minimizeBtn.setOnAction(new EventHandler< ActionEvent>() {
+        minimizeBtn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent actionEvent) {
                 window.getStage().setIconified(true);
             }

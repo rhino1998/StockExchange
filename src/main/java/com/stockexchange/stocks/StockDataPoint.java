@@ -1,5 +1,6 @@
 package com.stockexchange.stocks;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class StockDataPoint {
@@ -11,7 +12,8 @@ public class StockDataPoint {
     @JsonProperty
     private double bid;
 
-    public StockDataPoint() {
+    @JsonCreator
+    private StockDataPoint() {
     }
 
     protected StockDataPoint(Stock stock) {
@@ -29,7 +31,8 @@ public class StockDataPoint {
     public boolean equals(Object o) {
         if (o instanceof StockDataPoint) {
             StockDataPoint e = (StockDataPoint) o;
-            return this.time == e.time && this.bid == e.bid && this.ask == e.ask;
+            return this.time == e.time && this.bid == e.bid
+                    && this.ask == e.ask;
         }
         return false;
     }

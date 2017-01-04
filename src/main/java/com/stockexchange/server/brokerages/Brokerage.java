@@ -9,7 +9,7 @@ import com.stockexchange.transport.Register;
 public class Brokerage {
 
     private final String name;
-    private final HashMap< String, Trader> traders = new HashMap< String, Trader>();
+    private final HashMap<String, Trader> traders = new HashMap<String, Trader>();
 
     public Brokerage(String name) {
         this.name = name;

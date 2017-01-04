@@ -87,8 +87,9 @@ public class QuoteModel {
         return this.quote;
     }
 
-    public static ObservableList< QuoteModel> marshallQuotes(List< Quote> quotes) {
-        ObservableList< QuoteModel> quotesList = FXCollections.observableArrayList();
+    public static ObservableList<QuoteModel> marshallQuotes(List<Quote> quotes) {
+        ObservableList<QuoteModel> quotesList = FXCollections
+                .observableArrayList();
         for (Quote quote : quotes) {
             quotesList.add(new QuoteModel(quote));
         }

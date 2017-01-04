@@ -12,8 +12,10 @@ public class ExecutableOrder extends Order {
     private Stock stock;
 
     public ExecutableOrder(RemoteOrder order) {
-        this.trader = StockMarket.getBrokerage(order.getBrokerageName()).getTrader(order.getTraderUsername());
-        this.stock = StockMarket.getStockExchange(order.getExchangeName()).getStock(order.getSymbol());
+        this.trader = StockMarket.getBrokerage(order.getBrokerageName())
+                .getTrader(order.getTraderUsername());
+        this.stock = StockMarket.getStockExchange(order.getExchangeName())
+                .getStock(order.getSymbol());
         this.shares = order.getShares();
     }
 

@@ -3,19 +3,25 @@ package com.stockexchange.traders.accounts;
 import java.util.HashMap;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.stockexchange.traders.Trader;
 
 public class Account {
 
     @JsonProperty
-    private final String name;
+    private String name;
     @JsonProperty
-    private final Trader owner;
+    private Trader owner;
     @JsonProperty
     private double balance;
     @JsonProperty
-    private final HashMap< String, Long> portfolio = new HashMap< String, Long>();
+    private final HashMap<String, Long> portfolio = new HashMap<String, Long>();
+
+    @JsonCreator
+    private Account() {
+    }
 
     public Account(String name, Trader owner) {
         this.name = name;

@@ -17,9 +17,12 @@ import com.stockexchange.transport.Register;
 public class AuthenticationAPI {
 
     public static Trader authenticateTrader(String brokerage, Credentials cred) {
-        WebTarget target = Connection.website.path(String.format("/auth/%s", brokerage));
-        Entity< Credentials> entity = Entity.entity(cred, MediaType.APPLICATION_JSON);
-        Response response = target.request(MediaType.APPLICATION_JSON).post(entity);
+        WebTarget target = Connection.website.path(String.format("/auth/%s",
+                brokerage));
+        Entity<Credentials> entity = Entity.entity(cred,
+                MediaType.APPLICATION_JSON);
+        Response response = target.request(MediaType.APPLICATION_JSON).post(
+                entity);
 
         if (response.getStatus() != 200) {
             return null;
@@ -29,9 +32,12 @@ public class AuthenticationAPI {
     }
 
     public static Trader refresh(Trader trader) {
-        WebTarget target = Connection.website.path(String.format("/auth/%s/refresh", trader.getBrokerageName()));
-        Entity< String> entity = Entity.entity(trader.getUsername(), MediaType.APPLICATION_JSON);
-        Response response = target.request(MediaType.APPLICATION_JSON).post(entity);
+        WebTarget target = Connection.website.path(String.format(
+                "/auth/%s/refresh", trader.getBrokerageName()));
+        Entity<String> entity = Entity.entity(trader.getUsername(),
+                MediaType.APPLICATION_JSON);
+        Response response = target.request(MediaType.APPLICATION_JSON).post(
+                entity);
 
         if (response.getStatus() != 200) {
             return null;
@@ -41,15 +47,20 @@ public class AuthenticationAPI {
     }
 
     public static void logoutTrader(Trader trader) {
-        WebTarget target = Connection.website.path(String.format("/auth/%s/logout", trader.getBrokerageName()));
-        Entity< String> entity = Entity.entity(trader.getUsername(), MediaType.APPLICATION_JSON);
+        WebTarget target = Connection.website.path(String.format(
+                "/auth/%s/logout", trader.getBrokerageName()));
+        Entity<String> entity = Entity.entity(trader.getUsername(),
+                MediaType.APPLICATION_JSON);
         target.request(MediaType.APPLICATION_JSON).post(entity);
     }
 
     public static Trader registerTrader(String brokerage, Register reg) {
-        WebTarget target = Connection.website.path(String.format("/auth/register/%s", brokerage));
-        Entity< Register> entity = Entity.entity(reg, MediaType.APPLICATION_JSON);
-        Response response = target.request(MediaType.APPLICATION_JSON).post(entity);
+        WebTarget target = Connection.website.path(String.format(
+                "/auth/register/%s", brokerage));
+        Entity<Register> entity = Entity
+                .entity(reg, MediaType.APPLICATION_JSON);
+        Response response = target.request(MediaType.APPLICATION_JSON).post(
+                entity);
 
         if (response.getStatus() != 200) {
             return null;

@@ -27,9 +27,10 @@ public class Stock {
     private int volume;
     private String description;
     private final Timer historian;
-    private final History< StockDataPoint> history = new History< StockDataPoint>(720);
-    private final PriorityQueue< Order> sellOrders = new PriorityQueue< Order>();
-    private final PriorityQueue< Order> buyOrders = new PriorityQueue< Order>();
+    private final History<StockDataPoint> history = new History<StockDataPoint>(
+            720);
+    private final PriorityQueue<Order> sellOrders = new PriorityQueue<Order>();
+    private final PriorityQueue<Order> buyOrders = new PriorityQueue<Order>();
     private final MarketSystem exchange;
 
     /**
@@ -116,11 +117,13 @@ public class Stock {
 
     public double getAsk() {
         return Math
-                .min(ask, sellOrders.isEmpty() || sellOrders.peek().isMarket() ? Double.MAX_VALUE : Double.MAX_VALUE);
+                .min(ask,
+                        sellOrders.isEmpty() || sellOrders.peek().isMarket() ? Double.MAX_VALUE : Double.MAX_VALUE);
     }
 
     public double getBid() {
-        return Math.max(bid, sellOrders.isEmpty() || buyOrders.peek().isMarket() ? 0 : 0);
+        return Math.max(bid, sellOrders.isEmpty()
+                || buyOrders.peek().isMarket() ? 0 : 0);
     }
 
     public double getOpen() {
@@ -143,7 +146,7 @@ public class Stock {
         return marketCap;
     }
 
-    public History< StockDataPoint> getHistory() {
+    public History<StockDataPoint> getHistory() {
         return this.history;
     }
 
@@ -160,6 +163,7 @@ public class Stock {
     }
 
     public boolean hasDescription() {
-        return this.description != null && !this.description.equals("Description not available");
+        return this.description != null
+                && !this.description.equals("Description not available");
     }
 }

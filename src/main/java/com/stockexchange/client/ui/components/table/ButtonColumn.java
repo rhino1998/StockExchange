@@ -20,18 +20,19 @@ import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class ButtonColumn<S, T> extends TableColumn< S, T> {
+public class ButtonColumn<S, T> extends TableColumn<S, T> {
 
     private ViewStage window;
 
-    public ButtonColumn(ViewStage win, final ColumnButtonFactory< S> factory, String text) {
+    public ButtonColumn(ViewStage win, final ColumnButtonFactory<S> factory,
+            String text) {
         super(text);
         window = win;
 
-        Callback< TableColumn< S, T>, TableCell< S, T>> cellFactory = new Callback< TableColumn< S, T>, TableCell< S, T>>() {
-            public TableCell< S, T> call(TableColumn< S, T> param) {
-                TableCell< S, T> cell;
-                cell = new TableCell< S, T>() {
+        Callback<TableColumn<S, T>, TableCell<S, T>> cellFactory = new Callback<TableColumn<S, T>, TableCell<S, T>>() {
+            public TableCell<S, T> call(TableColumn<S, T> param) {
+                TableCell<S, T> cell;
+                cell = new TableCell<S, T>() {
                     public void updateItem(T item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty) {
@@ -39,8 +40,10 @@ public class ButtonColumn<S, T> extends TableColumn< S, T> {
                             setText(null);
                         } else {
                             try {
-                                ColumnButton< S> btn = factory
-                                        .create(window, getTableView().getItems().get(getIndex()));
+                                ColumnButton<S> btn = factory.create(
+                                        window,
+                                        getTableView().getItems().get(
+                                                getIndex()));
                                 setGraphic(btn);
                                 setText(null);
                             } catch (Exception e) {

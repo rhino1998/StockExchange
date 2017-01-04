@@ -5,8 +5,6 @@ import javax.ws.rs.client.ClientBuilder;
 
 import org.glassfish.jersey.client.ClientConfig;
 
-import com.stockexchange.client.api.AuthenticationAPI;
-import com.stockexchange.client.api.StockExchangeAPI;
 import com.stockexchange.client.connection.Connection;
 import com.stockexchange.client.ui.LoginView;
 import com.stockexchange.client.ui.RegisterView;
@@ -53,7 +51,9 @@ public class StockExchangeClient extends Application {
 
     public void start(Stage theStage) throws Exception {
 
-        theStage.getIcons().add(new Image(getClass().getClassLoader().getResource("icon/app.ico").toExternalForm()));
+        theStage.getIcons().add(
+                new Image(getClass().getClassLoader()
+                        .getResource("icon/app.ico").toExternalForm()));
         window = new ViewStage(theStage);
         window.getStage().initStyle(StageStyle.UNDECORATED);
 
@@ -68,8 +68,10 @@ public class StockExchangeClient extends Application {
         window.setTitle("Stock Trader 5000");
         window.show();
         Rectangle2D primScreenBounds = Screen.getPrimary().getBounds();
-        window.setX((primScreenBounds.getWidth() - window.getWidth()) * CENTER_ON_SCREEN_X_FRACTION);
-        window.setY((primScreenBounds.getHeight() - window.getHeight()) * CENTER_ON_SCREEN_Y_FRACTION);
+        window.setX((primScreenBounds.getWidth() - window.getWidth())
+                * CENTER_ON_SCREEN_X_FRACTION);
+        window.setY((primScreenBounds.getHeight() - window.getHeight())
+                * CENTER_ON_SCREEN_Y_FRACTION);
 
         // TODO Auto-generated method stub
 

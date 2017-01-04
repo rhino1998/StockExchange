@@ -94,14 +94,18 @@ public class LoginView extends View {
 
         this.border.setCenter(grid);
         this.scene = new Scene(this.border, width, height);
-        scene.getStylesheets().add(getClass().getClassLoader().getResource("styles/style.css").toExternalForm());
+        scene.getStylesheets().add(
+                getClass().getClassLoader().getResource("styles/style.css")
+                        .toExternalForm());
     }
 
-    class LoginButtonEvent implements EventHandler< ActionEvent> {
+    class LoginButtonEvent implements EventHandler<ActionEvent> {
         public void handle(ActionEvent e) {
 
-            Credentials cred = new Credentials(userField.getText(), pwField.getText());
-            Trader trader = AuthenticationAPI.authenticateTrader(brokerageField.getText(), cred);
+            Credentials cred = new Credentials(userField.getText(),
+                    pwField.getText());
+            Trader trader = AuthenticationAPI.authenticateTrader(
+                    brokerageField.getText(), cred);
             if (trader == null) {
                 pwField.setText("");
                 // TODO error alert
@@ -118,7 +122,7 @@ public class LoginView extends View {
         }
     }
 
-    class CancelButtonEvent implements EventHandler< ActionEvent> {
+    class CancelButtonEvent implements EventHandler<ActionEvent> {
         public void handle(ActionEvent e) {
             // Change view
             window.setView(Scenes.welcome);

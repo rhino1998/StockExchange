@@ -29,15 +29,18 @@ public class StockExchangeServer {
     public static HttpServer startServer() {
         // create a resource config that scans for JAX-RS resources and providers
         // in com.underdog.jersey.grizzly package
-        final ResourceConfig rc = new ResourceConfig().packages("com.stockexchange.server.api");
+        final ResourceConfig rc = new ResourceConfig()
+                .packages("com.stockexchange.server.api");
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
+        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI),
+                rc);
     }
 
     public static void main(String[] args) throws IOException {
-        Logger l = Logger.getLogger("org.glassfish.grizzly.http.server.HttpHandler");
+        Logger l = Logger
+                .getLogger("org.glassfish.grizzly.http.server.HttpHandler");
         l.setLevel(Level.FINE);
         l.setUseParentHandlers(false);
         ConsoleHandler ch = new ConsoleHandler();
@@ -54,12 +57,17 @@ public class StockExchangeServer {
         System.out.println(StockMarket.getStockExchange("NMS"));
         StockMarket.addBrokerage("rhino");
         final HttpServer server = startServer();
-        System.out.println(String.format("Jersey app started with WADL available at "
-                + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
+        System.out.println(String.format(
+                "Jersey app started with WADL available at "
+                        + "%sapplication.wadl\nHit enter to stop it...",
+                BASE_URI));
 
-        List< FakeTrader> sims = new ArrayList< FakeTrader>(500);
+        List<FakeTrader> sims = new ArrayList<FakeTrader>(500);
         for (int i = 0; i < sims.size(); i++) {
-            sims.set(i, new FakeTrader("SIMUTRADER", String.format("FakeTrader:%s", i), 15000));
+            sims.set(
+                    i,
+                    new FakeTrader("SIMUTRADER", String.format("FakeTrader:%s",
+                            i), 15000));
         }
         System.in.read();
         for (FakeTrader sim : sims) {

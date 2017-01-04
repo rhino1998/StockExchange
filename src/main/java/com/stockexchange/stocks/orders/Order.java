@@ -1,5 +1,6 @@
 package com.stockexchange.stocks.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.stockexchange.stocks.orders.enums.OrderType;
 import com.stockexchange.stocks.orders.enums.TransactionType;
@@ -13,7 +14,8 @@ public class Order {
     @JsonProperty
     protected double shares;
 
-    public Order() {
+    @JsonCreator
+    protected Order() {
     }
 
     public double getShares() {

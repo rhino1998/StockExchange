@@ -51,28 +51,28 @@ public class BaseBorder extends BorderPane {
 
         this.setTop(toolBar);
 
-        this.setOnMousePressed(new EventHandler< MouseEvent>() {
+        this.setOnMousePressed(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 xOffset = window.getX() - event.getScreenX();
                 yOffset = window.getY() - event.getScreenY();
             }
         });
 
-        this.setOnMouseDragged(new EventHandler< MouseEvent>() {
+        this.setOnMouseDragged(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 window.setX(event.getScreenX() + xOffset);
                 window.setY(event.getScreenY() + yOffset);
             }
         });
 
-        toolBar.setOnMousePressed(new EventHandler< MouseEvent>() {
+        toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 xOffset = window.getX() - event.getScreenX();
                 yOffset = window.getY() - event.getScreenY();
             }
         });
 
-        toolBar.setOnMouseDragged(new EventHandler< MouseEvent>() {
+        toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 window.setX(event.getScreenX() + xOffset);
                 window.setY(event.getScreenY() + yOffset);

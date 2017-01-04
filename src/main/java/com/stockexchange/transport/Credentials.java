@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Credentials implements Serializable {
@@ -17,7 +19,8 @@ public class Credentials implements Serializable {
     @JsonProperty
     private String password;
 
-    public Credentials() {
+    @JsonCreator
+    protected Credentials() {
 
     }
 

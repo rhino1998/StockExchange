@@ -10,8 +10,8 @@ import com.stockexchange.stocks.quotes.Quote;
 
 public class StockMarket {
 
-    private static final HashMap< String, MarketSystem> exchanges = new HashMap< String, MarketSystem>();
-    private static final HashMap< String, Brokerage> brokerages = new HashMap< String, Brokerage>();
+    private static final HashMap<String, MarketSystem> exchanges = new HashMap<String, MarketSystem>();
+    private static final HashMap<String, Brokerage> brokerages = new HashMap<String, Brokerage>();
 
     public static void addBrokerage(String name) {
         if (brokerages.containsKey(name)) {
@@ -44,7 +44,8 @@ public class StockMarket {
 
     public static void listStocks(String... symbols) throws IOException {
         for (Quote quote : YahooFinanceAPI.getQuotes(symbols)) {
-            registerStockExchange(quote.getExchange()).listStock(new Stock(quote));
+            registerStockExchange(quote.getExchange()).listStock(
+                    new Stock(quote));
         }
     }
 }

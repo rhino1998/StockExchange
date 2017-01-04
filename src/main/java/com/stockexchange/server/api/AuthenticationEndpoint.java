@@ -23,14 +23,15 @@ import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Credentials;
 import com.stockexchange.transport.Register;
 
-@Path("/auth")
+@Path( "/auth")
 public class AuthenticationEndpoint {
 
     @POST
-    @Path("/{brokerage}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response authenticateTrader(@PathParam("brokerage") String brokerageName, Credentials cred) {
+    @Path( "/{brokerage}")
+    @Produces( MediaType.APPLICATION_JSON)
+    @Consumes( MediaType.APPLICATION_JSON)
+    public Response authenticateTrader(
+            @PathParam( "brokerage") String brokerageName, Credentials cred) {
         Brokerage brokerage = StockMarket.getBrokerage(brokerageName);
         if (brokerage == null) {
             return Response.status(Status.NOT_FOUND).build();
@@ -42,27 +43,31 @@ public class AuthenticationEndpoint {
         }
 
         trader.genToken();
-        GenericEntity< Trader> entity = new GenericEntity< Trader>(trader, Trader.class);
+        GenericEntity<Trader> entity = new GenericEntity<Trader>(trader,
+                Trader.class);
         return Response.ok().entity(entity).build();
     }
 
     @POST
-    @Path("/{brokerage}/refresh")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response refreshTrader(@PathParam("brokerage") String brokerage, String username) {
+    @Path( "/{brokerage}/refresh")
+    @Produces( MediaType.APPLICATION_JSON)
+    @Consumes( MediaType.APPLICATION_JSON)
+    public Response refreshTrader(@PathParam( "brokerage") String brokerage,
+            String username) {
         Trader trader = StockMarket.getBrokerage(brokerage).refresh(username);
         if (trader == null) {
             return Response.status(Status.FORBIDDEN).build();
         }
-        GenericEntity< Trader> entity = new GenericEntity< Trader>(trader, Trader.class);
+        GenericEntity<Trader> entity = new GenericEntity<Trader>(trader,
+                Trader.class);
         return Response.ok().entity(entity).build();
     }
 
     @POST
-    @Path("/{brokerage}/logout")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response logoutTrader(@PathParam("brokerage") String brokerage, String username) {
+    @Path( "/{brokerage}/logout")
+    @Consumes( MediaType.APPLICATION_JSON)
+    public Response logoutTrader(@PathParam( "brokerage") String brokerage,
+            String username) {
         Trader trader = StockMarket.getBrokerage(brokerage).refresh(username);
         if (trader == null) {
             return Response.status(Status.FORBIDDEN).build();
@@ -72,10 +77,11 @@ public class AuthenticationEndpoint {
     }
 
     @POST
-    @Path("/register/{brokerage}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response registerTrader(@PathParam("brokerage") String brokerageName, Register reg) {
+    @Path( "/register/{brokerage}")
+    @Produces( MediaType.APPLICATION_JSON)
+    @Consumes( MediaType.APPLICATION_JSON)
+    public Response registerTrader(
+            @PathParam( "brokerage") String brokerageName, Register reg) {
         Brokerage brokerage = StockMarket.getBrokerage(brokerageName);
         if (brokerage == null) {
             return Response.status(Status.NOT_FOUND).build();
@@ -87,7 +93,8 @@ public class AuthenticationEndpoint {
         }
 
         trader.genToken();
-        GenericEntity< Trader> entity = new GenericEntity< Trader>(trader, Trader.class);
+        GenericEntity<Trader> entity = new GenericEntity<Trader>(trader,
+                Trader.class);
         return Response.ok().entity(entity).build();
     }
 

@@ -144,15 +144,6 @@
             </goals>
             <phase>test</phase>
             <configuration>
-              <excludes>
-                  <exclude>**/Abstract*.java</exclude>
-                  <exclude>**/*_Roo_*</exclude>
-                  <exclude>**/*SecurityTest.java</exclude>
-              </excludes>
-              <includes>
-                  <include>*Test.java</include>
-                  <include>**/*.java</include>
-              </includes>
             </configuration>
           </execution>
         </executions>

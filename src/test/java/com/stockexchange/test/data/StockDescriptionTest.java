@@ -1,6 +1,6 @@
 package com.stockexchange.test.data;
 
-import static org.junit.Assert.assertNotEquals;
+import static org.testng.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,14 +9,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import com.stockexchange.StockNames;
 import com.stockexchange.server.data.ReutersAPI;
 
 public class StockDescriptionTest {
 
-    @Test
+    @Test( priority = 1)
     public void getDescriptionTest() throws IOException {
         int i = 0;
         for (String symbol : StockNames.stocks) {

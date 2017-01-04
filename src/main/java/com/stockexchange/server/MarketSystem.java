@@ -12,7 +12,7 @@ import com.stockexchange.stocks.quotes.Quote;
 public class MarketSystem {
 
     private final String name;
-    private final HashMap< String, Stock> stocks = new HashMap< String, Stock>();
+    private final HashMap<String, Stock> stocks = new HashMap<String, Stock>();
 
     public MarketSystem(String name) {
         this.name = name;
@@ -42,8 +42,8 @@ public class MarketSystem {
         return new Quote(stocks.get(symbol));
     }
 
-    public List< Quote> getQuotes() {
-        ArrayList< Quote> quotes = new ArrayList< Quote>(stocks.size());
+    public List<Quote> getQuotes() {
+        ArrayList<Quote> quotes = new ArrayList<Quote>(stocks.size());
         for (Stock stock : this.stocks.values()) {
             quotes.add(new Quote(stock));
         }

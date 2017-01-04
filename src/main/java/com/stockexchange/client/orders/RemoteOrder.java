@@ -1,5 +1,6 @@
 package com.stockexchange.client.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.stockexchange.server.orders.ExecutableOrder;
 import com.stockexchange.stocks.orders.Order;
@@ -27,10 +28,11 @@ public class RemoteOrder extends Order {
     @JsonProperty
     private int volume;
 
-    public RemoteOrder() {
+    @JsonCreator
+    private RemoteOrder() {
     }
 
-    public RemoteOrder(ExecutableOrder order) {
+    private RemoteOrder(ExecutableOrder order) {
     }
 
     public String getSymbol() {

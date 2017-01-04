@@ -57,10 +57,12 @@ public class WelcomeView extends View {
         this.border.setCenter(grid);
 
         this.scene = new Scene(this.border, width, height);
-        scene.getStylesheets().add(getClass().getClassLoader().getResource("styles/style.css").toExternalForm());
+        scene.getStylesheets().add(
+                getClass().getClassLoader().getResource("styles/style.css")
+                        .toExternalForm());
     }
 
-    class LoginButtonEvent implements EventHandler< ActionEvent> {
+    class LoginButtonEvent implements EventHandler<ActionEvent> {
         public void handle(ActionEvent e) {
             // Change View
             View view = new QuoteView(window, "NMS", 500);
@@ -68,7 +70,7 @@ public class WelcomeView extends View {
         }
     }
 
-    class RegisterButtonEvent implements EventHandler< ActionEvent> {
+    class RegisterButtonEvent implements EventHandler<ActionEvent> {
         public void handle(ActionEvent e) {
             // Change View
             window.setView(Scenes.register);

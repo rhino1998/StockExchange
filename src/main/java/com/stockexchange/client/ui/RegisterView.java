@@ -103,10 +103,12 @@ public class RegisterView extends View {
         this.border.setCenter(grid);
 
         this.scene = new Scene(this.border, width, height);
-        scene.getStylesheets().add(getClass().getClassLoader().getResource("styles/style.css").toExternalForm());
+        scene.getStylesheets().add(
+                getClass().getClassLoader().getResource("styles/style.css")
+                        .toExternalForm());
     }
 
-    class RegisterButtonEvent implements EventHandler< ActionEvent> {
+    class RegisterButtonEvent implements EventHandler<ActionEvent> {
         public void handle(ActionEvent e) {
 
             // Ensure password is consistent
@@ -118,8 +120,10 @@ public class RegisterView extends View {
             }
 
             // Create transport object
-            Register reg = new Register(nameField.getText(), userField.getText(), pwField.getText());
-            Trader trader = AuthenticationAPI.registerTrader(brokerageField.getText(), reg);
+            Register reg = new Register(nameField.getText(),
+                    userField.getText(), pwField.getText());
+            Trader trader = AuthenticationAPI.registerTrader(
+                    brokerageField.getText(), reg);
 
             // Ensure registration was successful.
             if (trader == null) {
@@ -139,7 +143,7 @@ public class RegisterView extends View {
         }
     }
 
-    class CancelButtonEvent implements EventHandler< ActionEvent> {
+    class CancelButtonEvent implements EventHandler<ActionEvent> {
         public void handle(ActionEvent e) {
             // Change view
             window.setView(Scenes.welcome);
