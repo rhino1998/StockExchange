@@ -12,7 +12,7 @@ import com.stockexchange.server.data.GoogleFinanceAPI;
 
 public class StockChartTest {
 
-    @Test( priority = 1)
+    @Test(priority = 1)
     public void getStockChart() throws IOException {
         assertTrue(GoogleFinanceAPI.getChartURL("GOOG") != null);
     }

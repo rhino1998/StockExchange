@@ -27,7 +27,6 @@ public class QuoteModel {
     private final ReadOnlyDoubleProperty open;
     private final ReadOnlyDoubleProperty close;
     private final ReadOnlyDoubleProperty volume;
-    private final ReadOnlyDoubleProperty marketCap;
 
     public QuoteModel(Quote quote) {
         this.quote = quote;
@@ -40,7 +39,6 @@ public class QuoteModel {
         this.open = new SimpleDoubleProperty(quote.getOpen());
         this.close = new SimpleDoubleProperty(quote.getPreviousClose());
         this.volume = new SimpleDoubleProperty(quote.getVolume());
-        this.marketCap = new SimpleDoubleProperty(quote.getMarketCap());
     }
 
     public String getSymbol() {
@@ -77,10 +75,6 @@ public class QuoteModel {
 
     public Double getVolume() {
         return this.volume.getValue();
-    }
-
-    public Double getMarketCap() {
-        return this.marketCap.getValue();
     }
 
     public Quote getQuote() {

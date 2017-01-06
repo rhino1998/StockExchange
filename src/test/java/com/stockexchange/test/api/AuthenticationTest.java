@@ -23,7 +23,7 @@ public class AuthenticationTest extends JerseyTestNg.ContainerPerClassTest {
         return new ResourceConfig(AuthenticationEndpoint.class);
     }
 
-    @Test( priority = 1)
+    @Test(priority = 1)
     public void testRegister() {
         Connection.website = target("/");
         StockMarket.addBrokerage("rhino");
@@ -32,7 +32,7 @@ public class AuthenticationTest extends JerseyTestNg.ContainerPerClassTest {
         assertEquals(reg.getUsername(), trader.getUsername());
     }
 
-    @Test( priority = 1)
+    @Test(priority = 1)
     public void testAuthenticate() {
         Connection.website = target("/");
         StockMarket.addBrokerage("rhino");
@@ -43,7 +43,7 @@ public class AuthenticationTest extends JerseyTestNg.ContainerPerClassTest {
         assertEquals(a.getToken(), b.getToken());
     }
 
-    @Test( priority = 1)
+    @Test(priority = 1)
     public void testRefresh() {
         Connection.website = target("/");
         StockMarket.addBrokerage("rhino");
@@ -57,7 +57,7 @@ public class AuthenticationTest extends JerseyTestNg.ContainerPerClassTest {
         assertEquals(a.getToken(), c.getToken());
     }
 
-    @Test( priority = 1)
+    @Test(priority = 1)
     public void testLogout() {
         Connection.website = target("/");
         StockMarket.addBrokerage("rhino");
@@ -74,7 +74,7 @@ public class AuthenticationTest extends JerseyTestNg.ContainerPerClassTest {
         assertEquals(null, d);
     }
 
-    @Test( priority = 1)
+    @Test(priority = 1)
     public void testLogInOutInOut() {
         Connection.website = target("/");
         StockMarket.addBrokerage("rhino");

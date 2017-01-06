@@ -12,21 +12,44 @@ public class Order {
     protected OrderType orderType;
 
     @JsonProperty
-    protected double shares;
+    protected long qty;
+
+    @JsonProperty
+    protected double limitPrice;
 
     @JsonCreator
     protected Order() {
     }
 
-    public double getShares() {
-        return this.shares;
+    protected Order(TransactionType tt, OrderType ot, long qty, double lp){
+        transactionType = tt;
+        orderType = ot;
+        this.qty = qty;
+        limitPrice = lp;
+
+    }
+
+    public double getPrice() {
+        return limitPrice;
+    }
+
+    public long getQuantity() {
+        return qty;
+    }
+
+    public OrderType getOrderType() {
+        return orderType;
     }
 
     public boolean isMarket() {
-        return orderType == OrderType.MARKET;
+        return this.orderType == OrderType.MARKET;
     }
 
-    public boolean isBuy() {
-        return transactionType == TransactionType.BUY;
+    public boolean isLimit() {
+        return this.orderType == OrderType.LIMIT;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
     }
 }

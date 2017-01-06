@@ -29,6 +29,8 @@ public class Trader implements Comparable<Trader>, Serializable {
     @JsonProperty
     private HashMap<UUID, Order> pendingOrders;
     @JsonProperty
+    private HashMap<String, Long> portfolio;
+    @JsonProperty
     private UUID token;
     @JsonProperty
     private String brokerageName;
@@ -148,5 +150,14 @@ public class Trader implements Comparable<Trader>, Serializable {
 
     public String getBrokerageName() {
         return brokerageName;
+    }
+
+    public void addAccount(Account acct) {
+        acct.addOwner(this);
+        this.accounts.put(acct.getName(), acct);
+    }
+
+    public Account getAccount(String name) {
+        return accounts.get(name);
     }
 }

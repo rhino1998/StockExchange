@@ -1,12 +1,19 @@
 package com.stockexchange.stocks;
 
-import java.util.PriorityQueue;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.NoSuchElementException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import com.stockexchange.server.MarketSystem;
 import com.stockexchange.server.StockMarket;
+import com.stockexchange.server.data.TradierAPI;
+import com.stockexchange.server.orders.ExecutableOrder;
+import com.stockexchange.server.orders.comparators.BuyComparator;
+import com.stockexchange.server.orders.comparators.SellComparator;
 import com.stockexchange.stocks.orders.Order;
+import com.stockexchange.stocks.orders.enums.OrderType;
+import com.stockexchange.stocks.orders.enums.TransactionType;
 import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.util.History;
 
@@ -23,14 +30,17 @@ public class Stock {
     private double open;
     private double previousClose;
     private double marketCap;
-
-    private int volume;
+    private double volume;
+    
+    
     private String description;
     private final Timer historian;
     private final History<StockDataPoint> history = new History<StockDataPoint>(
             720);
-    private final PriorityQueue<Order> sellOrders = new PriorityQueue<Order>();
-    private final PriorityQueue<Order> buyOrders = new PriorityQueue<Order>();
+    private final PriorityBlockingQueue<ExecutableOrder> sellOrders = new PriorityBlockingQueue<ExecutableOrder>(
+            100, new SellComparator());
+    private final PriorityBlockingQueue<ExecutableOrder> buyOrders = new PriorityBlockingQueue<ExecutableOrder>(
+            100, new BuyComparator());
     private final MarketSystem exchange;
 
     /**
@@ -47,7 +57,6 @@ public class Stock {
         this.volume = quote.getVolume();
         this.open = quote.getOpen();
         this.previousClose = quote.getPreviousClose();
-        this.marketCap = quote.getMarketCap();
         this.dailyHigh = quote.getDailyHigh();
         this.dailyLow = quote.getDailyLow();
         this.exchange = StockMarket.getStockExchange(quote.getExchange());
@@ -58,12 +67,31 @@ public class Stock {
 
             @Override
             public void run() {
-                stock.bid += Math.random() * 100 - 45;
-                stock.ask += Math.random() * 100 - 45;
+            	double volatility = (Math.random()* 5 + 2)/2;
+
+            	double rnd = Math.random();
+
+            	double changePercent = 2 * volatility * rnd;
+
+                if (changePercent > volatility) {
+                    changePercent -= (2 * volatility);
+                }
+                double changeAmount = ask * changePercent/100;
+                double newPrice = ask + changeAmount;
+
+                // Add a ceiling and floor.
+                if (newPrice < dailyLow*0.8) {
+                    newPrice += Math.abs(changeAmount) * 2;
+                } else if (newPrice > dailyHigh*1.2) {
+                    newPrice -= Math.abs(changeAmount) * 2;
+                }
+                
+                ask = newPrice;
+                bid = ask*(0.99-Math.random()/70);
                 history.add(new StockDataPoint(stock));
             }
 
-        }, 0, 10000);
+        }, 0, 1000);
     }
 
     /**
@@ -82,7 +110,6 @@ public class Stock {
         this.volume = quote.getVolume();
         this.open = quote.getOpen();
         this.previousClose = quote.getPreviousClose();
-        this.marketCap = quote.getMarketCap();
         this.dailyHigh = quote.getDailyHigh();
         this.dailyLow = quote.getDailyLow();
     }
@@ -95,19 +122,92 @@ public class Stock {
         return symbol;
     }
 
-    public void placeOrder(Order order) {
-        if (order.isBuy()) {
-            buyOrders.add(order);
-            if (this.getBid() > this.getAsk()) {
-                if (sellOrders.isEmpty()) {
-                }
+    private void executeLoop() {
+        while (!buyOrders.isEmpty() && !sellOrders.isEmpty()) {
+            if (bid < ask && sellOrders.peek().isLimit()
+                    && buyOrders.peek().isLimit()) {
+                return;
             }
-
-            return;
+            executeTrade();
         }
     }
 
-    public int getVolume() {
+    private void executeTrade() {
+        ExecutableOrder buy, sell;
+        try {
+            buy = buyOrders.remove();
+            sell = sellOrders.remove();
+        } catch (NoSuchElementException e) {
+            return;
+        }
+
+        if (buy == null || sell == null) {
+            return;
+        }
+        double price = ask;
+
+        if (sell.isMarket() && buy.isMarket()) {
+            price = (ask + bid) / 2;
+        } else if (sell.isMarket()) {
+            price = bid;
+        }
+
+        long qty = Math.min(sell.getQuantity(), buy.getQuantity());
+        sell.subtractShares(qty);
+        buy.subtractShares(qty);
+
+        sell.getAccount().updatePortfolio(symbol, -qty);
+        sell.getAccount().deposit(price * qty);
+
+        buy.getAccount().updatePortfolio(symbol, qty);
+        buy.getAccount().withdraw(price * qty);
+
+        if (buy.getQuantity() > 0) {
+            buyOrders.add(buy);
+        } else {
+            if (!buyOrders.isEmpty()) {
+                bid = buyOrders.peek().getPrice();
+            }
+        }
+        if (sell.getQuantity() > 0) {
+            sellOrders.add(sell);
+        } else {
+            if (!sellOrders.isEmpty()) {
+                ask = sellOrders.peek().getPrice();
+            }
+        }
+
+    }
+
+    public void placeOrder(ExecutableOrder order) {
+
+        switch(order.getTransactionType()) {
+        case BUY:
+            buyOrders.add(order);
+            if (order.isLimit() && this.bid < order.getPrice()) {
+                this.bid = Math.min(order.getPrice(), ask);
+            }
+            break;
+        case SELL:
+            sellOrders.add(order);
+            if (order.isLimit() && this.ask > order.getPrice()) {
+                this.ask = Math.max(order.getPrice(), bid);
+            }
+            break;
+        }
+
+        if (this.buyOrders.isEmpty() || this.sellOrders.isEmpty()) {
+            return;
+        }
+
+        if (this.getBid() >= this.getAsk() || this.sellOrders.peek().isMarket()
+                || this.buyOrders.peek().isMarket()) {
+            executeLoop();
+        }
+
+    }
+
+    public double getVolume() {
         return volume;
     }
 
@@ -116,14 +216,11 @@ public class Stock {
     }
 
     public double getAsk() {
-        return Math
-                .min(ask,
-                        sellOrders.isEmpty() || sellOrders.peek().isMarket() ? Double.MAX_VALUE : Double.MAX_VALUE);
+        return ask;
     }
 
     public double getBid() {
-        return Math.max(bid, sellOrders.isEmpty()
-                || buyOrders.peek().isMarket() ? 0 : 0);
+        return bid;
     }
 
     public double getOpen() {
@@ -140,10 +237,6 @@ public class Stock {
 
     public double getDailyLow() {
         return dailyLow;
-    }
-
-    public double getMarketCap() {
-        return marketCap;
     }
 
     public History<StockDataPoint> getHistory() {

@@ -16,7 +16,7 @@ import com.stockexchange.server.data.ReutersAPI;
 
 public class StockDescriptionTest {
 
-    @Test( priority = 1)
+    @Test(priority = 1)
     public void getDescriptionTest() throws IOException {
         int i = 0;
         for (String symbol : StockNames.stocks) {

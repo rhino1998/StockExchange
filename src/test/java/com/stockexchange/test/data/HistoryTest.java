@@ -8,7 +8,7 @@ import com.stockexchange.util.History;
 
 public class HistoryTest {
 
-    @Test( priority = 1)
+    @Test(priority = 1)
     public void historyAdd() {
         History<Integer> history = new History<Integer>(80);
 

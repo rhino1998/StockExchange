@@ -11,20 +11,20 @@ import javax.ws.rs.core.Response;
 
 import com.stockexchange.stocks.orders.Order;
 
-@Path( "/trader")
+@Path("/trader")
 public class TraderEndpoint {
 
     @POST
-    @Path( "order")
-    @Consumes( "application/json")
-    @Produces( "application/json")
+    @Path("order")
+    @Consumes("application/json")
+    @Produces("application/json")
     public Response submitOrder(Order order) {
         return null;
     }
 
     @GET
-    @Path( "orders")
-    @Produces( "application/json")
+    @Path("orders")
+    @Produces("application/json")
     public Response getActiveOrders() {
         return null;
     }

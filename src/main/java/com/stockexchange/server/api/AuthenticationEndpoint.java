@@ -23,15 +23,15 @@ import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Credentials;
 import com.stockexchange.transport.Register;
 
-@Path( "/auth")
+@Path("/auth")
 public class AuthenticationEndpoint {
 
     @POST
-    @Path( "/{brokerage}")
-    @Produces( MediaType.APPLICATION_JSON)
-    @Consumes( MediaType.APPLICATION_JSON)
+    @Path("/{brokerage}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response authenticateTrader(
-            @PathParam( "brokerage") String brokerageName, Credentials cred) {
+            @PathParam("brokerage") String brokerageName, Credentials cred) {
         Brokerage brokerage = StockMarket.getBrokerage(brokerageName);
         if (brokerage == null) {
             return Response.status(Status.NOT_FOUND).build();
@@ -49,10 +49,10 @@ public class AuthenticationEndpoint {
     }
 
     @POST
-    @Path( "/{brokerage}/refresh")
-    @Produces( MediaType.APPLICATION_JSON)
-    @Consumes( MediaType.APPLICATION_JSON)
-    public Response refreshTrader(@PathParam( "brokerage") String brokerage,
+    @Path("/{brokerage}/refresh")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response refreshTrader(@PathParam("brokerage") String brokerage,
             String username) {
         Trader trader = StockMarket.getBrokerage(brokerage).refresh(username);
         if (trader == null) {
@@ -64,9 +64,9 @@ public class AuthenticationEndpoint {
     }
 
     @POST
-    @Path( "/{brokerage}/logout")
-    @Consumes( MediaType.APPLICATION_JSON)
-    public Response logoutTrader(@PathParam( "brokerage") String brokerage,
+    @Path("/{brokerage}/logout")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response logoutTrader(@PathParam("brokerage") String brokerage,
             String username) {
         Trader trader = StockMarket.getBrokerage(brokerage).refresh(username);
         if (trader == null) {
@@ -77,11 +77,11 @@ public class AuthenticationEndpoint {
     }
 
     @POST
-    @Path( "/register/{brokerage}")
-    @Produces( MediaType.APPLICATION_JSON)
-    @Consumes( MediaType.APPLICATION_JSON)
+    @Path("/register/{brokerage}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response registerTrader(
-            @PathParam( "brokerage") String brokerageName, Register reg) {
+            @PathParam("brokerage") String brokerageName, Register reg) {
         Brokerage brokerage = StockMarket.getBrokerage(brokerageName);
         if (brokerage == null) {
             return Response.status(Status.NOT_FOUND).build();
