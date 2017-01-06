@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import com.stockexchange.server.brokerages.Brokerage;
-import com.stockexchange.server.data.TradierAPI;
+import com.stockexchange.server.data.YahooFinanceAPI;
 import com.stockexchange.stocks.Stock;
 import com.stockexchange.stocks.quotes.Quote;
 
@@ -43,12 +43,12 @@ public class StockMarket {
     }
 
     public static void listStock(String symbol) throws IOException {
-        Quote quote = TradierAPI.getQuotes(symbol).get(0);
+        Quote quote = YahooFinanceAPI.getQuote(symbol);
         registerStockExchange(quote.getExchange()).listStock(new Stock(quote));
     }
 
     public static void listStocks(String... symbols) throws IOException {
-        for (Quote quote : TradierAPI.getQuotes(symbols)) {
+        for (Quote quote : YahooFinanceAPI.getQuotes(symbols)) {
             registerStockExchange(quote.getExchange()).listStock(
                     new Stock(quote));
         }

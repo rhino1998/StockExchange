@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.stockexchange.server.data.TradierAPI;
+import com.stockexchange.server.data.YahooFinanceAPI;
+
+
 import com.stockexchange.stocks.Stock;
 import com.stockexchange.stocks.quotes.Quote;
 
@@ -27,7 +29,7 @@ public class MarketSystem {
     }
 
     public void listStock(String symbol) throws IOException {
-        Stock stock = new Stock(TradierAPI.getQuotes(symbol).get(0));
+        Stock stock = new Stock(YahooFinanceAPI.getQuote(symbol));
         stocks.put(stock.getSymbol(), stock);
         this.symbols.add(symbol);
         //System.out.println(symbol);
@@ -35,7 +37,7 @@ public class MarketSystem {
 
     public void listStocks(String... symbols) throws IOException {
         this.symbols.addAll(Arrays.asList(symbols));
-        for (Quote quote : TradierAPI.getQuotes(symbols)) {
+        for (Quote quote : YahooFinanceAPI.getQuotes(symbols)) {
             Stock stock = new Stock(quote);
             stocks.put(stock.getSymbol(), stock);
         }

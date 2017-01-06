@@ -48,7 +48,7 @@ public class QuoteView extends View {
     private TextField filter;
     private TableView<QuoteModel> table;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings( "unchecked")
     /**
      * A view containing a searchable, filterable table of stock quotes
      * @param stage The window stage in which to render this view
@@ -87,8 +87,8 @@ public class QuoteView extends View {
         nameColumn
                 .setCellValueFactory(new PropertyValueFactory<QuoteModel, String>(
                         "name"));
-        nameColumn.setMinWidth(225);
-        nameColumn.setPrefWidth(225);
+        nameColumn.setMinWidth(175);
+        nameColumn.setPrefWidth(175);
 
         TableColumn<QuoteModel, Double> askColumn = new MoneyShortColumn("ASK");
         askColumn
@@ -140,9 +140,16 @@ public class QuoteView extends View {
         volumeColumn
                 .setCellValueFactory(new PropertyValueFactory<QuoteModel, Double>(
                         "volume"));
-        volumeColumn.setMinWidth(90);
-        volumeColumn.setPrefWidth(90);
+        volumeColumn.setMinWidth(80);
+        volumeColumn.setPrefWidth(80);
 
+        TableColumn<QuoteModel, Double> marketCapColumn = new MoneyShortColumn(
+                "CAP");
+        marketCapColumn
+                .setCellValueFactory(new PropertyValueFactory<QuoteModel, Double>(
+                        "marketCap"));
+        marketCapColumn.setMinWidth(70);
+        marketCapColumn.setPrefWidth(70);
 
         TableColumn<QuoteModel, String> orderColumn = new ButtonColumn<QuoteModel, String>(
                 window, new ColumnButtonFactory<QuoteModel>(
@@ -169,7 +176,7 @@ public class QuoteView extends View {
         // Format table
         table.getColumns().addAll(symbolColumn, nameColumn, askColumn,
                 bidColumn, lowColumn, highColumn, openColumn, closeColumn,
-                volumeColumn, orderColumn);
+                volumeColumn, marketCapColumn, orderColumn);
 
         // Size table
         table.setPrefWidth(750);

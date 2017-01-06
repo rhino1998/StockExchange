@@ -5,9 +5,6 @@ import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -17,54 +14,35 @@ import com.stockexchange.stocks.Stock;
 import com.stockexchange.traders.Trader;
 import com.stockexchange.traders.accounts.Account;
 
-
-@XmlRootElement(name="quote")
 public class Quote implements Serializable {
 
     private static final long serialVersionUID = -5983976623649918132L;
 
     @JsonProperty
-    @XmlElement(name="description")
     private String name;
-    
     @JsonProperty
-    @XmlElement(name="symbol")
     private String symbol;
-    
     @JsonProperty
-    @XmlElement(name="exch")
     private String exchange;
-    
     @JsonProperty
-    @XmlElement(name="high")
     private double dailyHigh;
-    
     @JsonProperty
-    @XmlElement(name="low")
     private double dailyLow;
-    
     @JsonProperty
-    @XmlElement(name="bid")
     private double bid;
-    
     @JsonProperty
-    @XmlElement(name="ask")
     private double ask;
-    
     @JsonProperty
-    @XmlElement(name="open")
     private double open;
-    
     @JsonProperty
-    @XmlElement(name="prevclose")
     private double previousClose;
-
     @JsonProperty
-    @XmlElement(name="volume")
+    private double marketCap;
+    @JsonProperty
     private double volume;
 
     @JsonCreator
-    protected Quote() {
+    private Quote() {
     }
 
     /**
@@ -83,6 +61,7 @@ public class Quote implements Serializable {
         this.open = stock.getOpen();
         this.previousClose = stock.getPreviousClose();
         this.volume = stock.getVolume();
+        this.marketCap = stock.getMarketCap();
         this.exchange = stock.getExchange().getName();
     }
 
@@ -92,12 +71,37 @@ public class Quote implements Serializable {
      * @param args
      *            the traits of the Quote in a string array.
      */
-    
-    public Quote(
-    		String name,
-    		String symbol,
-    		String exchange
-    	){
+    public Quote(String[] args) {
+
+        this.symbol = args[0];
+        this.name = args[1];
+        this.ask = Double.parseDouble(args[2]);
+        this.bid = Double.parseDouble(args[3]);
+
+        this.dailyLow = Double.parseDouble(args[4]);
+        this.dailyHigh = Double.parseDouble(args[5]);
+        this.volume = Integer.parseInt(args[6]);
+        this.open = Double.parseDouble(args[7]);
+        this.previousClose = Double.parseDouble(args[8]);
+        this.exchange = args[10];
+
+        double mCap = 0;
+        switch (args[9].charAt(args[9].length() - 1)) {
+        case 'B':
+            mCap = Double
+                    .parseDouble(args[9].substring(0, args[9].length() - 1));
+            mCap *= 1e9;
+            break;
+        case 'M':
+            mCap = Double
+                    .parseDouble(args[9].substring(0, args[9].length() - 1));
+            mCap *= 1e6;
+            break;
+        default:
+            mCap = Double.parseDouble(args[9]);
+        }
+
+        this.marketCap = mCap;
 
     }
 
@@ -137,6 +141,9 @@ public class Quote implements Serializable {
         return previousClose;
     }
 
+    public double getMarketCap() {
+        return marketCap;
+    }
 
     public String getExchange() {
         return exchange;
@@ -144,10 +151,10 @@ public class Quote implements Serializable {
 
     public String toString() {
         return String
-                .format("{Symbol: %s, Exchange: %s, Name: %s, Ask: %.2f, Bid %.2f, Daily Low: %.2f, Daily High: %.2f, Open: %.2f, Previous Close: %.2f, Volume: %.2f}",
+                .format("Symbol: %s, Exchange: %s, Name: %s, Ask: %.2f, Bid %.2f, Daily Low: %.2f, Daily High: %.2f, Open: %.2f, Previous Close: %.2f, Volume: %d, Market Cap: %.2f",
                         this.symbol, this.exchange, this.name, this.ask,
                         this.bid, this.dailyLow, this.dailyHigh, this.open,
-                        this.previousClose, this.volume);
+                        this.previousClose, this.volume, this.marketCap);
     }
 
     public boolean equals(Object o) {

@@ -87,6 +87,8 @@ public class StockDetailsView extends View {
                 new TextLabel(MoneyFormat.shortened(quote.getPreviousClose())));
         vbox2.getChildren().add(
                 new TextLabel(MoneyFormat.shortened(quote.getVolume())));
+        vbox2.getChildren().add(
+                new TextLabel(MoneyFormat.shortened(quote.getMarketCap())));
 
         vbox1.setPrefSize(130, 270);
         vbox2.setPrefSize(200, 270);

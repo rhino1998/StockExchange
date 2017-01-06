@@ -65,7 +65,7 @@ public class WelcomeView extends View {
     class LoginButtonEvent implements EventHandler<ActionEvent> {
         public void handle(ActionEvent e) {
             // Change View
-            View view = new QuoteView(window, "Q", 500);
+            View view = new QuoteView(window, "NMS", 500);
             window.setView(view);
         }
     }

@@ -32,8 +32,8 @@ public class StockExchangeTest extends JerseyTestNg.ContainerPerClassTest {
         Connection.website = target("/");
         StockMarket.listStocks(StockNames.stocks);
 
-        Quote a = StockMarket.getStockExchange("Q").getQuote("GOOG");
-        Quote b = StockExchangeAPI.getQuote("Q", "GOOG");
+        Quote a = StockMarket.getStockExchange("NMS").getQuote("GOOG");
+        Quote b = StockExchangeAPI.getQuote("NMS", "GOOG");
         assertEquals(a.getSymbol(), b.getSymbol());
     }
 
@@ -42,8 +42,8 @@ public class StockExchangeTest extends JerseyTestNg.ContainerPerClassTest {
         Connection.website = target("/");
         StockMarket.listStocks(StockNames.stocks);
 
-        List<Quote> a = StockMarket.getStockExchange("Q").getQuotes();
-        List<Quote> b = StockExchangeAPI.getQuotes("Q");
+        List<Quote> a = StockMarket.getStockExchange("NMS").getQuotes();
+        List<Quote> b = StockExchangeAPI.getQuotes("NMS");
 
         assertTrue(a.containsAll(b));
     }
@@ -51,10 +51,10 @@ public class StockExchangeTest extends JerseyTestNg.ContainerPerClassTest {
     @Test(priority = 2)
     public void testGetDescription() throws IOException {
         Connection.website = target("/");
-        Stock stock = StockMarket.getStockExchange("Q").getStock("GOOG");
+        Stock stock = StockMarket.getStockExchange("NMS").getStock("GOOG");
 
         String c = ReutersAPI.getDescription("GOOG");
-        String b = StockExchangeAPI.getStockDescription("Q", "GOOG");
+        String b = StockExchangeAPI.getStockDescription("NMS", "GOOG");
         String a = stock.getDescription();
 
         assertEquals(c, b);
@@ -66,16 +66,16 @@ public class StockExchangeTest extends JerseyTestNg.ContainerPerClassTest {
         Connection.website = target("/");
         StockMarket.listStocks(StockNames.stocks);
 
-        Stock stock = StockMarket.getStockExchange("Q").getStock("GOOG");
+        Stock stock = StockMarket.getStockExchange("NMS").getStock("GOOG");
 
         for (int i = 0; i < 1440; i++) {
             stock.getHistory().add(
                     new StockDataPoint(stock.getAsk(), stock.getBid()));
         }
 
-        List<StockDataPoint> a = StockMarket.getStockExchange("Q")
+        List<StockDataPoint> a = StockMarket.getStockExchange("NMS")
                 .getStock("GOOG").getHistory().getAll();
-        List<StockDataPoint> b = StockExchangeAPI.getStockHistory("Q",
+        List<StockDataPoint> b = StockExchangeAPI.getStockHistory("NMS",
                 "GOOG", 0);
 
         assertTrue(a.containsAll(b));

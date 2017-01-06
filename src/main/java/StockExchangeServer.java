@@ -12,8 +12,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import com.stockexchange.StockNames;
 import com.stockexchange.server.StockMarket;
+import com.stockexchange.server.data.YahooFinanceAPI;
 import com.stockexchange.stocks.quotes.Quote;
-import com.stockexchange.traders.accounts.Account;
 
 public class StockExchangeServer {
 

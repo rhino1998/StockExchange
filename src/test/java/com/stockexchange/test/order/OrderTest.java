@@ -36,7 +36,7 @@ public class OrderTest {
         Trader trader = StockMarket.getBrokerage("rhino").registerTrader(
                 new Register("Riley Wilburn", "TestA", "pw"));
         trader.addAccount(acct);
-        RemoteOrder r = new RemoteOrder(StockMarket.getStockExchange("Q")
+        RemoteOrder r = new RemoteOrder(StockMarket.getStockExchange("NMS")
                 .getQuote("GOOG"), "BASE", trader, TransactionType.BUY, 100);
 
         ExecutableOrder e = new ExecutableOrder(r);
@@ -57,12 +57,12 @@ public class OrderTest {
         Trader trader = StockMarket.getBrokerage("rhino").registerTrader(
                 new Register("Riley Wilburn", "TestA", "pw"));
         trader.addAccount(acct);
-        RemoteOrder rs = new RemoteOrder(StockMarket.getStockExchange("Q")
+        RemoteOrder rs = new RemoteOrder(StockMarket.getStockExchange("NMS")
                 .getQuote("GOOG"), "BASE", trader, TransactionType.SELL, 200);
 
         ExecutableOrder es = new ExecutableOrder(rs);
 
-        RemoteOrder rb = new RemoteOrder(StockMarket.getStockExchange("Q")
+        RemoteOrder rb = new RemoteOrder(StockMarket.getStockExchange("NMS")
                 .getQuote("GOOG"), "BASE", trader, TransactionType.BUY, 110);
 
         ExecutableOrder eb = new ExecutableOrder(rb);

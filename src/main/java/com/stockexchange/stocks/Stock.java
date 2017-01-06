@@ -7,7 +7,6 @@ import java.util.TimerTask;
 
 import com.stockexchange.server.MarketSystem;
 import com.stockexchange.server.StockMarket;
-import com.stockexchange.server.data.TradierAPI;
 import com.stockexchange.server.orders.ExecutableOrder;
 import com.stockexchange.server.orders.comparators.BuyComparator;
 import com.stockexchange.server.orders.comparators.SellComparator;
@@ -211,7 +210,7 @@ public class Stock {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(double volume) {
         this.volume = volume;
     }
 
@@ -250,6 +249,11 @@ public class Stock {
     public String getDescription() {
         return description;
     }
+    
+    public double getMarketCap() {
+        return marketCap;
+    }
+
 
     public void setDescription(String description) {
         this.description = description;
