@@ -48,7 +48,7 @@ public class QuoteView extends View {
     private TextField filter;
     private TableView<QuoteModel> table;
 
-    @SuppressWarnings( "unchecked")
+    @SuppressWarnings("unchecked")
     /**
      * A view containing a searchable, filterable table of stock quotes
      * @param stage The window stage in which to render this view
@@ -63,6 +63,8 @@ public class QuoteView extends View {
 
         // Retrieve quotes from the stock server.
         List<Quote> quotes = StockExchangeAPI.getQuotes(exchange);
+
+        System.out.println(quotes.get(0));
 
         // Create table and formatting containers.
         table = new TableView<QuoteModel>();

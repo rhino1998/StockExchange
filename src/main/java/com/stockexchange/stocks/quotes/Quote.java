@@ -77,7 +77,6 @@ public class Quote implements Serializable {
         this.name = args[1];
         this.ask = Double.parseDouble(args[2]);
         this.bid = Double.parseDouble(args[3]);
-
         this.dailyLow = Double.parseDouble(args[4]);
         this.dailyHigh = Double.parseDouble(args[5]);
         this.volume = Integer.parseInt(args[6]);
@@ -86,7 +85,7 @@ public class Quote implements Serializable {
         this.exchange = args[10];
 
         double mCap = 0;
-        switch (args[9].charAt(args[9].length() - 1)) {
+        switch(args[9].charAt(args[9].length() - 1)) {
         case 'B':
             mCap = Double
                     .parseDouble(args[9].substring(0, args[9].length() - 1));
@@ -151,7 +150,7 @@ public class Quote implements Serializable {
 
     public String toString() {
         return String
-                .format("Symbol: %s, Exchange: %s, Name: %s, Ask: %.2f, Bid %.2f, Daily Low: %.2f, Daily High: %.2f, Open: %.2f, Previous Close: %.2f, Volume: %d, Market Cap: %.2f",
+                .format("Symbol: %s, Exchange: %s, Name: %s, Ask: %.2f, Bid %.2f, Daily Low: %.2f, Daily High: %.2f, Open: %.2f, Previous Close: %.2f, Volume: %.2f, Market Cap: %.2f",
                         this.symbol, this.exchange, this.name, this.ask,
                         this.bid, this.dailyLow, this.dailyHigh, this.open,
                         this.previousClose, this.volume, this.marketCap);

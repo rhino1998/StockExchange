@@ -21,7 +21,7 @@ public class Order {
     protected Order() {
     }
 
-    protected Order(TransactionType tt, OrderType ot, long qty, double lp){
+    protected Order(TransactionType tt, OrderType ot, long qty, double lp) {
         transactionType = tt;
         orderType = ot;
         this.qty = qty;

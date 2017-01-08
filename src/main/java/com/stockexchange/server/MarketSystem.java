@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.stockexchange.server.data.YahooFinanceAPI;
 
-
 import com.stockexchange.stocks.Stock;
 import com.stockexchange.stocks.quotes.Quote;
 
@@ -32,7 +31,7 @@ public class MarketSystem {
         Stock stock = new Stock(YahooFinanceAPI.getQuote(symbol));
         stocks.put(stock.getSymbol(), stock);
         this.symbols.add(symbol);
-        //System.out.println(symbol);
+        // System.out.println(symbol);
     }
 
     public void listStocks(String... symbols) throws IOException {

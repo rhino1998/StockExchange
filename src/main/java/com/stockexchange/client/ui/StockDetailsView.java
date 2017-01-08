@@ -19,6 +19,7 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -123,7 +124,16 @@ public class StockDetailsView extends View {
         tablebox.setPrefSize(290, 260);
         tablebox.setMaxSize(290, 260);
 
-        HBox buttonbox = new HBox();
+        Button orderButton = new Button("ORDER");
+
+        VBox buttonsLeft = new VBox(orderButton);
+        buttonsLeft.setPadding(new Insets(25, 25, 25, 25));
+
+        VBox buttonsRight = new VBox();
+        buttonsRight.setPadding(new Insets(25, 25, 25, 25));
+
+        HBox buttonbox = new HBox(buttonsLeft, buttonsRight);
+        // buttonbox.setPadding(new Insets(25,25,25,25));
         buttonbox.setStyle("-fx-border-color: #EFEFEF;");
         buttonbox.setPrefSize(290, 260);
         buttonbox.setMaxSize(290, 260);

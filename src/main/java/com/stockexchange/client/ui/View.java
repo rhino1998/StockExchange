@@ -24,6 +24,7 @@ public abstract class View {
 
     public Scene getScene() {
         return this.scene;
+
     }
 
     /**

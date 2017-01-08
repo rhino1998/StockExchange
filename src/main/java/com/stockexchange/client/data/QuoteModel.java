@@ -94,6 +94,5 @@ public class QuoteModel {
             quotesList.add(new QuoteModel(quote));
         }
         return quotesList;
-
     }
 }

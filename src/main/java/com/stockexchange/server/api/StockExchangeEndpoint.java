@@ -51,7 +51,7 @@ public class StockExchangeEndpoint {
 
     @GET
     @Path("{symbol}/description")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getQuoteDescription(@PathParam("exchange") String exchange,
             @PathParam("symbol") String symbol) {
         Stock stock = StockMarket.getStockExchange(exchange).getStock(symbol);

@@ -21,7 +21,6 @@ Learn Jackson annotations
 * @JsonCreator -- allows a private constructor to be accessed to dejsonify a json object
 
 ## TODO
-
 - [ ] Client
   - [ ] UI
     - [x] Stock Quotes

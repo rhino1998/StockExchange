@@ -30,8 +30,7 @@ public class Stock {
     private double previousClose;
     private double marketCap;
     private double volume;
-    
-    
+
     private String description;
     private final Timer historian;
     private final History<StockDataPoint> history = new History<StockDataPoint>(
@@ -66,27 +65,27 @@ public class Stock {
 
             @Override
             public void run() {
-            	double volatility = (Math.random()* 5 + 2)/2;
+                double volatility = (Math.random() * 5 + 2) / 2;
 
-            	double rnd = Math.random();
+                double rnd = Math.random();
 
-            	double changePercent = 2 * volatility * rnd;
+                double changePercent = 2 * volatility * rnd;
 
                 if (changePercent > volatility) {
                     changePercent -= (2 * volatility);
                 }
-                double changeAmount = ask * changePercent/100;
+                double changeAmount = ask * changePercent / 100;
                 double newPrice = ask + changeAmount;
 
                 // Add a ceiling and floor.
-                if (newPrice < dailyLow*0.8) {
+                if (newPrice < dailyLow * 0.8) {
                     newPrice += Math.abs(changeAmount) * 2;
-                } else if (newPrice > dailyHigh*1.2) {
+                } else if (newPrice > dailyHigh * 1.2) {
                     newPrice -= Math.abs(changeAmount) * 2;
                 }
-                
+
                 ask = newPrice;
-                bid = ask*(0.99-Math.random()/70);
+                bid = ask * (0.99 - Math.random() / 70);
                 history.add(new StockDataPoint(stock));
             }
 
@@ -249,11 +248,10 @@ public class Stock {
     public String getDescription() {
         return description;
     }
-    
+
     public double getMarketCap() {
         return marketCap;
     }
-
 
     public void setDescription(String description) {
         this.description = description;

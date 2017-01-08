@@ -48,7 +48,8 @@ public class StockExchangeAPI {
             return "Description not available";
         }
 
-        return response.readEntity(String.class);
+        return response.readEntity(new GenericType<String>() {
+        });
     }
 
     public static String getQuoteChartURL(String exchange, String symbol) {

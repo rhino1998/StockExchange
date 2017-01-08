@@ -1,0 +1,13 @@
+GET http://localhost:8080/exchange/NMS/quotes
+
+###
+
+GET http://localhost:8080/exchange/NMS/GOOG
+
+###
+
+GET http://localhost:8080/exchange/NMS/GOOG/description
+
+###
+
+GET http://localhost:8080/exchange/NMS/GOOG/history/0
