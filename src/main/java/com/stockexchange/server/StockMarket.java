@@ -2,6 +2,8 @@ package com.stockexchange.server;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 import java.util.Iterator;
 
 import com.stockexchange.server.brokerages.Brokerage;
@@ -11,8 +13,8 @@ import com.stockexchange.stocks.quotes.Quote;
 
 public class StockMarket {
 
-    private static final HashMap<String, MarketSystem> exchanges = new HashMap<String, MarketSystem>();
-    private static final HashMap<String, Brokerage> brokerages = new HashMap<String, Brokerage>();
+    private static final Map<String, MarketSystem> exchanges = new ConcurrentHashMap<String, MarketSystem>();
+    private static final Map<String, Brokerage> brokerages = new ConcurrentHashMap<String, Brokerage>();
 
     public static void addBrokerage(String name) {
         if (brokerages.containsKey(name)) {

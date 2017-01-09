@@ -8,10 +8,16 @@
        <class name="com.stockexchange.test.api.AuthenticationTest" />
     </classes>
   </test>
-  
+
   <test name="Stock exchange tests">
     <classes>
        <class name="com.stockexchange.test.api.StockExchangeTest" />
     </classes>
   </test>
-</suite>  
+
+   <test name="Trade tests">
+    <classes>
+       <class name="com.stockexchange.test.api.TraderTest" />
+    </classes>
+  </test>
+</suite>

@@ -14,6 +14,7 @@ import com.stockexchange.stocks.quotes.Quote;
 public class StockExchangeAPI {
 
     public static List<Quote> getQuotes(String exchange) {
+
         WebTarget target = Connection.website.path("exchange").path(exchange)
                 .path("quotes");
 
@@ -42,6 +43,7 @@ public class StockExchangeAPI {
     }
 
     public static String getStockDescription(String exchange, String symbol) {
+
         WebTarget target = Connection.website.path("exchange").path(exchange)
                 .path(symbol).path("description");
 
@@ -56,6 +58,7 @@ public class StockExchangeAPI {
     }
 
     public static String getQuoteChartURL(String exchange, String symbol) {
+
         WebTarget target = Connection.website.path("exchange").path(exchange)
                 .path(symbol).path("chart");
 
@@ -66,6 +69,7 @@ public class StockExchangeAPI {
 
     public static List<StockDataPoint> getStockHistory(String exchange,
             String symbol, long offset) {
+
         WebTarget target = Connection.website.path("exchange").path(exchange)
                 .path(symbol).path("history").path(Long.toString(offset));
 

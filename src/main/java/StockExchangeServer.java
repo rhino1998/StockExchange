@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.ConsoleHandler;
 
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -22,7 +23,7 @@ public class StockExchangeServer {
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
-     * 
+     *
      * @return Grizzly HTTP server.
      */
     public static HttpServer startServer() {
@@ -30,6 +31,8 @@ public class StockExchangeServer {
         // in com.underdog.jersey.grizzly package
         final ResourceConfig rc = new ResourceConfig()
                 .packages("com.stockexchange.server.api");
+        rc.registerInstances(new LoggingFilter(Logger
+                .getLogger(StockExchangeServer.class.getName()), true));
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI

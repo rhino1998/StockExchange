@@ -1,6 +1,8 @@
 package com.stockexchange.server.brokerages;
 
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import com.stockexchange.traders.accounts.Account;
@@ -11,8 +13,8 @@ import com.stockexchange.transport.Register;
 public class Brokerage {
 
     private final String name;
-    private final HashMap<UUID, Account> accounts = new HashMap<UUID, Account>();
-    private final HashMap<String, Trader> traders = new HashMap<String, Trader>();
+    private final Map<UUID, Account> accounts = new ConcurrentHashMap<UUID, Account>();
+    private final Map<String, Trader> traders = new ConcurrentHashMap<String, Trader>();
 
     public Brokerage(String name) {
         this.name = name;

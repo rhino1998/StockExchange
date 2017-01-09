@@ -43,7 +43,7 @@ public class Stock {
 
     /**
      * Create a stock from a snapshot of it, typically retrieved elsewhere.
-     * 
+     *
      * @param quote
      *            a quote to initialize stock state
      */
@@ -94,7 +94,7 @@ public class Stock {
 
     /**
      * Update the stock from new data
-     * 
+     *
      * @param quote
      *            A snapshot of a stock's state
      */
@@ -134,8 +134,8 @@ public class Stock {
             buy.getAccount().updatePortfolio(buy.getStock().getSymbol(),
                     buy.getQuantity());
             buy.getAccount().withdraw(ask * buy.getQuantity());
-
             System.out.println(ask * buy.getQuantity());
+            buy.subtractShares(buy.getQuantity());
         }
 
         if (!sellOrders.isEmpty() && sellOrders.peek().isMarket()) {
@@ -143,7 +143,8 @@ public class Stock {
             sell.getAccount().updatePortfolio(sell.getStock().getSymbol(),
                     sell.getQuantity());
             sell.getAccount().deposit(bid * sell.getQuantity());
-            System.out.println(ask * sell.getQuantity());
+            System.out.println(bid * sell.getQuantity());
+            sell.subtractShares(sell.getQuantity());
         }
     }
 
@@ -217,8 +218,11 @@ public class Stock {
             return;
         }
 
-        if (this.getBid() >= this.getAsk() || this.sellOrders.peek().isMarket()
-                || this.buyOrders.peek().isMarket()) {
+        if (this.getBid() >= this.getAsk()
+                || (!this.sellOrders.isEmpty() && this.sellOrders.peek()
+                        .isMarket())
+                || (!this.buyOrders.isEmpty() && this.buyOrders.peek()
+                        .isMarket())) {
             executeLoop();
         }
 

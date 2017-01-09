@@ -69,6 +69,8 @@ public class AuthenticationAPI {
         Response response = target.request(MediaType.APPLICATION_JSON).post(
                 entity);
 
+        // System.out.println(response.readEntity(String.class));
+
         if (response.getStatus() != 200) {
             return null;
         }

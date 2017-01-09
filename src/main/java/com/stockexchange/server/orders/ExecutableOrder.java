@@ -20,7 +20,8 @@ public class ExecutableOrder extends Order {
         this.orderType = order.getOrderType();
 
         this.trader = trader;
-        this.account = trader.getAccount(order.getAccountUUID());
+        this.account = StockMarket.getBrokerage(order.getBrokerageName())
+                .getAccount(order.getAccountUUID());
         this.stock = StockMarket.getStockExchange(order.getExchangeName())
                 .getStock(order.getSymbol());
         this.qty = order.getQuantity();

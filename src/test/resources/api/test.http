@@ -41,24 +41,24 @@ Content-Type: Application/json
 
 POST http://localhost:8080/auth/rhino/refresh
 Content-Type: Application/json
-token: 000069fe-cf89-e42e-0000-69fecf89e42e
+token: 00008012-95a3-8dbc-0000-801295a38f47
 
 ###
 
 POST http://localhost:8080/auth/rhino/logout
 Content-Type: Application/json
-token: 0000679b-7a79-af88-0000-679b7a79b113
+token: 00008179-9f0e-d284-0000-81799f0ed40f
 
 ###
 
 POST http://localhost:8080/trade/order/submit
 Content-Type: Application/json
-token: 000069fe-cf89-e42e-0000-69fecf89e42e
+token: 0829b12c-4400-4ef8-bb73-b1eebfb13c3e
 
 {
     "symbol": "GOOG",
     "traderUsername": "test",
-    "accountUUID": "000069fe-c9dc-70b3-0000-69fec9dc70b3",
+    "accountUUID": "fda92c05-5748-4244-9321-77a887f6df7f",
     "brokerageName": "rhino",
     "exchangeName": "NMS",
     "transactionType": "SELL",

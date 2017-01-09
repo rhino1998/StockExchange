@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 
 import com.stockexchange.server.data.YahooFinanceAPI;
@@ -16,7 +18,7 @@ import javassist.compiler.ast.Symbol;
 public class MarketSystem {
 
     private final String name;
-    private final HashMap<String, Stock> stocks = new HashMap<String, Stock>();
+    private final Map<String, Stock> stocks = new ConcurrentHashMap<String, Stock>();
     private final List<String> symbols = new ArrayList<String>();
 
     public MarketSystem(String name) {

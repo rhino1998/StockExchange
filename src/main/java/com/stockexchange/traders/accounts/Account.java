@@ -1,18 +1,21 @@
 package com.stockexchange.traders.accounts;
 
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.UUID;
+import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import com.stockexchange.traders.Trader;
 import com.stockexchange.util.DefaultHashMap;
+import com.stockexchange.util.DefaultConcurrentHashMap;
 
 public class Account {
 
@@ -20,16 +23,20 @@ public class Account {
     private UUID uuid;
     @JsonProperty
     private String name;
+
     @JsonProperty
     @JsonBackReference
+    private Trader owner;
+
+    @JsonIgnore
     private List<Trader> owners = new ArrayList<Trader>();
     @JsonProperty
     private double balance = 0;
     @JsonProperty
-    private HashMap<String, Long> portfolio = new DefaultHashMap<String, Long>(
+    private Map<String, Long> portfolio = new DefaultConcurrentHashMap<String, Long>(
             0l);
     @JsonProperty
-    private HashMap<String, Long> reservedPortfolio = new DefaultHashMap<String, Long>(
+    private Map<String, Long> reservedPortfolio = new DefaultConcurrentHashMap<String, Long>(
             0l);
 
     @JsonCreator
@@ -37,18 +44,18 @@ public class Account {
     }
 
     public Account(String name) {
-        this.uuid = new UUID(System.nanoTime(), System.nanoTime());
+        this.uuid = UUID.randomUUID();
         this.name = name;
     }
 
     public Account(String name, Trader... owners) {
-        this.uuid = new UUID(System.nanoTime(), System.nanoTime());
+        this.uuid = UUID.randomUUID();
         this.name = name;
         this.owners.addAll(Arrays.asList(owners));
     }
 
     public Account(String name, double money, Trader... owners) {
-        this.uuid = new UUID(System.nanoTime(), System.nanoTime());
+        this.uuid = UUID.randomUUID();
         this.name = name;
         this.owners.addAll(Arrays.asList(owners));
         this.balance = money;
@@ -91,5 +98,9 @@ public class Account {
 
     public String getName() {
         return name;
+    }
+
+    public String toString() {
+        return String.format("%s : %s", uuid, balance);
     }
 }

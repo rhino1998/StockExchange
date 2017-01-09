@@ -1,6 +1,7 @@
 package com.stockexchange.stocks.orders;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.stockexchange.stocks.orders.enums.OrderType;
 import com.stockexchange.stocks.orders.enums.TransactionType;
@@ -8,13 +9,14 @@ import com.stockexchange.stocks.orders.enums.TransactionType;
 public class Order {
     @JsonProperty
     protected TransactionType transactionType;
+
     @JsonProperty
     protected OrderType orderType;
 
     @JsonProperty
     protected long qty;
 
-    @JsonProperty
+    @JsonProperty("limitPrice")
     protected double limitPrice;
 
     @JsonCreator
@@ -29,10 +31,12 @@ public class Order {
 
     }
 
+    @JsonIgnore
     public double getPrice() {
         return limitPrice;
     }
 
+    @JsonIgnore
     public long getQuantity() {
         return qty;
     }
@@ -41,10 +45,12 @@ public class Order {
         return orderType;
     }
 
+    @JsonIgnore
     public boolean isMarket() {
         return this.orderType == OrderType.MARKET;
     }
 
+    @JsonIgnore
     public boolean isLimit() {
         return this.orderType == OrderType.LIMIT;
     }

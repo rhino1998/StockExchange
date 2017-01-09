@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <version>0.0.24--INDEV</version>
+  <version>0.0.28--INDEV</version>
   <name>Analysis of Algorithms Stock Exchange</name>
   <packaging>jar</packaging>
   <properties>
@@ -49,45 +49,45 @@
 		        <phase>package</phase>
 		        <goals>
 		          <goal>shade</goal>
-		        </goals>   
+		        </goals>
 		        <configuration>
 		          <transformers>
-		            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
+		            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 		              <mainClass>StockExchangeClient</mainClass>
 		            </transformer>
 		          </transformers>
 		          <finalName>client--${project.version}</finalName>
-		        </configuration>        
+		        </configuration>
 		      </execution>
 		      <execution>
 		        <id>server</id>
 		        <phase>package</phase>
 		        <goals>
 		          <goal>shade</goal>
-		        </goals>   
+		        </goals>
 		        <configuration>
 		          <transformers>
-		            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
+		            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 		              <mainClass>StockExchangeServer</mainClass>
 		            </transformer>
 		          </transformers>
 		          <finalName>server--${project.version}</finalName>
-		        </configuration>  
+		        </configuration>
 		      </execution>
           <execution>
 		        <id>docs</id>
 		        <phase>package</phase>
 		        <goals>
 		          <goal>shade</goal>
-		        </goals>   
+		        </goals>
 		        <configuration>
 		          <transformers>
-		            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">                        
+		            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 		              <mainClass>StockExchangeDocs</mainClass>
 		            </transformer>
 		          </transformers>
 		          <finalName>docs--${project.version}</finalName>
-		        </configuration>  
+		        </configuration>
 		      </execution>
 		    </executions>
 		  </plugin>

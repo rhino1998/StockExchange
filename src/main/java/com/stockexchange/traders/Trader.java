@@ -2,6 +2,10 @@ package com.stockexchange.traders;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.glassfish.jersey.message.internal.Token;
@@ -9,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.stockexchange.server.brokerages.Brokerage;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -24,22 +29,31 @@ public class Trader implements Comparable<Trader>, Serializable {
 
     @JsonProperty
     private String username;
+
     @JsonProperty
     private String name;
+
     @JsonProperty
     @JsonManagedReference
-    private HashMap<UUID, Account> accounts;
+    private List<Account> accounts;
+
     @JsonProperty
-    private HashMap<UUID, Order> pendingOrders;
+    private Map<UUID, Order> pendingOrders;
+
     @JsonProperty
-    private HashMap<String, Long> portfolio;
+    private Map<String, Long> portfolio;
+
     @JsonProperty
     private UUID token;
+
     @JsonProperty
     private String brokerageName;
 
+    @JsonIgnore
     private transient String pwHash;
+    @JsonIgnore
     private transient Brokerage brokerage;
+    @JsonIgnore
     private transient long tokenTimeout;
 
     // private transient Token token;
@@ -53,7 +67,7 @@ public class Trader implements Comparable<Trader>, Serializable {
 
     /**
      * Create a new trader in a brokerage from a registration token
-     * 
+     *
      * @param brokerage
      *            The name of an existing Brokerage
      * @param reg
@@ -64,13 +78,15 @@ public class Trader implements Comparable<Trader>, Serializable {
         this.brokerage = StockMarket.getBrokerage(brokerage);
         this.username = reg.getUsername();
         this.name = reg.getName();
-        Account acct = new Account("Personal");
-        this.brokerage.addAccount(acct);
-        this.accounts = new HashMap<UUID, Account>();
-        this.addAccount(acct);
-        this.pendingOrders = new HashMap<UUID, Order>();
-
+        this.accounts = new ArrayList<Account>();
+        this.pendingOrders = new ConcurrentHashMap<UUID, Order>();
+        this.portfolio = new ConcurrentHashMap<String, Long>();
         this.pwHash = BCrypt.hashpw(reg.getPassword(), BCrypt.gensalt());
+
+        Account acct = new Account("Personal");
+        acct.deposit(10000);
+        this.brokerage.addAccount(acct);
+        this.addAccount(acct);
     }
 
     /**
@@ -80,13 +96,13 @@ public class Trader implements Comparable<Trader>, Serializable {
         if (token != null && ServerState.getTraderByToken(token) != null) {
             return;
         }
-        token = new UUID(System.nanoTime(), System.nanoTime());
+        token = UUID.randomUUID();
         ServerState.setTraderToken(this);
     }
 
     /**
      * Checks that a session is not invalid
-     * 
+     *
      */
     public boolean verifyToken(UUID token) {// Verify within 5 minutes
         return username.equals(ServerState.getTraderByToken(token).username);
@@ -102,7 +118,7 @@ public class Trader implements Comparable<Trader>, Serializable {
 
     /**
      * Get a session token (preexisting)
-     * 
+     *
      */
     public UUID getToken() {
         return token;
@@ -155,10 +171,11 @@ public class Trader implements Comparable<Trader>, Serializable {
 
     public void addAccount(Account acct) {
         acct.addOwner(this);
-        this.accounts.put(acct.getUUID(), acct);
+        this.accounts.add(acct);
     }
 
-    public Account getAccount(UUID uuid) {
-        return accounts.get(uuid);
+    public List<Account> getAccounts() {
+        return accounts;
     }
+
 }

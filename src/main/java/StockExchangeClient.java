@@ -1,10 +1,13 @@
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.glassfish.jersey.client.ClientConfig;
 
+import com.stockexchange.server.StockMarket;
 import com.stockexchange.client.connection.Connection;
 import com.stockexchange.client.ui.LoginView;
 import com.stockexchange.client.ui.RegisterView;
@@ -13,8 +16,14 @@ import com.stockexchange.client.ui.ViewStage;
 import com.stockexchange.client.ui.WelcomeView;
 import com.stockexchange.client.ui.components.BaseBorder;
 import com.stockexchange.stocks.quotes.Quote;
+import com.stockexchange.stocks.orders.enums.TransactionType;
+
 import com.stockexchange.traders.Trader;
 import com.stockexchange.transport.Register;
+import com.stockexchange.client.orders.RemoteOrder;
+import com.stockexchange.client.api.TraderAPI;
+import com.stockexchange.client.api.AuthenticationAPI;
+import com.stockexchange.client.api.StockExchangeAPI;
 
 import javafx.application.Application;
 import javafx.application.Platform;
