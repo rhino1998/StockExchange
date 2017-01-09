@@ -7,40 +7,36 @@ splines=true;
 pack=true;
 
 node[shape=box,style=filled,fillcolor="#fff2b6"];
-  "com.stockexchange.stocks.\nStockDataPoint"
-  "com.stockexchange.server.orders.comparators.\nSellComparator"
+  "com.stockexchange.server.\nServerState"
   "com.stockexchange.server.brokerages.\nBrokerage"
   "com.stockexchange.server.\nMarketSystem"
+  "com.stockexchange.stocks.\nStock"
+  "com.stockexchange.server.orders.comparators.\nBuyComparator"
+  "com.stockexchange.traders.\nTrader"
+  "com.stockexchange.server.orders.\nExecutableOrder"
+  "com.stockexchange.transport.\nRegister"
+  "com.stockexchange.stocks.\nStockDataPoint"
+  "com.stockexchange.server.orders.comparators.\nSellComparator"
   "com.stockexchange.client.orders.\nRemoteOrder"
   "com.stockexchange.stocks.orders.\nOrder"
   "com.stockexchange.stocks.orders.enums.\nTransactionType"
-  "com.stockexchange.stocks.\nStock"
   "com.stockexchange.stocks.orders.enums.\nOrderType"
   "com.stockexchange.traders.accounts.\nAccount"
-  "com.stockexchange.server.orders.comparators.\nBuyComparator"
   "com.stockexchange.stocks.quotes.\nQuote"
   "com.stockexchange.transport.\nCredentials"
-  "com.stockexchange.traders.\nTrader"
-  "com.stockexchange.server.orders.\nExecutableOrder"
   "com.stockexchange.server.\nStockMarket"
-  "com.stockexchange.transport.\nRegister"
 
 node[shape=diamond,style=filled,fillcolor="#b6e7ff"];
 
 node[shape=oval,style=filled,fillcolor="#f3c9ff"];
 
+  "com.stockexchange.traders.\nTrader" -> "com.stockexchange.server.\nServerState" [arrowtail=obox, dir=back]
   "com.stockexchange.traders.\nTrader" -> "com.stockexchange.server.brokerages.\nBrokerage" [arrowtail=obox, dir=back]
   "com.stockexchange.traders.accounts.\nAccount" -> "com.stockexchange.server.brokerages.\nBrokerage" [arrowtail=obox, dir=back]
   "com.stockexchange.stocks.\nStock" -> "com.stockexchange.server.\nMarketSystem" [arrowtail=obox, dir=back]
-  "com.stockexchange.client.orders.\nRemoteOrder" -> "com.stockexchange.stocks.orders.\nOrder"
-  "com.stockexchange.stocks.orders.enums.\nOrderType" -> "com.stockexchange.stocks.orders.\nOrder" [arrowtail=obox, dir=back]
-  "com.stockexchange.stocks.orders.enums.\nTransactionType" -> "com.stockexchange.stocks.orders.\nOrder" [arrowtail=obox, dir=back]
-  "com.stockexchange.stocks.orders.enums.\nTransactionType" -> "com.stockexchange.stocks.orders.enums.\nTransactionType" [arrowtail=obox, dir=back]
   "com.stockexchange.server.orders.\nExecutableOrder" -> "com.stockexchange.stocks.\nStock" [arrowtail=obox, dir=back]
   "com.stockexchange.stocks.\nStockDataPoint" -> "com.stockexchange.stocks.\nStock" [arrowtail=obox, dir=back]
   "com.stockexchange.server.\nMarketSystem" -> "com.stockexchange.stocks.\nStock" [arrowtail=obox, dir=back]
-  "com.stockexchange.stocks.orders.enums.\nOrderType" -> "com.stockexchange.stocks.orders.enums.\nOrderType" [arrowtail=obox, dir=back]
-  "com.stockexchange.traders.\nTrader" -> "com.stockexchange.traders.accounts.\nAccount" [arrowtail=obox, dir=back]
   "com.stockexchange.server.brokerages.\nBrokerage" -> "com.stockexchange.traders.\nTrader" [arrowtail=obox, dir=back]
   "com.stockexchange.traders.accounts.\nAccount" -> "com.stockexchange.traders.\nTrader" [arrowtail=obox, dir=back]
   "com.stockexchange.stocks.orders.\nOrder" -> "com.stockexchange.traders.\nTrader" [arrowtail=obox, dir=back]
@@ -48,7 +44,13 @@ node[shape=oval,style=filled,fillcolor="#f3c9ff"];
   "com.stockexchange.traders.\nTrader" -> "com.stockexchange.server.orders.\nExecutableOrder" [arrowtail=obox, dir=back]
   "com.stockexchange.traders.accounts.\nAccount" -> "com.stockexchange.server.orders.\nExecutableOrder" [arrowtail=obox, dir=back]
   "com.stockexchange.stocks.\nStock" -> "com.stockexchange.server.orders.\nExecutableOrder" [arrowtail=obox, dir=back]
+  "com.stockexchange.transport.\nRegister" -> "com.stockexchange.transport.\nCredentials"
+  "com.stockexchange.client.orders.\nRemoteOrder" -> "com.stockexchange.stocks.orders.\nOrder"
+  "com.stockexchange.stocks.orders.enums.\nOrderType" -> "com.stockexchange.stocks.orders.\nOrder" [arrowtail=obox, dir=back]
+  "com.stockexchange.stocks.orders.enums.\nTransactionType" -> "com.stockexchange.stocks.orders.\nOrder" [arrowtail=obox, dir=back]
+  "com.stockexchange.stocks.orders.enums.\nTransactionType" -> "com.stockexchange.stocks.orders.enums.\nTransactionType" [arrowtail=obox, dir=back]
+  "com.stockexchange.stocks.orders.enums.\nOrderType" -> "com.stockexchange.stocks.orders.enums.\nOrderType" [arrowtail=obox, dir=back]
+  "com.stockexchange.traders.\nTrader" -> "com.stockexchange.traders.accounts.\nAccount" [arrowtail=obox, dir=back]
   "com.stockexchange.server.\nMarketSystem" -> "com.stockexchange.server.\nStockMarket" [arrowtail=obox, dir=back]
   "com.stockexchange.server.brokerages.\nBrokerage" -> "com.stockexchange.server.\nStockMarket" [arrowtail=obox, dir=back]
-  "com.stockexchange.transport.\nRegister" -> "com.stockexchange.transport.\nCredentials"
 }

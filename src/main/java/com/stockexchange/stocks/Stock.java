@@ -128,6 +128,23 @@ public class Stock {
             }
             executeTrade();
         }
+
+        if (!buyOrders.isEmpty() && buyOrders.peek().isMarket()) {
+            ExecutableOrder buy = buyOrders.remove();
+            buy.getAccount().updatePortfolio(buy.getStock().getSymbol(),
+                    buy.getQuantity());
+            buy.getAccount().withdraw(ask * buy.getQuantity());
+
+            System.out.println(ask * buy.getQuantity());
+        }
+
+        if (!sellOrders.isEmpty() && sellOrders.peek().isMarket()) {
+            ExecutableOrder sell = sellOrders.remove();
+            sell.getAccount().updatePortfolio(sell.getStock().getSymbol(),
+                    sell.getQuantity());
+            sell.getAccount().deposit(bid * sell.getQuantity());
+            System.out.println(ask * sell.getQuantity());
+        }
     }
 
     private void executeTrade() {
@@ -149,6 +166,7 @@ public class Stock {
         } else if (sell.isMarket()) {
             price = bid;
         }
+        System.out.println(price);
 
         long qty = Math.min(sell.getQuantity(), buy.getQuantity());
         sell.subtractShares(qty);
@@ -185,6 +203,7 @@ public class Stock {
             if (order.isLimit() && this.bid < order.getPrice()) {
                 this.bid = Math.min(order.getPrice(), ask);
             }
+
             break;
         case SELL:
             sellOrders.add(order);
@@ -194,7 +213,7 @@ public class Stock {
             break;
         }
 
-        if (this.buyOrders.isEmpty() || this.sellOrders.isEmpty()) {
+        if (this.buyOrders.isEmpty() && this.sellOrders.isEmpty()) {
             return;
         }
 

@@ -34,14 +34,6 @@ public class Brokerage {
         return null;
     }
 
-    public Trader refresh(String username) {
-        Trader trader = traders.get(username);
-        if (trader.renewToken()) {
-            return trader;
-        }
-        return null;
-    }
-
     public Trader registerTrader(Register reg) {
         if (traders.containsKey(reg.getUsername())) {
             return traders.get(reg.getUsername());

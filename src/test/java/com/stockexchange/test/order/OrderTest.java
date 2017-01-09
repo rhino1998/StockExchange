@@ -39,7 +39,7 @@ public class OrderTest {
         RemoteOrder r = new RemoteOrder(StockMarket.getStockExchange("NMS")
                 .getQuote("GOOG"), "BASE", trader, TransactionType.BUY, 100);
 
-        ExecutableOrder e = new ExecutableOrder(r);
+        ExecutableOrder e = new ExecutableOrder(r, trader);
 
         assertEquals(r.getSymbol(), e.getStock().getSymbol());
         assertEquals(r.getQuantity(), e.getQuantity());
@@ -60,13 +60,13 @@ public class OrderTest {
         RemoteOrder rs = new RemoteOrder(StockMarket.getStockExchange("NMS")
                 .getQuote("GOOG"), "BASE", trader, TransactionType.SELL, 200);
 
-        ExecutableOrder es = new ExecutableOrder(rs);
+        ExecutableOrder es = new ExecutableOrder(rs, trader);
 
         RemoteOrder rb = new RemoteOrder(StockMarket.getStockExchange("NMS")
                 .getQuote("GOOG"), "BASE", trader, TransactionType.BUY, 110);
 
-        ExecutableOrder eb = new ExecutableOrder(rb);
-        ExecutableOrder eb1 = new ExecutableOrder(rb);
+        ExecutableOrder eb = new ExecutableOrder(rb, trader);
+        ExecutableOrder eb1 = new ExecutableOrder(rb, trader);
 
         eb.submit();
         eb1.submit();

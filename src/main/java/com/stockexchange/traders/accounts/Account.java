@@ -9,6 +9,8 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.stockexchange.traders.Trader;
 import com.stockexchange.util.DefaultHashMap;
 
@@ -19,6 +21,7 @@ public class Account {
     @JsonProperty
     private String name;
     @JsonProperty
+    @JsonBackReference
     private List<Trader> owners = new ArrayList<Trader>();
     @JsonProperty
     private double balance = 0;
@@ -34,15 +37,18 @@ public class Account {
     }
 
     public Account(String name) {
+        this.uuid = new UUID(System.nanoTime(), System.nanoTime());
         this.name = name;
     }
 
     public Account(String name, Trader... owners) {
+        this.uuid = new UUID(System.nanoTime(), System.nanoTime());
         this.name = name;
         this.owners.addAll(Arrays.asList(owners));
     }
 
     public Account(String name, double money, Trader... owners) {
+        this.uuid = new UUID(System.nanoTime(), System.nanoTime());
         this.name = name;
         this.owners.addAll(Arrays.asList(owners));
         this.balance = money;

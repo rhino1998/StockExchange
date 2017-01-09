@@ -32,6 +32,7 @@ public class StockExchangeEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getQuote(@PathParam("exchange") String exchange,
             @PathParam("symbol") String symbol) {
+
         Quote quote = StockMarket.getStockExchange(exchange).getQuote(symbol);
         GenericEntity<Quote> entity = new GenericEntity<Quote>(quote,
                 Quote.class);
@@ -42,6 +43,7 @@ public class StockExchangeEndpoint {
     @Path("quotes")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getQuotes(@PathParam("exchange") String exchange) {
+
         List<Quote> quotes = StockMarket.getStockExchange(exchange).getQuotes();
         GenericEntity<List<Quote>> entity = new GenericEntity<List<Quote>>(
                 quotes) {
@@ -54,6 +56,7 @@ public class StockExchangeEndpoint {
     @Produces(MediaType.TEXT_PLAIN)
     public Response getQuoteDescription(@PathParam("exchange") String exchange,
             @PathParam("symbol") String symbol) {
+
         Stock stock = StockMarket.getStockExchange(exchange).getStock(symbol);
         if (!stock.hasDescription()) {
             String desc = ReutersAPI.getDescription(symbol);
@@ -70,6 +73,7 @@ public class StockExchangeEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getQuoteChart(@PathParam("exchange") String exchange,
             @PathParam("symbol") String symbol) {
+
         GenericEntity<String> entity = new GenericEntity<String>(
                 GoogleFinanceAPI.getChartURL(symbol), String.class);
         return Response.ok().entity(entity).build(); // MAYBE ADD CACHING

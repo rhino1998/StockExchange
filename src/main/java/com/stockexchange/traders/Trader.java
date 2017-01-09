@@ -10,8 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import com.stockexchange.server.brokerages.Brokerage;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import com.stockexchange.server.StockMarket;
+import com.stockexchange.server.ServerState;
 import com.stockexchange.stocks.orders.Order;
 import com.stockexchange.traders.accounts.Account;
 import com.stockexchange.transport.Register;
@@ -25,7 +27,8 @@ public class Trader implements Comparable<Trader>, Serializable {
     @JsonProperty
     private String name;
     @JsonProperty
-    private HashMap<String, Account> accounts;
+    @JsonManagedReference
+    private HashMap<UUID, Account> accounts;
     @JsonProperty
     private HashMap<UUID, Order> pendingOrders;
     @JsonProperty
@@ -61,7 +64,10 @@ public class Trader implements Comparable<Trader>, Serializable {
         this.brokerage = StockMarket.getBrokerage(brokerage);
         this.username = reg.getUsername();
         this.name = reg.getName();
-        this.accounts = new HashMap<String, Account>();
+        Account acct = new Account("Personal");
+        this.brokerage.addAccount(acct);
+        this.accounts = new HashMap<UUID, Account>();
+        this.addAccount(acct);
         this.pendingOrders = new HashMap<UUID, Order>();
 
         this.pwHash = BCrypt.hashpw(reg.getPassword(), BCrypt.gensalt());
@@ -71,10 +77,11 @@ public class Trader implements Comparable<Trader>, Serializable {
      * Create a new session token for a trader Returns an existing one if the session is not invalid yet
      */
     public void genToken() {
-        if (this.token == null || System.nanoTime() > this.tokenTimeout + 3e11) {
-            this.token = new UUID(System.nanoTime(), System.nanoTime());
+        if (token != null && ServerState.getTraderByToken(token) != null) {
+            return;
         }
-        this.tokenTimeout = System.nanoTime();
+        token = new UUID(System.nanoTime(), System.nanoTime());
+        ServerState.setTraderToken(this);
     }
 
     /**
@@ -82,21 +89,15 @@ public class Trader implements Comparable<Trader>, Serializable {
      * 
      */
     public boolean verifyToken(UUID token) {// Verify within 5 minutes
-        if (System.nanoTime() < this.tokenTimeout + timeout
-                && this.token.compareTo(token) == 0) {
-            this.tokenTimeout = System.nanoTime();
-            return true;
-        }
-        this.token = null;
-        return false;
+        return username.equals(ServerState.getTraderByToken(token).username);
     }
 
     /**
      * Invalidates a session
      */
     public void logout() {
-        this.token = null;
-        this.tokenTimeout = 0;
+        ServerState.invalidateTraderToken(token);
+        token = null;
     }
 
     /**
@@ -104,7 +105,7 @@ public class Trader implements Comparable<Trader>, Serializable {
      * 
      */
     public UUID getToken() {
-        return this.token;
+        return token;
     }
 
     /**
@@ -154,10 +155,10 @@ public class Trader implements Comparable<Trader>, Serializable {
 
     public void addAccount(Account acct) {
         acct.addOwner(this);
-        this.accounts.put(acct.getName(), acct);
+        this.accounts.put(acct.getUUID(), acct);
     }
 
-    public Account getAccount(String name) {
-        return accounts.get(name);
+    public Account getAccount(UUID uuid) {
+        return accounts.get(uuid);
     }
 }

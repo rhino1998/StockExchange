@@ -1,13 +1,68 @@
 GET http://localhost:8080/exchange/NMS/quotes
+Accept: application/json
 
 ###
 
 GET http://localhost:8080/exchange/NMS/GOOG
+Accept: application/json
 
 ###
 
 GET http://localhost:8080/exchange/NMS/GOOG/description
+Accept: text/plain
 
 ###
 
 GET http://localhost:8080/exchange/NMS/GOOG/history/0
+Accept: application/json
+
+###
+
+POST http://localhost:8080/auth/rhino/register
+Content-Type: Application/json
+
+{
+    "name": "test",
+    "username": "test",
+    "password": "test"
+}
+
+###
+
+POST http://localhost:8080/auth/rhino
+Content-Type: Application/json
+
+{
+    "username": "test",
+    "password": "test"
+}
+
+###
+
+POST http://localhost:8080/auth/rhino/refresh
+Content-Type: Application/json
+token: 000069fe-cf89-e42e-0000-69fecf89e42e
+
+###
+
+POST http://localhost:8080/auth/rhino/logout
+Content-Type: Application/json
+token: 0000679b-7a79-af88-0000-679b7a79b113
+
+###
+
+POST http://localhost:8080/trade/order/submit
+Content-Type: Application/json
+token: 000069fe-cf89-e42e-0000-69fecf89e42e
+
+{
+    "symbol": "GOOG",
+    "traderUsername": "test",
+    "accountUUID": "000069fe-c9dc-70b3-0000-69fec9dc70b3",
+    "brokerageName": "rhino",
+    "exchangeName": "NMS",
+    "transactionType": "SELL",
+    "orderType": "MARKET",
+    "qty": 500,
+    "limitPrice": 0.0
+}

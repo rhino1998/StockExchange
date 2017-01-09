@@ -13,8 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.beans.Observable;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 
-;
-
 public class QuoteModel {
 
     private final Quote quote;

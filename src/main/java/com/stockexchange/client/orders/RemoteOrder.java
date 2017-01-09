@@ -1,5 +1,7 @@
 package com.stockexchange.client.orders;
 
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.stockexchange.server.orders.ExecutableOrder;
@@ -8,6 +10,7 @@ import com.stockexchange.stocks.orders.enums.OrderType;
 import com.stockexchange.stocks.orders.enums.TransactionType;
 import com.stockexchange.stocks.quotes.Quote;
 import com.stockexchange.traders.Trader;
+import com.stockexchange.traders.accounts.Account;
 
 public class RemoteOrder extends Order {
 
@@ -16,7 +19,7 @@ public class RemoteOrder extends Order {
     @JsonProperty
     private String traderUsername;
     @JsonProperty
-    private String accountName;
+    private UUID accountUUID;
     @JsonProperty
     private String brokerageName;
     @JsonProperty
@@ -27,27 +30,27 @@ public class RemoteOrder extends Order {
     }
 
     public RemoteOrder(ExecutableOrder order) {
-        this.accountName = order.getAccount().getName();
+        this.accountUUID = order.getAccount().getUUID();
     }
 
-    public RemoteOrder(Quote quote, String accountName, Trader trader,
+    public RemoteOrder(Quote quote, Account acct, Trader trader,
             TransactionType transType, long qty) {
         super(transType, OrderType.MARKET, qty, 0);
         this.exchangeName = quote.getExchange();
         this.symbol = quote.getSymbol();
         this.traderUsername = trader.getUsername();
         this.brokerageName = trader.getBrokerageName();
-        this.accountName = accountName;
+        this.accountUUID = acct.getUUID();
     }
 
-    public RemoteOrder(Quote quote, String accountName, Trader trader,
-            long qty, TransactionType transType, double price) {
+    public RemoteOrder(Quote quote, Account acct, Trader trader, long qty,
+            TransactionType transType, double price) {
         super(transType, OrderType.MARKET, qty, price);
         this.exchangeName = quote.getExchange();
         this.symbol = quote.getSymbol();
         this.traderUsername = trader.getUsername();
         this.brokerageName = trader.getBrokerageName();
-        this.accountName = accountName;
+        this.accountUUID = acct.getUUID();
         this.transactionType = transType;
         this.orderType = OrderType.LIMIT;
         this.limitPrice = price;
@@ -70,7 +73,7 @@ public class RemoteOrder extends Order {
         return traderUsername;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public UUID getAccountUUID() {
+        return accountUUID;
     }
 }

@@ -15,13 +15,12 @@ public class ExecutableOrder extends Order {
     private final Account account;
     private final Stock stock;
 
-    public ExecutableOrder(RemoteOrder order) {
+    public ExecutableOrder(RemoteOrder order, Trader trader) {
         this.transactionType = order.getTransactionType();
         this.orderType = order.getOrderType();
 
-        this.trader = StockMarket.getBrokerage(order.getBrokerageName())
-                .getTrader(order.getTraderUsername());
-        this.account = trader.getAccount(order.getAccountName());
+        this.trader = trader;
+        this.account = trader.getAccount(order.getAccountUUID());
         this.stock = StockMarket.getStockExchange(order.getExchangeName())
                 .getStock(order.getSymbol());
         this.qty = order.getQuantity();

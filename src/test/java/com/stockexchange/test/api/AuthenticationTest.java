@@ -32,7 +32,7 @@ public class AuthenticationTest extends JerseyTestNg.ContainerPerClassTest {
         assertEquals(reg.getUsername(), trader.getUsername());
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void testAuthenticate() {
         Connection.website = target("/");
         StockMarket.addBrokerage("rhino");
@@ -91,7 +91,7 @@ public class AuthenticationTest extends JerseyTestNg.ContainerPerClassTest {
         assertEquals(null, d);
 
         Trader e = AuthenticationAPI.authenticateTrader("rhino", cred);
-        Trader f = AuthenticationAPI.refresh(b);
+        Trader f = AuthenticationAPI.refresh(e);
         assertEquals(e.getToken(), f.getToken());
 
         AuthenticationAPI.logoutTrader(f);

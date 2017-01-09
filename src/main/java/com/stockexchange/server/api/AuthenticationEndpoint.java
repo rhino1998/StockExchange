@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericEntity;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.stockexchange.server.MarketSystem;
+import com.stockexchange.server.ServerState;
 import com.stockexchange.server.StockMarket;
 import com.stockexchange.server.brokerages.Brokerage;
 import com.stockexchange.stocks.quotes.Quote;
@@ -53,8 +55,9 @@ public class AuthenticationEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response refreshTrader(@PathParam("brokerage") String brokerage,
-            String username) {
-        Trader trader = StockMarket.getBrokerage(brokerage).refresh(username);
+            @HeaderParam("token") UUID token) {
+
+        Trader trader = ServerState.getTraderByToken(token);
         if (trader == null) {
             return Response.status(Status.FORBIDDEN).build();
         }
@@ -67,8 +70,8 @@ public class AuthenticationEndpoint {
     @Path("/{brokerage}/logout")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response logoutTrader(@PathParam("brokerage") String brokerage,
-            String username) {
-        Trader trader = StockMarket.getBrokerage(brokerage).refresh(username);
+            @HeaderParam("token") UUID token) {
+        Trader trader = ServerState.getTraderByToken(token);
         if (trader == null) {
             return Response.status(Status.FORBIDDEN).build();
         }
@@ -77,7 +80,7 @@ public class AuthenticationEndpoint {
     }
 
     @POST
-    @Path("/register/{brokerage}")
+    @Path("/{brokerage}/register")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerTrader(
@@ -93,6 +96,7 @@ public class AuthenticationEndpoint {
         }
 
         trader.genToken();
+
         GenericEntity<Trader> entity = new GenericEntity<Trader>(trader,
                 Trader.class);
         return Response.ok().entity(entity).build();
