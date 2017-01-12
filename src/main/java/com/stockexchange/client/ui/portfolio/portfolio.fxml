@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane 
+	fx:id="window"
+	fx:controller="com.stockexchange.client.ui.portfolio.PortfolioPresenter" 
+	xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <fx:include 
+        	fx:id="toolbar"
+        	source="/com/stockexchange/client/ui/components/toolbars/management.fxml" />
+    </top>
+    <center>
+    	<VBox>
+    		<padding><Insets top="10" right="25" bottom="25" left="25"/></padding>
+    		<HBox
+    			spacing="25">
+    			<VBox
+    				prefWidth="175"
+    				minWidth="175"
+    				spacing="10"
+    				>
+    				<VBox
+    				spacing="10">
+	    				<ChoiceBox 
+	    				prefWidth="175"
+	    				minWidth="175"
+		        		fx:id="accountsChoice"
+		        		/>
+		        		<VBox style="-fx-border-color: #EFEFEF;">
+		    				<padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+		    				<HBox>
+				        		<Label text="Name: " minWidth="50"/>
+			        			<Label text="N/A" fx:id="nameLabel"/>
+				        	</HBox>
+				        	<HBox>
+				        		<Label text="Balance: " minWidth="50"/>
+			        			<Label text="N/A" fx:id="balanceLabel"/>
+				        	</HBox>
+				        </VBox>
+				        <ListView fx:id="messages" style="-fx-border-color: #EFEFEF;"/>
+	    			</VBox>
+	    		</VBox>
+    			<fx:include 
+		        	fx:id="portfolioTable"
+		        	source="/com/stockexchange/client/ui/components/tables/portfolio.fxml"/>
+    		</HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -1,7 +1,22 @@
 package com.stockexchange.util;
 
-public class MoneyFormat {
 
+
+
+/**
+ * DOCUMENT ME!
+ *
+ * @author $author$
+ * @version $Revision$
+  */
+public class MoneyFormat {
+    /**
+     * DOCUMENT ME!
+     *
+     * @param money DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
     public static String shortened(double money) {
         if (money > 1e9) {
             return (String.format("$%.2fB", money / 1e9));

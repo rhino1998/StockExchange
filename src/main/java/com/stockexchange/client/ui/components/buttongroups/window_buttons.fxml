@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox id="toolbar-right"
+	xmlns:fx="http://javafx.com/fxml"
+	styleClass="toolbar-right"
+	alignment="center_right"
+	HBox.hgrow="ALWAYS" maxWidth="Infinity"
+	fx:controller="com.stockexchange.client.ui.components.buttongroups.WindowButtonsController">
+	<children>
+		<Button text="_" onAction="#onMinimizeButtonPress" />
+		<Button text="X" onAction="#onCloseButtonPress"/>
+	</children>
+</HBox>

@@ -1,8 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <version>0.0.28--INDEV</version>
+  <version>0.0.40--INDEV</version>
   <name>Analysis of Algorithms Stock Exchange</name>
   <packaging>jar</packaging>
+  <repositories>
+    <repository>
+      <id>sonatype-nexus</id>
+      <url>https://oss.sonatype.org/content/groups/public</url>
+    </repository>
+  </repositories>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -10,35 +16,6 @@
     <sourceDirectory>src/main/java</sourceDirectory>
     <testSourceDirectory>src/test/java</testSourceDirectory>
     <plugins>
-      <plugin>
-        <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
-        <artifactId>maven-java-formatter-plugin</artifactId>
-        <version>0.4</version>
-        <configuration>
-          <configFile>${project.basedir}/build/java.xml</configFile>
-          <overrideConfigCompilerVersion>true</overrideConfigCompilerVersion>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.eclipse.text</groupId>
-            <artifactId>org.eclipse.text</artifactId>
-            <version>3.5.101</version>
-          </dependency>
-          <dependency>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>org.eclipse.jdt.core</artifactId>
-            <version>3.10.0.v20140604-1726</version>
-          </dependency>
-        </dependencies>
-        <executions>
-          <execution>
-            <phase>format</phase>
-            <goals>
-              <goal>format</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
 		  <plugin>
 		    <groupId>org.apache.maven.plugins</groupId>
 		    <artifactId>maven-shade-plugin</artifactId>
@@ -53,7 +30,7 @@
 		        <configuration>
 		          <transformers>
 		            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-		              <mainClass>StockExchangeClient</mainClass>
+		              <mainClass>com.stockexchange.client.ClientApp</mainClass>
 		            </transformer>
 		          </transformers>
 		          <finalName>client--${project.version}</finalName>
@@ -108,7 +85,7 @@
                 <outfile>target/client--${project.version}.exe</outfile>
                 <downloadUrl>http://java.com/download</downloadUrl>
                 <classPath>
-                  <mainClass>StockExchangeClient</mainClass>
+                  <mainClass>com.stockexchange.client.ClientApp</mainClass>
                   <preCp>anything</preCp>
                 </classPath>
                 <icon>src/main/resources/icon/app.ico</icon>
@@ -174,6 +151,18 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.5.0</version>
         <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+                <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>${project.basedir}/build/fmt.bat</executable>
+              <arguments>
+                <argument>${project.basedir}</argument>
+              </arguments>
+            </configuration>
+          </execution>
           <execution>
             <id>docs</id>
             <phase>package</phase>
@@ -293,6 +282,11 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>20.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.airhacks</groupId>
+      <artifactId>afterburner.fx</artifactId>
+      <version>1.7.0</version>
     </dependency>
   </dependencies>
 </project>

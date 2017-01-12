@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane 
+	fx:id="window"
+	fx:controller="com.stockexchange.client.ui.quotes.QuotesPresenter" 
+	xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <fx:include 
+        	fx:id="toolbar"
+        	source="/com/stockexchange/client/ui/components/toolbars/management.fxml" />
+    </top>
+    <center>
+    	
+        <fx:include 
+        	fx:id="quoteTable"
+        	source="/com/stockexchange/client/ui/components/tables/stock_quotes.fxml"/>
+    </center>
+
+</BorderPane>

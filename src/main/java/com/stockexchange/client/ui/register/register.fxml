@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane 
+	fx:id="window"
+	fx:controller="com.stockexchange.client.ui.register.RegisterPresenter" 
+	xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <fx:include 
+        	source="/com/stockexchange/client/ui/components/toolbars/basic.fxml" />
+    </top>
+    <center>
+        <GridPane
+    		xmlns:fx="http://javafx.com/fxml"
+    		alignment="center"
+    		hgap="10"
+    		vgap="10">
+			<padding><Insets top="10" right="25" bottom="25" left="25"/></padding>
+			    <Label text="Register" 
+			    	styleClass="header-label" 
+			        GridPane.columnIndex="0" GridPane.rowIndex="0"
+			        GridPane.columnSpan="2"  GridPane.rowSpan="1"/>
+			    <Label text="Brokerage:"
+			    	GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+			   	<TextField
+			   		fx:id="brokerageField"
+			   		GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+			   	
+			   	<Label text="Name:"
+			    	GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+			   	<TextField
+			   		fx:id="nameField"
+			   		GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+			   	
+			   	<Label text="Username:"
+			    	GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+			   	<TextField
+			   		fx:id="usernameField"
+			   		GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+			   		
+			   	<Label text="Password:"
+			    	GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+			   	<PasswordField
+			   		fx:id="passwordField"
+			   		GridPane.columnIndex="1" GridPane.rowIndex="5"/>	
+			   	
+			   	<Label text="Password Confirmation:"
+			    	GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+			   	<PasswordField
+			   		fx:id="passwordConfirmationField"
+			   		GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+			   	
+			    <Button text="Register"
+			    	onAction="#onRegisterRegisterButtonPress"
+			    	GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+			   	<Button text="Cancel"
+			   		onAction="#onRegisterCancelButtonPress"
+			    	GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+		</GridPane>
+    </center>
+
+</BorderPane>

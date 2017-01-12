@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.stockexchange.client.ui.components.graphs.PriceLineChart?>
+
+<?import com.stockexchange.client.ui.components.table.*?>
+
+
+<HBox
+	xmlns:fx="http://javafx.com/fxml"
+	fx:controller="com.stockexchange.client.ui.components.graphs.StockPriceGraphController">
+	<padding><Insets top="15" right="15" bottom="0" left="0"/></padding>
+	<PriceLineChart
+		prefWidth="300"
+		prefHeight="260"
+		maxWidth="300"
+		maxHeight="260"
+		fx:id="chart">
+	</PriceLineChart>
+</HBox>

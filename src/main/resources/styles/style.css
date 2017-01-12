@@ -9,10 +9,96 @@
     -fx-color: #EFEFEF;
 }
 
+ .dialog-pane{
+  -fx-border-color: #343434;
+  -fx-border-width:2.0px;
+ }
+
+/**Costumization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+  -fx-background-color:#343434;
+}
+
+.dialog-pane > .content.label {
+   -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+   -fx-background-color: #343434;
+   -fx-text-fill:#EFEFEF;
+   -fx-font-size:15.0px;
+}
+
+/**Costumization of DialogPane Header**/
+.dialog-pane:header .header-panel {
+  -fx-background-color: #343434;
+}
+
+.dialog-pane:header .header-panel .label{
+  -fx-background-color: #343434;
+  -fx-background-radius:10px;
+  -fx-text-fill:#EFEFEF;
+  -fx-font-size:15.0px;
+}
+
+
+/**Costumization of Buttons**/
+.dialog-pane .button{
+   -fx-background-color:black;
+   -fx-text-fill:white;
+   -fx-wrap-text: true;
+   -fx-cursor:hand;
+ }
+
+.dialog-pane .button:hover{
+  -fx-background-color:white;
+  -fx-text-fill:black;
+  -fx-font-weight:bold;
+ }
+
+.choice-box{
+    -fx-background-color: #232323;
+    -fx-text-fill: #EFEFEF;
+    -fx-mark-color: #EFEFEF ;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #232323;
+}
+
+
+.list-view{
+    -fx-background-color: #232323;
+    -fx-text-fill: #EFEFEF;
+    -fx-mark-color: #EFEFEF ;
+}
+
+.list-view .list-cell{
+    -fx-background-color: #454545;
+    -fx-text-fill: #EFEFEF;
+}
+
+.list-view > .virtual-flow{
+    -fx-background-color: transparent;
+    -fx-text-fill: #EFEFEF;
+    -fx-mark-color: #EFEFEF ;
+}
+
+.list-view > .virtual-flow > .scroll-bar:vertical,
+.list-view > .virtual-flow > .scroll-bar:vertical > .track,
+.list-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.list-view > .virtual-flow > .scroll-bar:horizontal,
+.list-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.list-view > .virtual-flow > .scroll-bar:horizontal > .track-background{
+    -fx-background-color: transparent;
+}
 
 .header_text {
     -fx-stroke: #EFEFEF;
     -fx-fill: #EFEFEF;
+}
+
+.header-label{
+    -fx-font-size: 20;
+    -fx-font-family: Tahoma;
+    -fx-color: #EFEFEF;
 }
 
 
@@ -56,19 +142,19 @@
 
 .axis-tick-mark {
     -fx-stroke: #EFEFEF;
-    -fx-stroke-width: 2; 
+    -fx-stroke-width: 2;
 }
 .axis-minor-tick-mark {
     -fx-stroke: #EFEFEF;
 }
- 
+
 .axis-label {
   -fx-font-size: 10;
   -fx-text-fill: #EFEFEF;
 }
 
 .axis {
-    -fx-font-size: 12;    
+    -fx-font-size: 12;
     -fx-tick-label-fill: #EFEFEF;
     -fx-font-family: Tahoma;
     -fx-tick-length: 10;

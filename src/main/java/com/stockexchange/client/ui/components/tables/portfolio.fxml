@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.stockexchange.client.ui.components.table.*?>
+
+
+<VBox
+	xmlns:fx="http://javafx.com/fxml"
+	spacing="10"
+	fx:controller="com.stockexchange.client.ui.components.tables.PortfolioController">
+	<TextField fx:id="filter"/>
+	<TableView 
+		fx:id="table">
+	    <columns>
+	        <TableColumn fx:id="symbolColumn" minWidth="50.0" prefWidth="50.0" text="SYM" />
+	        <TableColumn fx:id="nameColumn" minWidth="115.0" prefWidth="115.0" text="CORPORATION" />
+	        <TableColumn fx:id="qtyColumn" minWidth="50.0" prefWidth="50.0" text="QTY" />
+	        <MoneyShortColumn fx:id="askColumn" minWidth="50.0" prefWidth="50.0" text="ASK" />
+	        <MoneyShortColumn fx:id="bidColumn" minWidth="50.0" prefWidth="50.0" text="BID" />
+	        <MoneyShortColumn fx:id="volumeColumn" minWidth="75.0" prefWidth="80.0" text="VOL" />
+	        <MoneyShortColumn fx:id="marketCapColumn" minWidth="70.0" prefWidth="70.0" text="CAP" />
+	    </columns>
+	</TableView>
+</VBox>

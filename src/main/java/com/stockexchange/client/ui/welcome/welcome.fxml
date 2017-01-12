@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane 
+	fx:id="window"
+	fx:controller="com.stockexchange.client.ui.welcome.WelcomePresenter" 
+	xmlns:fx="http://javafx.com/fxml"
+    prefHeight="200" prefWidth="320">
+
+    <top>
+        <fx:include 
+        	source="/com/stockexchange/client/ui/components/toolbars/basic.fxml" />
+    </top>
+    <center>
+        <GridPane
+    		xmlns:fx="http://javafx.com/fxml"
+    		alignment="center"
+    		hgap="10"
+    		vgap="10">
+			<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+			    <Label text="Welcome" 
+			    	styleClass="header-label" 
+			        GridPane.columnIndex="0" GridPane.rowIndex="0"
+			        GridPane.columnSpan="2"  GridPane.rowSpan="1"/>
+			    <Button text="Login" 
+			    	onAction="#onWelcomeLoginButtonPress"
+			    	GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+			   	<Button text="Register" 
+			   		onAction="#onWelcomeRegisterButtonPress"
+			    	GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+		</GridPane>
+    </center>
+
+</BorderPane>

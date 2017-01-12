@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<ToolBar 
+		fx:id="toolbar"
+		xmlns:fx="http://javafx.com/fxml"
+	    prefHeight="28" 
+	    minHeight="28" 
+	    maxHeight="28" 
+	    styleClass="basic-toolbar" 
+	    fx:controller="com.stockexchange.client.ui.components.toolbars.ToolBarController"
+    >
+    
+    <padding><Insets top="0" right="0" bottom="0" left="1"/></padding>
+	<HBox id="toolbar-left" 
+		styleClass="basic-toolbar-left" 
+		alignment="center_left"
+		HBox.hgrow="ALWAYS" maxWidth="Infinity">
+		<children>
+    	</children>
+    </HBox>
+    <HBox id="toolbar-center" 
+    	styleClass="basic-toolbar-center" 
+    	alignment="center" 
+    	HBox.hgrow="ALWAYS" maxWidth="Infinity">
+    	<children>
+    		<Label text="SafeTrade" HBox.hgrow="ALWAYS"/>
+    	</children>
+    </HBox>
+    <fx:include 
+        	source="/com/stockexchange/client/ui/components/buttongroups/window_buttons.fxml" />
+</ToolBar>

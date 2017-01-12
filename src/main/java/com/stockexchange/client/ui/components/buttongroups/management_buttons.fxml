@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox id="toolbar-right" 
+	xmlns:fx="http://javafx.com/fxml"
+	styleClass="toolbar-left" 
+	alignment="center_left" 
+	HBox.hgrow="ALWAYS" maxWidth="Infinity"
+	fx:controller="com.stockexchange.client.ui.components.buttongroups.ManagementButtonsController">
+	<children>
+		<Button text="Profile" onAction="#onProfileButtonPress" />
+		<Button text="Quotes" onAction="#onQuotesButtonPress" />
+		<Button text="Logout" onAction="#onLogoutButtonPress" />
+	</children>
+</HBox>

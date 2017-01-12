@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+	fx:id="window"
+	fx:controller="com.stockexchange.client.ui.details.DetailsPresenter" 
+	xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <fx:include 
+        	fx:id="toolbar"
+        	source="/com/stockexchange/client/ui/components/toolbars/management.fxml" />
+    </top>
+    <center>
+        <VBox spacing="25">
+        	<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+        	<HBox
+        		spacing="25">
+        		<HBox 
+        			spacing="5"
+        			prefWidth="200" 
+        			maxWidth="200"
+        			style="-fx-border-color: #EFEFEF;">
+        			<padding><Insets top="25" right="5" bottom="25" left="5"/></padding>
+        			<VBox minWidth="50">
+        				<Label text="Name: "/>
+        				<Label text="Symbol: "/>
+        				<Label text="Ask: "/>
+        				<Label text="Bid: "/>
+        				<Label text="High: "/>
+        				<Label text="Low: "/>
+        				<Label text="Open: "/>
+        				<Label text="Close: "/>
+        				<Label text="Volume:"/>
+        				<Label text="Cap:"/>
+        			</VBox>
+					<VBox>
+        				
+        				<Label fx:id="nameLabel"/>
+        				<Label fx:id="symbolLabel"/>
+        				<Label fx:id="askLabel"/>
+        				<Label fx:id="bidLabel"/>
+        				<Label fx:id="highLabel"/>
+        				<Label fx:id="lowLabel"/>
+        				<Label fx:id="openLabel"/>
+        				<Label fx:id="closeLabel"/>
+        				<Label fx:id="volumeLabel"/>
+        				<Label fx:id="capLabel"/>
+        			</VBox>
+        		</HBox>
+        		<VBox 
+        			prefWidth="350" 
+        			maxWidth="350"
+        			style="-fx-border-color: #EFEFEF;">
+        			
+	        		<fx:include 
+	        			fx:id="chart"
+	        			source="/com/stockexchange/client/ui/components/graphs/stock_price_graph.fxml" />
+        		</VBox>
+        		<VBox 
+        			spacing="15"
+        			prefWidth="200" 
+        			maxWidth="200"
+        			style="-fx-border-color: #EFEFEF;">
+        			<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+        			<ChoiceBox 
+	    				prefWidth="175"
+	    				minWidth="175"
+		        		fx:id="accountsChoice"
+		        		/>
+        			<Label text="Quantity: "/>
+        			<TextField fx:id="quantityField" text="0"/>
+        			<Label text="Limit Price: "/>
+        			<TextField text="0" fx:id="limitPriceField"/>
+        			<HBox spacing="25" alignment="CENTER">
+        				<Button text="Buy" onAction="#onBuyButtonPressed"/>
+        				<Button text="Sell" onAction="#onSellButtonPressed"/>
+        			</HBox>
+        		</VBox>
+        	</HBox>
+        	<HBox style="-fx-border-color: #EFEFEF;">
+        		<ScrollPane fx:id="descScroll">
+        			<padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+        			<Label text="" fx:id="descLabel"/>
+        		</ScrollPane>
+        	</HBox>
+        </VBox>
+    </center>
+
+</BorderPane>
